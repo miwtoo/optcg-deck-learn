@@ -1,0 +1,8 @@
+---
+import { cardImageUrl } from '../data/sabo';
+
+const { id, alt = `${id} card` } = Astro.props;
+---
+<button class="card-image-button" type="button" data-card-id={id} aria-label={`Open ${alt} details`}>
+  <img src={cardImageUrl(id)} data-card-image-id={id} alt={alt} />
+</button>

@@ -1,0 +1,1356 @@
+00:00 Welcome to our OP17 Elbaf Sabo El Sabo
+deck guide, where we're going to be
+00:05 going over the leader, the deck list
+you're seeing on screen. We're going to
+00:08 take a look at cards you could consider
+for the deck, his performance for the
+00:12 last week to see where he stands in the
+meta, how he does into certain leaders.
+00:15 We're going to show a curve, too, just
+so that you have a general idea of what
+00:17 to be playing every turn, and then we're
+going to cap things off with some
+00:20 gameplay to see the deck in action. So,
+that sounds like something you'd be
+00:22 interested in and you've been waiting
+for this long-awaited meta flourishing
+00:26 of Sabo since OP13. Stay tuned, but
+first a quick word from our sponsors.
+00:30 >> Card Kaijuku.
+>> This video is sponsored by Onboard
+00:33 Gaming in Escondido, California, a game
+store owned and operated by gamers. They
+00:37 run multiple weekly events for One Piece
+and other TCGs. They're a player-first
+00:40 store, where regular attendance is
+rewarded with access to pre-orders.
+00:42 Check out their store if you're in the
+area or their website for all your
+00:44 gaming needs. This video is brought to
+you by Adakai TCG. Shop the latest in
+00:48 premium customs created by featured
+artists with their own signature lines,
+00:50 designed for collectors, crafted to
+stand out. Use code Card Kaijuku for 15%
+00:54 off your order. This video is sponsored
+by gumgum.gg. See the most up-to-date
+00:57 Eastern and Western deck lists on
+gumgum.gg, updated daily. Be the first
+00:59 to see deck lists leaders as they
+emerge. With over 1,000 deck lists per
+01:02 set, gumgum.gg has all the top
+strategies as soon as they drop. This
+01:04 video is sponsored by Card Market,
+Europe's largest online marketplace for
+01:06 trading card game.
+>> So, yeah, it's been quite the roller
+01:08 coaster with Sabo, right? He was kind of
+decent when he first released, but he
+01:12 was overshadowed by a bunch of other
+different leaders, and then people tried
+01:16 to start running stuff like Stussy in
+the deck that kind of made it relevant
+01:19 again a little bit, but then he fell
+into obscurity. Then they announced that
+01:21 he was going to get a starter deck and
+people were excited, and then the
+01:24 starter deck revealed the cards that
+were actually released, and it was super
+01:27 disappointing. But then people found
+like a Straw Hat build of Sabo that was
+01:30 super strong, and people were excited
+again, but then now OP17, here's a
+01:34 completely new package for the Sabo
+deck. It's the Elbaf package Black Luffy
+01:38 deck that conveniently works really well
+for the Sabo deck as well, just cuz it's
+01:42 a deck that plays a bunch of weenies and
+it kind of turns Sabo into sort of like
+01:46 a OP01 pseudo Zoro deck, right? Cuz what
+Sabo does, in case you guys don't know
+01:50 his leader ability, if you have four
+more life cards, you give yourself minus
+01:52 1,000 power, so you're a 4K leader until
+you're at three life. But at downtime
+01:56 one, if you have a character with a cost
+of eight or more, your leader and all
+01:59 your characters get plus 1,000 power.
+The OP-17 L back package like perfectly
+02:03 synergizes with this leader ability, if
+you think about it, right? Not only are
+02:06 the giants 12 cost activating your
+leader ability, but then all the two
+02:09 drops you're playing get buffed to 6K,
+and you're able to play them out so
+02:13 cheaply, and they all have like nice
+additional effects on top of them being
+02:16 a nice stat stick for yourself. So,
+yeah, it just really made sense to fit
+02:19 that kind of package into a Sabo leader
+shell. We do lose some access into like
+02:23 the exclusive L back stuff and like the
+exclusive Straw Hat stuff, but it's
+02:27 still a really strong deck regardless
+despite that. So, we'll jump into the
+02:31 deck list.
+02:34 So, for the searchers of the deck, you
+have four actually. Well, technically
+02:38 three, right? You have a top five
+searcher here, and you have a top three
+02:41 searcher that traches the rest, and then
+another top three that traches the rest,
+02:45 and is also a four cost 6K attacker, 7K
+with your leader ability, and is your 12
+02:50 cost activator. So, Saul is one of the
+most important cards in your deck. It's
+02:53 never a bad idea to play one of these
+guys out. And then, Nami, I would
+02:56 consider not technically a searcher, but
+it does fix your hand a bit. You trash
+02:59 an L back card and draw two. I just
+early ways to get cards you don't need
+03:03 in your hand. We do get quite bricky
+with 20 bricks in the deck. Right? Here
+03:07 are all the bricks. So, the Nami does
+help fix that a little bit. If you have
+03:09 too many Sauls in hand, that is. So,
+this makes the consistency of the deck
+03:13 quite good. And it's the fact that Usopp
+can search into Usopp, Saul can search
+03:17 into Saul. So, yeah, you don't whiff
+often, if at all. Now, the main
+03:22 characters you're playing out would be
+the two drops. Here are the two drop L
+03:25 back Straw Hats. The nice thing about
+these ones is they all get plus 3,000
+03:29 power if you have a 12 cost or more on
+board. So, that's where the Saul buffs
+03:32 these guys, and then your leader buffs
+them an additional 1K power. So, they
+03:35 become two Don 6K attackers even on your
+opponent's turn, too, unlike in a animal
+03:39 zoo deck. Your guys don't die as easily
+on the clap back. And yeah, they all
+03:42 have other additional effects. We saw
+that Usopp searches top three. A Jinbe
+03:45 just has blocker. We have Robin that
+gives minus 3K. I would consider this
+03:48 one of the most important cards for the
+deck, as well. Right? It combos really
+03:52 well with the eight drop Luffy with the
+pirate stocking six or if you just play
+03:55 two of these from your hand, it really
+messes up your opponent getting rid of
+03:58 their key character card. I've seen some
+deck list of Sabo only run two of this
+04:02 and I think that's just kind of asinine.
+It's hearsay, but it could just come
+04:05 down to play style. I find a lot of
+value in minus three freaking K for two
+04:09 Don and you can play it out with another
+character, too. So many different ways
+04:12 to use it. Then of course Zoro, Zoro is
+a 6K and is a 2K counter and also
+04:17 protects your board from removal if you
+bottom deck three cards from your trash,
+04:20 which is really easy to do. So super
+strong hitters here. Uh the giants for
+04:24 the deck, these are your 12 cost that
+activate your two drops from getting
+04:27 that 3K buff and also your leader
+ability from activating. You have Saul
+04:30 and then you have Loki, a six cost 8K
+secret rare, so it's going to be quite
+04:34 the pretty penny, but he does let you KO
+one of your opponent's four cost as well
+04:37 or it adds up to four cost. He can pick
+like four one costs for that matter, so
+04:41 you can use it in a plethora of ways
+here. And he also has plus 3,000 power
+04:45 on your opponent's turn. So if you
+attack with them, it's really hard for
+04:47 them to be attacked back into. Right now
+only is he going to be a 9K cuz of your
+04:50 leader ability, but then his own effect
+makes him a 12K. The only downside of
+04:54 this Loki is that in the red ace match
+up, it activates their 10 drop Newgate,
+04:57 so you do have to be careful about
+dropping this guy, but against every
+05:00 other leader, it's never a bad idea to
+drop Loki. Right, if you manage to take
+05:03 out a four cost along with it, great. If
+not, you still have a 9K attacker that
+05:06 you can use next turn. And then your
+late game is going to be this eight-drop
+05:09 Luffy. It's such an amazing card cuz if
+you have a 12 cost or more on board, he
+05:13 gives himself rush and then you can also
+play a two cost from your trash. This
+05:17 one is not type locked. You can play any
+two drop. You also draw a card, too, in
+05:20 case that is relevant. But yeah, why
+it's so good is that you can play out
+05:22 that Robin as we mentioned earlier.
+Right, so it's a 8K attack with 9K with
+05:26 your leader ability activated into
+something that you debuff minus 3K, so
+05:29 you kill whatever that you tag with that
+Robin with this Luffy or even with your
+05:32 leader. If you don't need power down in
+the moment, you have access to like
+05:35 search with Usopp. You have a blocker,
+too, with Jinbe. And then if you need to
+05:39 put Don on your leader, like let's say
+you're on eight and then you don't have
+05:41 Don to spare for your leader ability,
+but you need it to stay tanky being a
+05:44 6K, play out a Brook. Put two Don on
+your leader. Your leader becomes 6K.
+05:47 Your leader can also attack for 8K cuz
+uh Luffy is an eight cost, so it
+05:51 activates the Sabo's leader ability,
+too. So, super synergistic card. And
+05:54 then I would also consider Pirates
+Docking 6 like the best thing to play if
+05:58 you don't have Luffy, right? For five
+Don, you can play out a two drop from
+06:00 your trash. It's kind of like a Luffy
+light. He doesn't have rush or they
+06:03 don't have rush, but they let you trash
+three cards, too, so you could find
+06:06 potentially something that you may be
+looking for. But unfortunately, Pirates
+06:10 Docking 6 is only an 11 cost, right?
+He's five plus six to himself. So, he's
+06:14 not activating your two drops. Straw
+Hats. There's ways to give them plus one
+06:16 cost, but I don't think it's worth
+running in this deck. It might be in the
+06:19 black Luffy deck, but we'll go over that
+once we go over that leader. And in
+06:22 terms of tech, you have Frankie as tech
+against a lot of the event heavy decks,
+06:27 right? that's green Mihawk. They use a
+lot of events to defend themselves.
+06:30 Purple Enel and Rocks exclusively use
+events to defend themselves. So, just
+06:34 dropping one of these guys, I would when
+your opponent does use an event, just
+06:37 bust your whole board for 2,000 power
+can be that extra firepower you need.
+06:40 But to be honest, it's not super
+imperative. You can totally cut this out
+06:43 and then run something else, right? I
+used to run Gerd in this slot. I would
+06:47 gladly return back to Gerd. I don't
+think it's that big of a difference, but
+06:50 we'll go over Gerd once we go over the
+card options. We also have Chopper for
+06:53 unblockable if you have a 12 cost or
+more on board, so this makes it so that
+06:56 staying at zero life is super dangerous
+against you. You can even play this out
+06:60 with your Luffy from your trash, too.
+So, you just need to have it somewhere
+07:02 available on on board. Then also, I like
+running the event as a two of, right?
+07:06 It's a dual event. It has counter on
+your leader for 3K, but also for six
+07:10 additional Don, you can KO two of your
+opponent's six cost or less if you have
+07:14 a 12 cost on board. So, this is a good
+equalizer, right? On our like five Don
+07:17 turn, six Don turn, we're able to play
+out like a Pirates Docking 6 or the
+07:20 turns prior, we're playing two two drops
+out. As long as you have more board than
+07:23 your opponent, I do think it's worth it
+to Kong Gun them. You kill two of their
+07:27 things and then you have like three or
+four characters of your own. They have
+07:29 to redevelop, and then you can just keep
+developing. So, I would definitely
+07:32 consider Kong Gunning if your opponent
+has like two really juicy targets, like
+07:36 against Rocks if they have like a Kaido
+and a Linlin out, just kill them if you
+07:39 already have a board. If you don't
+already have a board, it's a lot harder
+07:42 to justify playing Kong Gun on that
+turn, so do be aware of that. Right. And
+07:45 then at the end of the day, it's still
+3K on your leader to survive with. And
+07:48 then I think the only card we didn't go
+over is Bad Manners, and we just need it
+07:51 because we run so many bricks, so it's
+3K counter. Uh it's searchable by the
+07:54 Nami only, the Straw Hat, right? And
+then the trigger is nice, you can get
+07:57 minus 3K, you can sometimes cheese a win
+that way. But then of course the Brook
+08:00 lets you put two rested on leader. But
+we kind of went over that when we went
+08:03 over the Luffy. So yeah, that's pretty
+much the deck. If you guys want to buy
+08:05 these cards ahead of time, uh you can
+buy some of these pieces, the OP17 stuff
+08:09 of course is not going to be available.
+They're They're being sold for pre-sale
+08:12 on TCGPlayer for some reason, so I'm
+going to show the price of the deck, but
+08:15 you can ignore like this Robin and the
+Logi and the Luffy. Haha. So just out of
+08:19 curiosity, if you wanted to buy the rest
+of the pieces, I'm going to remove them
+08:22 cuz I also don't think these are going
+to be the final prices for these cards,
+08:24 they're quite inflated. Okay, so for
+everything else, it's about 18 bucks to
+08:28 buy the shell, and then of course you're
+going to need the OP17 stuff after that.
+08:32 But yeah, if you guys wanted to buy
+these cards ahead of time, you can do
+08:34 that via my deck builder by clicking the
+prices that show up when you do click
+08:37 show prices. You can even swap some of
+these out for alt arts, and I will show
+08:41 that with Nami cuz that's the only card
+here with an alt art I do believe, other
+08:44 than the Brook. I also added that you
+can show your collection when you're
+08:47 looking at cards in the deck builder, so
+you guys know I have this Nami.
+08:50 But yeah, I'll replace it with this
+Nami. I I own one of these, I own one of
+08:53 these. I wish I owned two of these. So
+you can change them accordingly, and
+08:56 it'll update the price. And also for
+your convenience, if you guys want to
+08:58 buy the deck in one click, save you some
+time, you just click mass entry here in
+09:01 purple. Adds the entire thing to your
+cart of whatever's available. If you
+09:04 guys want to wait for OP17, that'll
+automatically flow in. If not, you can
+09:07 buy some of these ahead of the time
+before the prices go up even more cuz
+09:10 this is going to be a popular deck,
+right? We see Pirates docking six
+09:12 already 390 for just a rare that was
+like pennies only a couple weeks ago.
+09:17 But yeah, both of these methods go
+through my affiliate link, so if you
+09:19 guys wanted to support me and you guys
+were going to buy these cards anyway,
+09:22 it's a win-win situation. And if my
+videos, guides, or website have helped
+09:25 you, I greatly appreciate it. So we'll
+move on to the card options for Sabo.
+09:31 So for card options, we're going to take
+a look at the 20 most performing decks
+09:34 for the last week just to see if people
+are running stuff that I'm not running.
+09:37 But yeah, here's that guard. I do think
+guard is a good choice for the deck. I
+09:40 was running guard before the Frankie. I
+just wanted to try the Frankie out and
+09:43 then I don't think it made too much of a
+difference, so I'm including it in the
+09:47 deck guide. But, guard is nice in that
+you can on play trash a card in your
+09:50 hand and add an eight-cost or less from
+your trash back to your hand. So, it
+09:53 cycles one of your bricks into like a 2K
+potentially or if you have a Luffy in
+09:56 your trash you want to bring back on
+your 10-don turn, you can play it out.
+09:59 All right, turn your Saul into a Luffy,
+play out the Luffy, play out a Brook,
+10:02 put two don on your leader, and then go
+to town. But, unfortunately, since our
+10:04 leader is not Alabasta, she doesn't give
+herself plus 12 cost, so it is just a 2K
+10:08 counter that's searchable in our deck.
+There's also the I'm Luffy, the man who
+10:11 will be the king of the pirates event.
+This is just a 4K counter for one don,
+10:14 super strong if you have a 12 cost out.
+I just don't always have a 12 cost out
+10:17 sometimes, so a little bit wary of using
+this and I do like the utility of being
+10:21 able to KO two six cost with the the
+Kong Gun event instead. The trigger is
+10:25 nice, though, you can add an Alabasta
+type card from your trash to your hand.
+10:27 You could also consider the seven cost
+Zoro. I think this card is good in the
+10:30 mirror, right? I don't think it's good
+into the other leaders and matchups, but
+10:34 it's definitely really strong into your
+opponent's Alabasta Luffy and Alabasta
+10:38 Sabo deck cuz he makes your leader plus
+2,000 power till the end of your
+10:41 opponent's next end phase. And he can
+also have character rush where you can
+10:44 attack into a rested character right
+away if there's an AK on board or more.
+10:47 If your opponent plays a Loki out,
+that's your
+10:50 activator for the Zoro or even if they
+have a pirate stocking six, activates
+10:53 the Zoro as well. And yeah, definitely
+just being an AK when your opponent is
+10:56 attacking you with their own six K's is
+really strong. And if this deck is as
+10:59 popular as it's looking like it's
+shaping up to be, I would consider Zoro
+11:02 as maybe like a two-of. And in terms of
+the two cost Straw Hats, some people run
+11:06 Sanji. It does fix your hand cuz it
+allows you to draw two trash, too. And
+11:09 then of course he becomes a 6K when you
+have a 12 cost out. There's also Brook.
+11:13 Brook makes your opponent trash a card
+in hand. I don't think it's as good in a
+11:16 Sabo deck. I think the black Luffy deck
+is more grindy, so Brook makes more
+11:20 sense in that deck cuz we have blockers
+and stuff. But, in this deck I feel like
+11:23 I want to go more aggro and protect my
+board than I do want to remove cards
+11:26 from my opponent's hand. Right, my way
+of grinding them down is attacking into
+11:29 them, not trying to outvalue them. Some
+people also run this Zoro instead of the
+11:34 Jinbe for a blocker option. I just like
+Jinbe cuz he can attack for 6K as well,
+11:38 but this Zoro does protect from removal
+by uh trashing himself as a blocker. But
+11:43 yeah, he doesn't become a 6K when you
+would need to attack with them, and he's
+11:45 not Alabasta either, so you can only
+really search him via the Nami. You
+11:49 could also consider the Nightmare Luffy.
+It is a lot harder to get 20 cards in
+11:53 your trash in uh Sabo deck than it is in
+a Luffy deck, but if you can do it, you
+11:57 can make your leader a 7K base. Plus,
+your leader ability makes it 8K. So, for
+12:01 the same merits as the EB04 Zoro, you
+could consider Nightmare Luffy here. He
+12:05 also has counter, too. And then, if you
+don't like the Chopper for the
+12:08 conditional unblockable cuz you have to
+have a top cost uh Sanji for another
+12:11 condition if you have a Straw Hat with a
+6,000 power or more, can also give
+12:15 unblockable that way, too. And I think
+that covers the card options that stand
+12:19 out to me. So, I'll move on to the stats
+for Sabo.
+12:25 So, for the last week of private games
+for Sabo, his performance is quite high,
+12:29 quite well, right? You guys have a 54%
+win rate, 12.26%
+12:33 play rate, uh 50 going first, 58 going
+second. It's a huge advantage taking
+12:38 second away with 38,000 games played.
+The matchups break down below. So, he's
+12:41 favored into stuff like Mihawk, Linlin,
+Alabasta Luffy, Shanks, Pudding, Boa
+12:46 Hancock, Katakuri, and Blue Purple
+Luffy. He's even into Kaido and Red
+12:50 Green Luffy, and then unfavored into
+Rocks, Ace, and Enel. But uh for the Ace
+12:55 and Enel matchup, it looks like it is
+coin dependent. If you take away their
+12:58 better curve, it looks like you do have
+a pretty good chance. But yeah, even
+13:01 despite these being the unfavored
+matchups, it's barely unfavored, right?
+13:04 If 44's your worst matchup, I feel like
+that's a pretty good spot to be in. 44
+13:08 is completely winnable. Meanwhile, his
+positive matchups go into like the 67,
+13:12 62, so that's insanely favored. So, Sabo
+is in a really good spot at the moment.
+13:16 It could be a combination of people not
+knowing how to play against him just yet
+13:19 and
+not teching for it. There's a lot of
+13:22 two-cost hate that was printed in the
+last two to three sets that a lot of
+13:25 people aren't already including. I would
+have to assume that they kind of
+13:28 predicted this coming and then printed
+all that in anticipation for this two
+13:32 cost Alabasta package. But yeah, for
+some reason people are just aren't
+13:35 running those cards to a high degree.
+But taking a look at starting hands
+13:38 here, we have Usopp being the most kept
+card in hand and also Jaguar D. Saul.
+13:42 You want these guaranteed, right? You
+want the best two drop to fix your hand
+13:46 and then also the four drop that is your
+12 cost activator that also fixes your
+13:50 hand. Then after that, you want Zoro to
+protect your board and then you want to
+13:53 play your late game stuff like Pirate
+Docking 6 Lowkey and Luffy here. I also
+13:57 would prioritize Robin in some match-ups
+too, but definitely you'll find them
+13:60 eventually if you start with these kind
+of cards here. So we'll take a look at a
+14:03 sample curve for Sabo. So here are the
+curves for Sabo going first and second.
+14:06 Going first on one, you could play
+either Nami, right? The search Nami or
+14:09 the draw two trash one. Then on three,
+you play your Usopp. And then you can
+14:14 even put Don on leader to swing five if
+you want. On five Don, you can play a
+14:16 Saul and put Don on leader. You already
+have it activated, so you would
+14:19 potentially be a 6K or 7K leader
+depending on how much life you have. Or
+14:22 you could play Pirate Docking 6 and then
+hold off on leader ability for a turn.
+14:26 Just develop more wide board. And then
+probably with the Pirate Docking 6,
+14:28 you'll play out a Usopp or something.
+And then on seven, you can play Lowkey
+14:31 and put Don on leader and pop a four
+drop. Or you could play Pirate Docking 6
+14:35 into another character. Like at this
+point, maybe Robin makes sense cuz you
+14:37 can power down something and attack into
+it with all the characters you played
+14:40 out the turns prior. Or you could do
+like a Saul and Usopp in case you guys
+14:43 haven't played your 12 cost activator
+just yet. But Lowkey counts too if you
+14:47 have a Lowkey. Then on nine, you can
+play Luffy into a Robin and then attack
+14:51 into something and then put Don on
+leader as well. Going second, it's
+14:54 pretty much the same but you don't have
+that flexibility of having Don on leader
+14:58 sometimes. So on your two Don turn, you
+play Nami. Both Namis if you have it or
+15:02 the Usopp. On four, you can play Saul.
+But then at this point, your leader is
+15:05 still a 4K. So you can probably can't
+attack with it. Or you could play two
+15:08 two drops with the Usopp and a Zoro or
+something to protect your board the turn
+15:11 after. And then on six, you can play
+Saul at this point and then you have two
+15:15 Don left over so you just put it on your
+leader. Or you can play Pirate Docking 6
+15:18 and Don on leader. And then that would
+play out probably at Usopp at this
+15:20 point. Or you could just play out Lowkey
+for six and not have any Don for your
+15:23 leader at all, but I would do this if
+you feel like you won't take too much
+15:26 damage on the clap back. Otherwise, I
+would prioritize being a 6K if I can. Or
+15:30 if you can like kill one of their
+priority four costs, then yeah, Loki
+15:33 makes complete sense here. Then on
+eight, you can do your eight drops Luffy
+15:36 early. Now, you won't have Don on
+leader, but what you can do is play the
+15:38 Luffy into a two cost Brooke, the 2K
+counter one that can put two Don on your
+15:41 leader. So, you will be 6K. You'll
+attack for 8K actually, so it'll be
+15:44 eight, nine. Or you could play pirate
+stocking six into a Robin at this point
+15:48 and then you'll have a lot of extra Don
+to use. Do you know why is after that?
+15:51 If you want, you can even play like a
+second Robin. I believe you can fit that
+15:53 in a turn and still have Don on your
+leader. Or as we mentioned before, you
+15:57 could have seven Don up for Kong Gun and
+then have one Don for your leader. Like
+16:00 kill two of their six costs and then
+attack with whatever's on your board.
+16:03 And then on your 10 Don turn, you'll
+just do the same Luffy into Robin that
+16:06 you do on the going first curve. Most of
+the times you'd be doing Luffy into
+16:10 Robin in the late game. So, yeah, that
+pretty much covers the L Bab Sabo deck,
+16:14 the L Sabo deck. A lot of people call
+him elbow, but I I feel like I don't
+16:18 know, making him Spanish is funny to me
+for some reason, so I'm going to call
+16:21 him El Sabo, but I'll understand if you
+guys call him El Bow cuz that's also
+16:24 pretty funny, too. But yeah, super
+strong deck. It's so synergistic with
+16:27 his leader ability despite the package
+probably not being meant to be designed
+16:31 for this guy. I like when things like
+that happen, like totally unexpected
+16:35 cards being used in decks that you
+didn't expect them to be good for. So,
+16:39 I'm glad that Sabo finally is meta
+relevant. This is one of my favorite
+16:42 decks for a long time. I do like red
+black as a color combination. We just
+16:46 have not had a good enough deck in the
+meta. Right? We had like there was a
+16:51 Garp deck that kind of had a weird
+combination of cost reduction and power
+16:54 reduction. There was the other Sabo that
+was like protection on your board. And
+16:58 then we had Kobe that was pretty
+interesting, too. Try to kill your
+17:02 opponent's characters that are active
+and then of course this Sabo now finally
+17:06 has a place in the top meta. I do think
+he's going to be a top meta deck. I
+17:08 don't know if he's going to be number
+one. I do think that again, decks just
+17:11 have to tech into him, but definitely I
+would say top five. Pretty confident
+17:15 that he's going to be a top five deck.
+And yeah, going to be one of my favorite
+17:18 decks. I might even main it. I do have a
+lot of experience playing these kind of
+17:21 decks thanks to all the time I played
+OP01 Zoro for the past 3 years of the
+17:25 game. So, yeah, that's going to be it
+for the video. Let me know what you guys
+17:28 thought. If you guys have any advice or
+any tech options or cards that you want
+17:32 to also talk about in the comments down
+below, please feel free to share it. Uh
+17:35 subscribe to my channel if you're not
+already subscribed. And yeah, more OP07
+17:38 guides to come, so stay tuned for that.
+And I'll catch you guys in the next one
+17:42 as we transition over into the sample
+gameplay. Which will be ranked gameplay,
+17:46 by the way.
+17:50 All right, we have Sabo versus Rocks. We
+do have an Usopp start, I think. That is
+17:56 good enough for me.
+Okay, so we don't have a one dawn play.
+17:60 That's okay. We'll Usopp next turn. I
+can even attack with my leader thanks to
+18:03 going odd. Play Usopp first. I don't
+think there's any triggers now in the
+18:06 Rocks deck that I have to worry about.
+We'll take uh
+18:09 another Usopp here. I'm trying to find a
+Jaguar D. Saul. Looking would be nice,
+18:14 but sometimes they have KO outs, so he
+doesn't do as much. And I'd rather have
+18:18 the uh Saul that can draw me a card.
+Right? Find my eight drop Luffy's. I
+18:22 have one in my hand. I just need to find
+I I I feel safer with one more.
+18:26 Two. If I had two, I'd feel pretty good.
+If I had three, I'm sitting pretty. So,
+18:30 he does counter with the Buckin.
+If I would have just take that. Yeah,
+18:34 the nice thing about Rocks is that he
+cannot starve us cuz he has to attack
+18:38 me.
+And if I don't give him a rested
+18:39 character to attack into, I always get
+cards from life. But no Saul here. So,
+18:43 we might just go for a pirate stocking
+turn and not attack. I just need bodies
+18:47 out. Right? And then if I'm worried
+about like a Gloriosa, okay, Captain
+18:51 John.
+Play out pirate stocking six
+18:54 into Jinbe.
+And then uh
+18:57 if I can find a Saul or something, I can
+play Saul and then Robin next turn and
+19:00 then just pop the John. Otherwise, yeah,
+I'm going to be throwing a bunch of
+19:04 sixes at him, which is fine. I'll have
+dawn up for leader. I just need to find
+19:07 a a 12 cost activator.
+If I don't have one, then I don't know
+19:10 what to do. Okay, I have one more shot
+with an Usopp and then Don Leader and
+19:14 then uh uh four Don for Saul if I can
+find it. Okay, five at us maybe makes it
+19:18 into an eight with the Newgate. Nope,
+but we'll take that anyway. Does Captain
+19:22 John attack? He has to, right? We do
+find the Saul so let's counter here.
+19:26 Let's get rid of Chopper. I can play him
+back out with the Luffy if I need to.
+19:29 Okay, so we have the Robin Saul Don on
+Leader turn here. It cleared the John
+19:34 and then he'll have to eat six seven
+eight, right? Pass your turn, please.
+19:38 Okay, thank you. Don Leader Play Saul
+first in case we find something
+19:42 different. I don't think there is
+anything different. Let's take a an
+19:44 event in case we need to pop two things.
+Robin to make John into three. Six at
+19:47 him, he dies. You dead, son.
+Fix just like the real Captain John.
+19:54 That's not a spoiler. He was on Thriller
+Bark, okay?
+19:57 Seven at face.
+Hasn't taken a single hit. Here's the
+19:60 eight that he will take.
+There we go and he still has the same
+20:03 amount of cards as I do.
+Okay, Shiki so Pirates Docking six is
+20:07 dead. I have to be careful with the Saul
+cuz I don't have a a replacement 12
+20:11 cost. Okay, five at Jinbe just draw a
+card. He picked up a 2K.
+20:17 It makes it into an eight. Okay, bye-bye
+Jinbe. Can I defend Pirates Docking six?
+20:21 He would be a 5K. Well, 10 at five.
+That's kind of steep. Maybe I'll let him
+20:27 go cuz he also has a Newgate. He has
+eight for my Usopp. Okay, all my guys
+20:32 are dead.
+Let's defend this guy then.
+20:35 I want to keep at least one guy. So we
+can eight drop Luffy and Don Leader and
+20:39 then I can Robin. I think I should uh
+Newgate or Shiki, that's the thing. So
+20:43 Robin for sure.
+Now who to kill though? Shiki is going
+20:47 to be six. This guy will be five. I
+think we just guarantee the kill on
+20:50 Newgate. Either way it's 3K counter out
+of his uh arsenal, right? So I think
+20:55 that is what we should do. Six at five.
+Well, on second thought though if I did
+20:59 minus the Shiki to six, okay, let's
+Newgate die. Like it's not like he has
+21:02 1K's unless he has more Buckings in hand
+to protect the Shiki so So burn a 2K
+21:06 anyway, but he let it die. There's a 2K
+swing at face. So maybe Shiki was the
+21:10 better choice there.
+Let's swing nine at face. If he took a
+21:13 seven, he has to take a nine, right?
+He did. Okay, we'll pass with the salt
+21:17 cuz we need it for rush for our second
+Luffy in hand. Hopefully he doesn't have
+21:21 a way to kill it. I don't think he does
+have a way. As much as I would gladly
+21:25 like to swing for seven here while I'm
+pushing the advantage.
+21:28 A nine at Usopp, does he minus it? I do
+have 4K counter for this.
+21:32 Uh he minus my Robin.
+Huh. So the leader can kill Robin. Does
+21:36 that mean I counter the Usopp? What's he
+going to do? Play another Shiki?
+21:40 I do need board space for my Luffy
+anyway, so maybe I just let him go.
+21:44 And then he kills Robin and then I just
+replay them back out.
+21:47 With 10 drop rocks and two Gloriosas to
+see. Ooh. Okay, so he cleared more than
+21:52 I was expecting him to clear.
+Maybe I should have countered after all.
+21:56 All right. Um is it a good idea to Kong
+Pistol this board? Nah, we'll play
+22:00 Luffy. If it was like a Linlin Kaido,
+maybe I would Kong Pistol instead, but I
+22:04 think in this case uh I can make the
+Shiki into a six, but
+22:09 let's attack eight into it. I was
+thinking like six Shiki or five leader,
+22:12 which is more soft, but 2Ks are 2Ks,
+right? 8K over it. He can't uh Shiki
+22:18 ability yet, so he has to block cuz
+Shiki only works on characters. And even
+22:22 then I can throw nine at six, so it's
+going to be really awkward for him to
+22:25 protect the Shiki.
+He blocks that. Okay, nine at six.
+22:29 So this is going to be a Shiki ability
+plus a card in hand.
+22:32 2K counter. So I think he'll just let it
+go.
+22:35 He protected it. Okay.
+Well, I guess it's easier to protect
+22:38 this than to protect his face.
+Oh, he has enough counter to stop all of
+22:42 that. Okay, so the Shiki lived. Well, hm
+am I dead? No, I have enough counter to
+22:46 stop four attacks. Is my board dead? No,
+my board's even stronger than my face.
+22:50 Yeah, we got him to three cards in hand,
+I think. We're in a good position to win
+22:53 it here.
+Okay, six from leader at my face.
+22:57 I counter that. I have to counter, I
+think, if I I
+23:01 want to die from the remaining three
+attacks. So now he has to go for my
+23:04 board instead. Here's 13 at Luffy. I can
+defend that. Right? Do I defend this
+23:09 now? Let it go and then he'll
+play Kaido. Oh, okay. I should have
+23:13 defended it then.
+But I know what's in his hand. A 2K Kylo
+23:16 and then the Linlin.
+This is 10 at my Luffy.
+23:20 10 at three.
+I was not expecting the Kaido. Dang. I
+23:23 should have protected my other Luffy. So
+he has Linlin and then a 2K in hand. Uh
+23:27 I can Usopp to try to find my third
+eight drop Luffy and that will probably
+23:32 be game for me.
+Right? I'll play out a Brook and put
+23:34 down a leader for that. Oh, my Saul
+can't attack, right? Maybe I don't have
+23:38 game. Uh phew. Well, it would still be
+nice to play out a Luffy if I can. I
+23:43 don't find it. We'll play Usopp. Double
+Usopp and Saul. Mhm. We'll swing seven
+23:48 at Stussy so I don't die on the clap
+back. He can block counter two, but then
+23:51 I can kill Kaido afterwards cuz I Robin
+still.
+23:55 Or I can go for like a bigger
+character here.
+23:57 But yeah, he can't Shiki ability my
+leader again. So
+24:00 he has to use that 2K. Use it or lose
+it.
+24:03 Okay. Stussy died. Uh I just have to not
+die. How do I not die?
+24:08 Does Saul find a blocker or no? 2K would
+be better cuz I'm going to play out
+24:13 Usopp.
+Then I guess Robin just swings. He just
+24:15 burned a card. We'll play Usopp. Okay,
+there's eight drop Luffy and then we
+24:18 have a Don up for defense. I feel pretty
+good about this. Six at face.
+24:23 Okay, he uses the Shiki ability. I know
+he still has a 2K.
+24:26 He needs to draw into something and then
+his leader ability will draw into
+24:28 another card. We'll get to see it though
+at least.
+24:31 Six at our face. Okay, discards the
+Linlin, picks up a Gloriosa. So we'll
+24:35 counter this for one.
+I don't even need this Frankie to be
+24:39 honest. Okay, Shiki 10 at Robin. You got
+it.
+24:43 He can't interact with the rest of my
+board. Gloriosa can bottom deck one of
+24:45 my Usopps at the very least. Yep,
+there's that. He's going to leave two
+24:49 blockers up.
+Oh, and that's Captain John, too. Okay,
+24:53 so I know he has a 2K in hand still. Do
+I even need the Luffy? We'll swing six
+24:58 at John.
+He counters, right? Or blocks? Oh, he
+25:02 has two blockers, so maybe I do need the
+Luffy for rush.
+25:05 Okay, block that uh
+seven at John.
+25:11 He counters. Then seven at John, he
+blocks. Oh, he'll let it die. Okay,
+25:15 we'll play out Luffy
+and then play out Robin. Let's kill the
+25:18 board instead. Swing seven at Shiki. If
+he uses Shiki ability, that's the same
+25:23 as countering 2K. Okay, so he does use
+his ability.
+25:26 Uh seven should kill it.
+Maybe I should have swung eight with my
+25:29 leader then, but he could have blocked.
+Nine at face, he blocks this one, takes
+25:33 it. Okay, he needs to split three ways.
+I have a lot of counter in hand. 2 4 6 8
+25:38 9 10 11 plus 3K counter for event.
+Five at Saul to draw. Got any new
+25:46 options? Kyo, got any new options?
+Newgate, got any new options?
+25:52 14 at Luffy, I defend it. Do do do.
+He concedes, and I click rematch, back
+25:59 out of it. We have Sabo in the mirror.
+Uh psh.
+26:05 I think I want searchers. No searchers,
+okay. At least I have a Saul. But then
+26:09 Saul would activate his guys, which I
+don't want. We'll play out um
+26:14 Zoro.
+And then I play Saul and I counter one
+26:18 time and I have three cards to protect
+my board against his six-drop Loki, I
+26:21 hope. Okay, he plays a Zoro, too. Five
+at us. We have the same idea here.
+26:25 >> [laughter]
+>> Pick up an Nami. Okay, four at four.
+26:28 Play out Saul. Pick up Usoha uh Usopp,
+not Usohachi. They don't have Elbaf
+26:34 names.
+Okay, Pirates docking six. Yeah, he's
+26:37 using my He's using my giant to buff his
+board. Come on, man.
+26:42 Play one of your own.
+Okay, four at four. We'll counter this
+26:46 and take the six from the Zoro. He
+doesn't have Don on leader. Okay, so he
+26:49 left it up. I wish I had a Loki right
+now.
+26:54 I'll swing for it for then. He'll be
+five. He will be at five. Play another
+26:58 Saul. Well, he does have enough cards to
+protect with the Zoro now, but let's
+27:02 just keep it in our back pocket. Usopp
+into 2K.
+27:06 Then pass.
+Maybe he'll replace the Zoro on board at
+27:10 one point and then and then I can pop
+stuff with Loki.
+27:13 Wait, my board? No, my board's
+protected, too. So, no one's going to
+27:16 play a Loki right now. Second Pirate
+Stalking six, he has Pirate Stalking 12
+27:21 into an Usopp.
+I guess I can It costs Luffy next turn
+27:25 if I can get this broken my trash. Seven
+at my four.
+27:30 Or six at my four, we'll take that.
+Six at my five, I will counter with that
+27:34 Brook.
+He's got eight with leader.
+27:38 Seven, we'll take Oh, that guy can
+attack. Oops.
+27:42 I'm going to go down to one. Yeah.
+If I'd known that, I would've countered
+27:46 the leader seven. Should have paid
+attention cuz he He played one this
+27:49 turn, so I thought it was the same one,
+but it's definitely the separate secret
+27:53 one
+on the board. So, I need to clear the
+27:57 board a bit. No, he dropped Luffy this
+turn. We'll do Robin
+28:01 into the Pirate Stalking.
+We'll attack with our leader seven.
+28:07 Uh we'll attack with Usopp, too.
+And then I think
+28:11 six at Zoro.
+Uh
+28:15 maybe I'll play Pirate Stalking six and
+play out a Robin here.
+28:17 And replace the two rested guys. That
+makes sense, right?
+28:21 So, PD6.
+Play out Robin and now I don't have my
+28:25 Zoro protection. So, hopefully that
+doesn't bite me in the butt, but I want
+28:27 to get rid of his, too.
+Seven at his.
+28:30 And then seven at the Sanji just cuz
+they're both 6K leader and Sanji,
+28:34 anyway. So, counters that, we'll pass.
+Okay, how do I not die at one life?
+28:37 >> [laughter]
+>> He's going to play eight drop Luffy,
+28:40 right? He has to.
+Oh, he played Loki.
+28:45 I mean, I can kind of do the same back
+to him, but then that doesn't progress
+28:49 the board state for me, does it? I need
+something to do on top of the low key,
+28:53 okay? Nine at Saul, I will defend my
+lady's honor.
+28:58 Seven at Saul, I will defend my lady's
+honor.
+29:01 And then sixes at my face.
+Uh-oh, goodbye all my counter.
+29:06 Six at my face. Uh-oh, goodbye my
+literally last counter.
+29:10 Okay.
+Don leader, I just have to clear the
+29:13 board, right? Or I might die if I do
+that. I might be dead if I clear the
+29:17 board. I need like a blocker
+and to still clear the board with the
+29:20 little seven at Sanji.
+Counter two, we'll throw eight at
+29:25 Usopp.
+Die?
+29:27 Usopp die?
+Luffy out, Jinbe blocker, and then I
+29:31 just have to clear these two guys here
+and I should be good.
+29:35 Wishful thinking. We'll swing nine at
+eight.
+29:38 Right here at the 2K. Okay, can I kill
+Sanji at least, please?
+29:41 And he dead. Seven at face, he take.
+And let's just hope we have enough with
+29:46 5K counter here.
+I can counter up to 11. He plays a Nami
+29:49 out. Uh if he splits three ways, is that
+enough to kill me? Cuz I can defend up
+29:54 to 10K. So, don on leader. Low key, one
+don makes him a 10.
+29:59 High stack in another two makes him a
+10, and then he has five don left for
+30:02 the leader to make like an 11. 12? Okay,
+let's counter this eight. I think if he
+30:07 throws an eight, there's no way I die,
+right? Or if he plays Luffy. Or he plays
+30:11 Saul. Okay, so
+I think we just got maybe a little lucky
+30:13 they didn't have rush. If he did play
+Luffy, it would be nine
+30:17 nine seven.
+And then I just have to get like
+30:21 uh
+No, I die that that way. Yeah, if he had
+30:24 Luffy out, I would be dead. Jinbe
+definitely saved me here, though, for
+30:27 sure. Seven at Saul, we'll counter one.
+Thank you, Jinbe.
+30:31 You're the best.
+Nine at nine, we'll just counter one.
+30:36 Jinbe, you saved me.
+This is Zoro blocker. A Jinbe better,
+30:41 cuz Jinbe can attack for six if I need
+to right now. Let's throw eight and I
+30:46 basically just have to go for game here
+cuz I'll die on the clapback. Here's
+30:49 another eight.
+And then eight Jimbei, I owe you my
+30:53 life.
+He counters out of that. Go 10 Luffy, he
+30:58 has to block and all in leader and then
+hopefully if that's not enough Jimbei
+31:02 will help finish for me but I don't need
+it. Jimbei, you a G, you a bro. Sabo
+31:08 versus Luffy. Hey, I took your package.
+I took your homework. No, I wouldn't
+31:12 take your homework. I took your lunch
+money. You take my homework.
+31:16 That's how Sabo is bullying Luffy's
+these days.
+31:20 He'll play out Nami. I never understood
+like I saw it on like American TV shows
+31:24 and movies all the time of like bullies
+taking your lunch money but I grew up in
+31:27 like a poor city so all of us had free
+lunch anyway so I had I really never
+31:31 understood that kind of the stereotype.
+It's like give me your lunch money. I'm
+31:35 like, wait, you guys pay for lunch? Like
+literally everyone in my school just got
+31:40 free lunch cuz we were all super low
+income. And then I see like lockers too.
+31:45 So I'm in the West Coast so I didn't
+know it was a thing but like we have
+31:49 outdoor schools here. Like all the
+classrooms are are like separated by
+31:53 like wilderness. Oh not wilderness but
+like
+31:55 >> [laughter]
+>> the elements, right? And that's like a
+31:58 weird thing for people on the East Coast
+of the United States cuz all their
+32:02 classes are like in a building. I think
+that's it's like that in Asia, too and
+32:05 maybe Europe. Maybe it's just a
+California thing but we didn't have
+32:08 lockers, either.
+Five minutes, we'll take that. [music]
+32:11 So we just had to lug all our books
+around, super heavy books.
+32:15 Cuz like a little 10-year-old with like
+four textbooks in my backpack. Okay, so
+32:18 he plays a Frankie and a Rodo to pop my
+Robin. So he wants that early
+32:23 pressure denial.
+We'll play out a Saul.
+32:27 I will put down leader. We can swing
+seven at Usopp.
+32:30 He die, right?
+Oh, he dead. We'll pass. I think he
+32:34 could have blocked with Rodo if he
+wanted to just cuz my Saul activates his
+32:37 characters anyway.
+He's got Loki to pop my Nami. Good. I
+32:41 have no other two drops for him to get
+value out of it, but he does have a nice
+32:44 blocker now. And then I guess I can Loki
+to kill the Frankie. Like killing one
+32:48 thing is
+at least better than nothing.
+32:51 So we have seven here.
+If he takes it, I don't attack with
+32:54 soul. Yeah, cuz then he can just block
+it. He should have just blocked. So
+32:58 we'll pop the Frankie.
+That's something that later later on if
+33:02 you're a new player in One Piece you're
+going to have to learn how to do.
+33:05 Right? Cuz well it in the end in the end
+materially he does stop a 7K, but he
+33:10 would have the option of attacking into
+my soul right now. Like with that Luffy
+33:12 he could play out like a Robin or Usopp
+here, but my soul would be rested,
+33:16 right? Cuz I'd have to attack with it if
+he blocked with the Loki. And then he
+33:19 can attack AK into my my soul right now,
+but he's going to swing it at my face.
+33:24 And he passes the turn. So we're going
+to play our own Luffy and then we're
+33:27 going to Robin his Luffy.
+Robin him. Robin him blind.
+33:32 Robin him blind and he gets to be a
+lawyer.
+33:35 He blocks.
+Seven at five. That was a Better Call
+33:40 Saul reference in case you guys were
+like, "Why did he suddenly do that?"
+33:44 Seven at five kill? No, he defends it.
+Okay, we got nine here. You're going to
+33:48 block with the Roronoa.
+Pass. That was such a good scene, right?
+33:52 Chuck's deposition.
+Incredible acting.
+33:55 Incredible dialogue. Incredible writing.
+If you guys haven't seen Better Call
+33:59 Saul I I would implore you to watch it.
+So he plays a Robin to debuff my Luffy.
+34:04 10 at six. Okay, you got it, dude.
+Now, can he threaten my other
+34:08 characters? I don't think so. So what's
+he going to play? Pirate stocking? Okay,
+34:11 six at our face. We'll counter that and
+I do think a pirate stocking six is
+34:15 coming.
+No, it's Usopp six.
+34:19 So only the What was Usopp? He was like
+the left arm, right arm? He plays out of
+34:22 soul.
+He was the weapon. Okay, we'll play out
+34:25 to another Luffy or let's check what's
+in our trash first. Okay, yeah, I think
+34:28 it's going to be a Robin.
+Which is insane. Like I run four of
+34:32 Robin. I see some deck lists for Sabo
+with only like two or three copies. It's
+34:36 too good. Robin is way amazing for these
+situations like this.
+34:40 Uh do we kill Usopp?
+Can throw six at him. He does still have
+34:45 two blockers up. Okay, he has to die.
+Okay, we'll throw Saul. Maybe he blocks
+34:49 this one. He does block and counter.
+Uh that means I can still get damage to
+34:54 go through. Nine at Saul, he blocks and
+we'll throw nine at Saul. He dies.
+34:58 Perfect.
+He has a second Luffy to pop my two
+35:01 Robins. That's pretty good. And the
+Saul. So three blockers. No damage
+35:06 though. I have two if I If only I had a
+third Luffy.
+35:10 I could try to find it with my Usopp,
+but let's put down on leader.
+35:14 Swing seven. Maybe I just play two Sauls
+out and just draw into a counter. He
+35:18 took a seven. La la la la la la
+Saul. I can't pick up PD6, so we'll take
+35:23 a Jinbe. Second Saul find a 2K? Nope, 1K
+good enough.
+35:27 One dawn up for defense if I needed to.
+So swing Saul, he'll block with his
+35:32 Luffys. Yep, and then we'll swing nine.
+He blocks with Luffy and hopefully our
+35:36 Luffy can get his Saul to die.
+Or maybe he just takes it. Yeah, he'll
+35:39 just take it. He blocked and let it die.
+Okay. So I think he has to try to go for
+35:43 game here. He's left with no recourse.
+Never mind Pirates docking six. He's
+35:48 going to try to drag it out for another
+turn. Robin here. So my Luffy is a 6K.
+35:52 He can throw a 10 at it. I might defend
+that. I think yeah, I'm going to try to
+35:57 go for game if he doesn't. Okay, so six
+will counter one.
+36:00 Get him to use his blockers, too.
+Eight at six will bad manners.
+36:05 Come on, use a Luffy.
+Use it. Use it. Eight. We will Pirates.
+36:09 Uh not Pirates.
+Uh just counter 3K.
+36:13 And then we'll bad manners if we need
+to.
+36:16 I don't know. Bad manners? Yeah, yeah,
+bad manners. Bad manners? Yeah, bad
+36:19 manners. Bad manners. If we got it.
+Sorry, Luffy.
+36:22 We have Sabo versus Kaido. I've been
+seeing a lot of Kaidos today. And
+36:26 unfortunately, I am not Rocks or Mihawk,
+which is what Kaido is good against. I
+36:31 am
+the complete opposite.
+36:34 So, if Kaido keeps the Mihawks and Rocks
+at bay, that's good for me. Oh, no, I'm
+36:38 pretty good into Mihawk, too.
+Just kind of everyone dumpsters on
+36:41 Mihawk right now.
+But, uh Usopp
+36:44 take a Luffy.
+So, he's going to be able to hit six and
+36:47 play King. Or he could double ramp on
+his six some other way.
+36:52 There's that ramp. Will he attack us or
+is he going to starve? I've been seeing
+36:55 some Kaidos try to starve. Right, their
+their deck play style is conducive to
+36:60 that kind of strategy.
+I didn't have my possibilities until he
+37:03 stabilizes, and then
+that's when he'll kill me.
+37:07 So, he has a nine-drop Queen. He doesn't
+attack me. He is starving. I Yeah, it's
+37:11 good to starve me here cuz that it's
+kind of awkward for me right now.
+37:14 So, I guess I'll just drop two Zoros and
+then pass. Smart move. But, once I
+37:19 topdeck my Saul next turn, he's going to
+regret it. I just need to topdeck that
+37:23 Saul. If I play Pirate Stocking six, I
+have to hope I get something nice cuz I
+37:27 only have Nami in my trash.
+Okay, a second Queen. He's going to
+37:30 double ramp this turn, and then he'll
+hit 10 next turn.
+37:33 1 2
+3 4 5 6. Yeah, he will hit 10 next turn
+37:36 after ramping with two Queens. He's
+dropping his Pop Kaido cuz I have two
+37:40 Zoros out. I I might even still play it
+just for the 1K like fixing in my hand.
+37:45 He does play a second Queen this turn.
+Three Queens.
+37:49 So, there's a ramp. Another ramp. Yeah,
+he goes to 10 next turn.
+37:53 Three Queens, two Princes, and 1K.
+Does not attack me. He's still starving
+37:57 me, which is good cuz I didn't topdeck
+that Saul. Okay, I'll play out Nami. I
+38:01 didn't get anything good off of the
+Pirate Stocking six, either. Let's get
+38:04 rid of Zoro, and I still don't have a a
+giant. What do I do here? I guess I'll
+38:08 sing six. At least I have a eight cost I
+can use. But, my two costs can't attack.
+38:15 He takes that hit. I'm I'm running
+giants, right?
+38:19 Okay, he plays Block Kaido.
+Block Kaido would give him two Dawn. He
+38:23 doesn't attack. Still wants to starve
+me. We'll play Nami to try to find
+38:27 Jaguar D Sold. Thank you. Finally. We'll
+play him out.
+38:31 Okay, we'll take eight drop Luffy.
+Now, we can start to doing some damage.
+38:35 We got six. My leader is still a 6K only
+two.
+38:38 2K, hmm, six.
+Then Zoro seven, leader seven, pirate
+38:42 stocking eight.
+The six.
+38:45 Hey, then you'll take a seven, too.
+Yep. Then you'll take a third seven. No,
+38:51 my second seven of the turn. He blocks
+that, so I have to attack with PD6. You
+38:55 take. Maybe he's taking cuz he wants to
+find like a heal, Lilin or something.
+38:59 That might be it. He might be forced to
+counter here. Okay, he's countering.
+39:04 Uh, yeah, I don't care if my stuff dies.
+He does play a Lilin. Okay, I care if my
+39:08 Jaguar D Sold dies. I hope he doesn't
+have a Mom Argon. Let's see what he
+39:11 debuffs, though.
+Pirate stocking six, right? It's my
+39:14 soul. Okay, he has Mom Argon, but that
+would make him go down to like five
+39:17 Dawn, seven Dawn next turn. Okay,
+there's MMG.
+39:21 MMR. Yeah, MMR. Is it Mom Argon or Mom
+Argon?
+39:25 So, there's my giant. My small guys are
+easier to kill. Mom Argon.
+39:30 Mom Argon. Will he attack with the Block
+Kaido?
+39:33 >> [laughter]
+>> He could kill my pirate stocking six.
+39:35 Okay, five at Zoro. No Dawn minusing cuz
+he doesn't want to go down to six Dawn
+39:40 next turn. He does have
+access to like Mom Argon defensively to
+39:44 draw a card. He is attacking with it. In
+that case, I think I will actually
+39:48 defend it.
+If my theory is correct that he has no
+39:52 counter in hand, then he could throw 3K
+with the queen, which I might have to
+39:56 counter.
+The thing is I don't have another giant.
+39:59 >> [laughter]
+>> So, hopefully Usopp finds me one
+40:01 cuz I can't get rushed to Luffy.
+And I top deck into a Jinbe. Thanks.
+40:04 We'll play a Usopp. Okay, Saul works.
+Play out Saul. Uh, another eight drop
+40:10 Luffy. I just need one of my tall costs
+to stick. Dawn leader. Uh, 7778.
+40:16 Yeah, I could do that. And then if my
+soul lives, I guess I'll just play out
+40:19 Luffy and put Brooke down on leader or
+something. Okay, here's another seven.
+40:23 Took that as well. Okay, we can get him
+to zero maybe. Another seven. He has to
+40:27 counter this one.
+Took it. Okay, eight.
+40:32 What's in your hand, man? So, leader
+ability plus the 2K. I guess he just
+40:35 wanted to avoid having to leader ability
+at all possible cost. So, he's on seven
+40:40 dawn. He
+concedes. Oh my god, so brick so bricked
+40:44 up. I think if he had played the the
+other Kaido first, that would have
+40:48 bought him some more time.
+Or even on the last turn instead of the
+40:52 Linlin. Cuz he probably would have
+survived and be able to Linlin this
+40:56 turn.
+IMHO.
+40:58 Okay, bye.
+>> Cardi Kaizoku

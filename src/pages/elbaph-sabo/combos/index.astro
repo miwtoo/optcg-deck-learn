@@ -1,0 +1,12 @@
+---
+import GuideLayout from '../../../layouts/GuideLayout.astro';
+import CardImageButton from '../../../components/CardImageButton.astro';
+import CardModal from '../../../components/CardModal.astro';
+import { saboCombos } from '../../../data/combos';
+---
+<GuideLayout title="Elbaph Sabo Combos" active="combos">
+  <section class="combo-intro"><div class="eyebrow">THREE EASY LINES</div><h1>Make the line.<br><em>Check the cost.</em></h1><p class="lede">Use these short lines after you build your board. Check your DON!! before you start.</p></section>
+  <section class="combo-grid" aria-label="Combo lines">{saboCombos.map((combo)=><article class="combo-card"><div class="combo-art">{combo.cards.slice(0, 2).map((id)=><CardImageButton id={id} alt={`${id} card`} />)}</div><div class="combo-copy"><div class="eyebrow">{combo.number}</div><h2>{combo.title}</h2><p>{combo.summary}</p><div class="combo-step"><b>OPEN GUIDE</b>See cards, steps, and power states.</div><a class="button combo-open" href={`/elbaph-sabo/combos/${combo.slug}/`}>Open detail</a></div></article>)}</section>
+  <div class="notice"><b>Simple order.</b> Find the big body. Go wide. Then use Luffy or your 5K bodies to close.</div>
+  <CardModal />
+</GuideLayout>
