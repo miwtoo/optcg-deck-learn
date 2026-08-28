@@ -22,11 +22,13 @@ When website text asks the user to choose:
 
 # Deploy
 
-Deploy the site to Cloudflare Pages after a user asks to deploy.
+Deploy the site to GitHub Pages after a user asks to deploy.
 
 1. Run `pnpm run build`.
-2. Run `pnpm dlx wrangler pages deploy ./dist --project-name optcg-deck-learn`.
-3. Report `https://optcg-deck-learn.pages.dev`.
+2. Push the changes to `main`.
+3. Report `https://miwtoo.github.io/optcg-deck-learn/`.
+
+The repository Pages Source setting must be `GitHub Actions`.
 
 # Guide source
 

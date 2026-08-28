@@ -1,11 +1,12 @@
 ---
+const base = `${import.meta.env.BASE_URL}/`;
 const guides = [
   {
     title: 'Elbaph Sabo',
     colors: 'Red / Black',
     description: 'Build a wide board. Reach 12+. With 1 DON!! and your own 8+ Character, Sabo gives your Leader and Characters +1000 power.',
-    href: '/elbaph-sabo/',
-    image: '/cards/OP13-004.png',
+    href: `${base}elbaph-sabo/`,
+    image: `${base}cards/OP13-004.png`,
     imageAlt: 'Sabo Leader card',
   },
 ];
@@ -20,7 +21,7 @@ const guides = [
   <body>
     <main class="shell">
       <header class="topbar">
-        <a class="mark" href="/">ONE PIECE · DECK GUIDES</a>
+        <a class="mark" href={base}>ONE PIECE · DECK GUIDES</a>
         <span class="edition">OP17</span>
       </header>
 

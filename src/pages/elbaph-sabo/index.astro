@@ -1,4 +1,5 @@
 ---
+const base = `${import.meta.env.BASE_URL}/elbaph-sabo`;
 import GuideLayout from '../../layouts/GuideLayout.astro';
 import CardGrid from '../../components/CardGrid.astro';
 import CardModal from '../../components/CardModal.astro';
@@ -62,7 +63,7 @@ const matchupLegend = [
     <section class="section matchup-section"><div class="eyebrow">CARD OPTIONS</div><h2>Make a clear swap.</h2><p class="lede" style="font-size:16px">Choose one card option. Keep the rest of the list.</p><div class="matchup-grid">{matchupSwaps.map((swap)=><article class="matchup-card"><h3>{swap.title}</h3><div class="swap-list">{swap.items.map((item, index)=><div class="swap-item"><span class:list={{ 'swap-action': true, 'swap-action-add': item.action === 'Add', 'swap-action-keep': item.action === 'Keep', 'swap-action-test': item.action === 'Test' }}>{item.action}</span><CardImageButton id={item.id} alt={item.name} /><div><strong>{item.quantity} {item.name}</strong><small>{item.id}</small></div>{index < swap.items.length - 1 && <span class="swap-arrow" aria-hidden="true">→</span>}</div>)}</div></article>)}</div><div class="matchup-legend"><div class="eyebrow">CARD LEGEND</div><div class="legend-grid">{matchupLegend.map((card)=><article class="legend-card"><CardImageButton id={card.id} alt={card.name} /><div><strong>{card.name}</strong><span>{card.id}</span><b>{card.role}</b><small>{card.use}</small></div></article>)}</div></div></section>
     <section class="section"><div class="countline"><div><div class="eyebrow">THE EXACT LIST</div><h2>1 leader + {mainDeckTotal} cards</h2></div><div class="count">✓ Counted: {mainDeckTotal}</div></div><CardGrid /><p class="source">This sheet uses every card and quantity from the supplied deck list. Tap a card for its local text.</p></section>
     <section class="section export-panel"><div class="countline"><div><div class="eyebrow">EGMAN EVENTS DECK BUILDER</div><h2>Copy the deck list.</h2></div><button class="button copy-button" type="button" data-copy-export>Copy list</button></div><p class="source">Copy this list and paste it into Egman Events Deck Builder.</p><pre class="deck-export" data-deck-export>{egmanExport}</pre><p class="copy-status" data-copy-status role="status" aria-live="polite"></p></section>
-   <div class="notice"><a class="button" href="/elbaph-sabo/pilot/">Open the Pilot guide →</a><p>Learn the turn order, hand keeps, and DON!! curve.</p></div>
+   <div class="notice"><a class="button" href={`${base}/pilot/`}>Open the Pilot guide →</a><p>Learn the turn order, hand keeps, and DON!! curve.</p></div>
    <section class="section"><div class="eyebrow">WEBSITE SOURCE</div><p>Fan-made learning guide based on Car D. Kaizoku’s Elbaph Sabo guide. Simplified and adapted for beginner practice.</p><p><a href="https://youtu.be/pW0WQAHiZyk?si=_8f0yDqn1B07T95X">https://youtu.be/pW0WQAHiZyk?si=_8f0yDqn1B07T95X</a></p></section>
    <CardModal />
 </GuideLayout>

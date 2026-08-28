@@ -1,4 +1,5 @@
 ---
+const base = `${import.meta.env.BASE_URL}/elbaph-sabo`;
 import GuideLayout from '../../../layouts/GuideLayout.astro';
 import CardImageButton from '../../../components/CardImageButton.astro';
 import CardModal from '../../../components/CardModal.astro';
@@ -48,7 +49,7 @@ const curves: [string, CurveTurn[]][] = [['Going first', first as CurveTurn[]], 
     </div>
   </section>
   <section class="section"><div class="eyebrow">IDEAL DON!! CURVE</div><h2>Spend DON!! in this order.</h2><p class="source">This is a sample menu, not a rule. Keep counters when the board needs safety.</p><div class="ideal-curve">{curves.map(([heading, lane])=><article class="ideal-lane"><h3>{heading}</h3>{lane.map((turn: CurveTurn)=><div class="ideal-step"><div class="ideal-pair">{turn[1].map((id)=><CardImageButton id={id} alt={`${id} card`} />)}</div><div><h4>{turn[0]}</h4><p>{turn[2]}</p><span class="tag">Card text + strong inference</span></div></div>)}</article>)}</div></section>
-  <div class="notice"><a class="button" href="/elbaph-sabo/combos/">Open Combos →</a></div>
+   <div class="notice"><a class="button" href={`${base}/combos/`}>Open Combos →</a></div>
   <CardModal />
 </GuideLayout>
 

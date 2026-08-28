@@ -526,9 +526,9 @@ export const saboDeckTotal = saboDeck.reduce(
 );
 
 export const saboPageNavigation = [
-  { label: 'Deck', href: '/' },
-  { label: 'Pilot', href: '/pilot/' },
-  { label: 'Combos', href: '/combos/' },
+  { label: 'Deck', href: `${import.meta.env.BASE_URL}/elbaph-sabo/` },
+  { label: 'Pilot', href: `${import.meta.env.BASE_URL}/elbaph-sabo/pilot/` },
+  { label: 'Combos', href: `${import.meta.env.BASE_URL}/elbaph-sabo/combos/` },
 ] as const;
 
-export const cardImageUrl = (id: string): string => `/cards/${id}.png`;
+export const cardImageUrl = (id: string): string => `${import.meta.env.BASE_URL}/cards/${id}.png`;

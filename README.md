@@ -2,6 +2,15 @@
 
 An Astro site for One Piece Card Game deck guides.
 
+Published site: https://miwtoo.github.io/optcg-deck-learn/
+
+## Deploy
+
+1. Run `pnpm run build`.
+2. Push the changes to `main`.
+
+Set the repository Pages Source setting to `GitHub Actions`.
+
 ## Setup
 
 Requires Node.js and pnpm.
