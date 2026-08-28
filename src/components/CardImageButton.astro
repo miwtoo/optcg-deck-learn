@@ -1,8 +1,18 @@
 ---
 import { cardImageUrl as defaultImageUrl } from '../data/sabo';
+import { getUiLabels, type Locale, type UiLabelOverrides } from '../i18n/ui';
 
-const { id, alt = `${id} card`, imageUrl = defaultImageUrl } = Astro.props;
+const { id, alt = `${id} card`, imageUrl = defaultImageUrl, lang = 'en', labels: labelOverrides, openLabel, ariaLabel } = Astro.props as {
+  id: string;
+  alt?: string;
+  imageUrl?: (id: string) => string;
+  lang?: Locale;
+  labels?: UiLabelOverrides;
+  openLabel?: string;
+  ariaLabel?: string;
+};
+const ui = getUiLabels(lang, labelOverrides);
 ---
-<button class="card-image-button" type="button" data-card-id={id} aria-label={`Open ${alt} details`}>
+<button class="card-image-button" type="button" data-card-id={id} aria-label={ariaLabel ?? `${openLabel ?? ui.openCard} ${alt} ${ui.cardDetails}`}>
   <img src={imageUrl(id)} data-card-image-id={id} alt={alt} />
 </button>

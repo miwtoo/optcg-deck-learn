@@ -1,22 +1,84 @@
 ---
 import { saboDeck, saboFlexCards, saboCardArtVariants, saboCardMetadataById, cardImageUrl as defaultImageUrl } from '../data/sabo';
-const { deck = saboDeck, extraCards = saboFlexCards, artVariants = saboCardArtVariants, metadataById = saboCardMetadataById, imageUrl = defaultImageUrl } = Astro.props;
-const cards = Object.fromEntries([...deck, ...extraCards].map((card: { id: string }) => [card.id, { ...card, ...metadataById[card.id], image: imageUrl(card.id), variants: (artVariants[card.id] ?? []).map((variant: string, index: number) => ({ id: variant, label: `PA ${index + 1}`, image: imageUrl(variant) })) }]));
+import { thaiCardMetadataById } from '../data/cards-th';
+import { getUiLabels, type Locale, type UiLabelOverrides } from '../i18n/ui';
+
+type DeckCard = { readonly id: string; readonly name: string; readonly role: string; readonly quantity: number };
+type Metadata = { readonly name?: string; readonly role?: string; readonly effect?: string };
+
+const {
+  deck = saboDeck,
+  extraCards = saboFlexCards,
+  artVariants = saboCardArtVariants,
+  metadataById = saboCardMetadataById,
+  imageUrl = defaultImageUrl,
+  lang = 'en',
+  labels: labelOverrides,
+  closeLabel,
+  parallelArtLabel,
+  baseArtLabel,
+  cardTextLabel,
+  detailsSourceLabel,
+} = Astro.props as {
+  deck?: readonly DeckCard[];
+  extraCards?: readonly DeckCard[];
+  artVariants?: Readonly<Record<string, readonly string[]>>;
+  metadataById?: Readonly<Record<string, Metadata>>;
+  imageUrl?: (id: string) => string;
+  lang?: Locale;
+  labels?: UiLabelOverrides;
+  closeLabel?: string;
+  parallelArtLabel?: string;
+  baseArtLabel?: string;
+  cardTextLabel?: string;
+  detailsSourceLabel?: string;
+};
+
+const ui = getUiLabels(lang, {
+  ...labelOverrides,
+  closeCard: closeLabel ?? labelOverrides?.closeCard,
+  parallelArt: parallelArtLabel ?? labelOverrides?.parallelArt,
+  baseArt: baseArtLabel ?? labelOverrides?.baseArt,
+  cardText: cardTextLabel ?? labelOverrides?.cardText,
+  cardDetailsSource: detailsSourceLabel ?? labelOverrides?.cardDetailsSource,
+});
+const localizedMetadataById: Readonly<Record<string, Metadata>> = lang === 'th' ? { ...metadataById, ...thaiCardMetadataById } : metadataById;
+const cards = Object.fromEntries([...deck, ...extraCards].map((card) => {
+  const metadata = localizedMetadataById[card.id] ?? {};
+  return [card.id, {
+    ...card,
+    ...metadata,
+    name: metadata.name ?? card.name,
+    role: metadata.role ?? card.role,
+    effect: metadata.effect ?? '',
+    image: imageUrl(card.id),
+    variants: (artVariants[card.id] ?? []).map((variant, index) => ({ id: variant, label: `PA ${index + 1}`, image: imageUrl(variant) })),
+  }];
+}));
+const modalLabels = {
+  closeCard: ui.closeCard,
+  parallelArt: ui.parallelArt,
+  baseArt: ui.baseArt,
+  cardText: ui.cardText,
+  cardDetailsSource: ui.cardDetailsSource,
+};
 ---
-<dialog class="modal" id="card-modal" data-cards={JSON.stringify(cards)}><button class="close" data-close aria-label="Close card details">×</button><div id="card-modal-content"></div></dialog>
+<dialog class="modal" id="card-modal" data-cards={JSON.stringify(cards)} data-labels={JSON.stringify(modalLabels)}><button class="close" type="button" data-close aria-label={ui.closeCard}>×</button><div id="card-modal-content"></div></dialog>
 <script>
   type Variant = { id: string; label: string; image: string };
   type Card = { image: string; name: string; role: string; id: string; quantity: number; effect: string; variants: Variant[] };
+  type ModalLabels = { closeCard: string; parallelArt: string; baseArt: string; cardText: string; cardDetailsSource: string };
   const dialog = document.querySelector<HTMLDialogElement>('#card-modal');
   const content = document.querySelector<HTMLDivElement>('#card-modal-content');
   const cards = JSON.parse(dialog?.dataset.cards ?? '{}') as Record<string, Card>;
+  const labels = JSON.parse(dialog?.dataset.labels ?? '{}') as ModalLabels;
   const storageKey = (id: string) => `sabo-card-art:${id}`;
-  const escapeHtml = (value: string) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+  const escapeHtml = (value: unknown) => String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
   const savedArt = (id: string) => { try { return localStorage.getItem(storageKey(id)); } catch { return null; } };
   const selectedImage = (card: Card) => { const saved = savedArt(card.id); return card.variants.find((variant) => variant.id === saved)?.image ?? card.image; };
-  const updateImages = (id: string, image: string) => document.querySelectorAll<HTMLImageElement>(`[data-card-image-id="${id}"]`).forEach((imageElement) => { imageElement.src = image; });
+  const updateImages = (id: string, image: string) => document.querySelectorAll<HTMLImageElement>('[data-card-image-id]').forEach((imageElement) => { if (imageElement.dataset.cardImageId === id) imageElement.src = image; });
   const saveArt = (card: Card, variantId: string) => { if (variantId === card.id) { try { localStorage.removeItem(storageKey(card.id)); } catch { /* Storage may be unavailable. */ } updateImages(card.id, card.image); render(card); return; } const variant = card.variants.find((item) => item.id === variantId); if (!variant) return; try { localStorage.setItem(storageKey(card.id), variant.id); } catch { /* Storage may be unavailable. */ } updateImages(card.id, variant.image); render(card); };
-  const render = (card: Card) => { const image = selectedImage(card); const options = card.variants.length ? `<fieldset class="art-selector" data-card-id="${card.id}"><legend>Parallel art</legend><div>${[{ id: card.id, label: 'Base', image: card.image }, ...card.variants].map((variant) => `<button type="button" class="art-option" data-art-id="${variant.id}" aria-pressed="${variant.image === image}"><img src="${variant.image}" alt="${card.name}, ${variant.label}"><span>${variant.label}</span></button>`).join('')}</div></fieldset>` : ''; content!.innerHTML = `<div class="modal-top" data-card-id="${card.id}"><img data-card-image-id="${card.id}" src="${image}" alt="${card.name}"><div><div class="eyebrow">${card.role}</div><h2>${card.name}</h2><div class="chips"><span class="chip">${card.id}</span><span class="chip">×${card.quantity}</span></div></div></div>${options}<p><b>Card text</b><br>${escapeHtml(card.effect)}</p><p class="source">Details use the local card data. Count and role use the deck list.</p>`; };
+  const render = (card: Card) => { const image = selectedImage(card); const cardId = escapeHtml(card.id); const cardName = escapeHtml(card.name); const cardRole = escapeHtml(card.role); const cardImage = escapeHtml(image); const options = card.variants.length ? `<fieldset class="art-selector" data-card-id="${cardId}"><legend>${escapeHtml(labels.parallelArt)}</legend><div>${[{ id: card.id, label: labels.baseArt, image: card.image }, ...card.variants].map((variant) => `<button type="button" class="art-option" data-art-id="${escapeHtml(variant.id)}" aria-pressed="${variant.image === image}"><img src="${escapeHtml(variant.image)}" alt="${cardName}, ${escapeHtml(variant.label)}"><span>${escapeHtml(variant.label)}</span></button>`).join('')}</div></fieldset>` : ''; content!.innerHTML = `<div class="modal-top" data-card-id="${cardId}"><img data-card-image-id="${cardId}" src="${cardImage}" alt="${cardName}"><div><div class="eyebrow">${cardRole}</div><h2>${cardName}</h2><div class="chips"><span class="chip">${cardId}</span><span class="chip">×${escapeHtml(card.quantity)}</span></div></div></div>${options}<p><b>${escapeHtml(labels.cardText)}</b><br>${escapeHtml(card.effect)}</p><p class="source">${escapeHtml(labels.cardDetailsSource)}</p>`; };
 
   if (dialog && content) {
     document.querySelectorAll<HTMLImageElement>('[data-card-image-id]').forEach((image) => { const card = cards[image.dataset.cardImageId ?? '']; if (card) image.src = selectedImage(card); });

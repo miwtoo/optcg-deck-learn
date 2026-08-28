@@ -1,0 +1,96 @@
+---
+import GuideLayout from '../../layouts/GuideLayout.astro';
+import CardGrid from '../../components/CardGrid.astro';
+import CardModal from '../../components/CardModal.astro';
+import CardImageButton from '../../components/CardImageButton.astro';
+import { mihawkDeck, mihawkDeckTotal, mihawkCardMetadataById, mihawkCardArtVariants, mihawkCardImageUrl } from '../../data/mihawk';
+import { mihawkThaiDeck, mihawkThaiDeckRoleLabels, mihawkThaiNavigation } from '../../content/mihawk/th';
+import { thaiCardMetadataById } from '../../data/cards-th';
+import type { Locale } from '../../i18n/ui';
+
+const { lang = 'en' } = Astro.props as { lang?: Locale };
+const locale: Locale = lang === 'th' ? 'th' : 'en';
+const isThai = locale === 'th';
+const thaiMetadata = thaiCardMetadataById;
+const deck = isThai
+  ? mihawkDeck.map((card) => ({
+      ...card,
+      name: thaiMetadata[card.id]?.name ?? card.name,
+      role: mihawkThaiDeckRoleLabels[card.role as keyof typeof mihawkThaiDeckRoleLabels] ?? card.role,
+    }))
+  : mihawkDeck;
+const mainDeckTotal = mihawkDeckTotal - 1;
+const egmanExport = deck.map((card) => `${card.quantity} ${card.id} ${card.name}`).join('\n');
+const groups = isThai
+  ? [
+      { id: 'leader', label: mihawkThaiDeck.list.groups.Leader },
+      { id: 'search-setup', label: mihawkThaiDeck.list.groups['Search / setup'] },
+      { id: 'characters', label: mihawkThaiDeck.list.groups.Characters },
+      { id: 'rest-effects', label: mihawkThaiDeck.list.groups['Rest effects'] },
+      { id: 'events', label: mihawkThaiDeck.list.groups.Events },
+    ]
+  : [
+      { id: 'leader', label: 'Leader' },
+      { id: 'search-setup', label: 'Search / setup' },
+      { id: 'characters', label: 'Characters' },
+      { id: 'rest-effects', label: 'Rest effects' },
+      { id: 'events', label: 'Events' },
+    ];
+const groupById: Readonly<Record<string, string>> = {
+  'OP14-020': 'leader',
+  'OP07-022': 'search-setup',
+  'OP12-034': 'search-setup',
+  'OP14-023': 'rest-effects',
+  'OP14-039': 'rest-effects',
+  'OP01-055': 'events',
+  'OP12-037': 'events',
+  'OP13-040': 'events',
+  'OP14-036': 'events',
+};
+const groupBy = (card: { readonly id: string }) => groupById[card.id] ?? (card.id === 'OP12-023' ? 'search-setup' : 'characters');
+const navigation = isThai
+  ? [
+      { id: 'deck', label: mihawkThaiNavigation.deck, path: '/mihawk/' },
+      { id: 'pilot', label: mihawkThaiNavigation.pilot, path: '/mihawk/pilot/' },
+    ]
+  : [
+      { id: 'deck', label: 'Deck', path: '/mihawk/' },
+      { id: 'pilot', label: 'Pilot', path: '/mihawk/pilot/' },
+    ];
+const copyText = isThai
+  ? mihawkThaiDeck.export
+  : { eyebrow: 'EGMAN EVENTS DECK BUILDER', title: 'Copy the deck list.', copy: 'Copy list', copied: 'Copied', copiedStatus: 'Copied to your clipboard.' };
+---
+<GuideLayout title={isThai ? mihawkThaiDeck.title : 'Green Dracule Mihawk · OP14-020'} active="deck" lang={locale} guideBase="/mihawk" brand="ONE PIECE · OP14" navigation={navigation}>
+  <section class="hero"><div><div class="eyebrow">{isThai ? mihawkThaiDeck.hero.eyebrow : 'GREEN · SLASH'}</div><h1>Dracule Mihawk<br><em>OP14-020</em></h1><p class="lede">{isThai ? mihawkThaiDeck.hero.lede : 'Play your effects first. Rest one card. Turn up to 3 DON!! active.'}</p><div class="chips"><span class="chip">{isThai ? mihawkThaiDeck.hero.leaderChip : 'OP14-020 Leader'}</span><span class="chip">{isThai ? mihawkThaiDeck.hero.cardCount(mainDeckTotal) : `1 leader + ${mainDeckTotal} cards`}</span></div></div><div class="hero-art"><CardImageButton id="OP14-020" imageUrl={mihawkCardImageUrl} lang={locale} alt={isThai ? mihawkThaiDeck.hero.leaderAlt : 'Dracule Mihawk leader'} /><CardImageButton id="OP14-119" imageUrl={mihawkCardImageUrl} lang={locale} alt={isThai ? 'Dracule Mihawk' : 'Dracule Mihawk'} /></div></section>
+  <div class="notice"><b>{isThai ? mihawkThaiDeck.leaderSequence.label + ' :' : 'Leader sequence.'}</b> {isThai ? mihawkThaiDeck.leaderSequence.text : 'Play Characters and use their effects first. Confirm either field has a cost 5 or more Character. Rest your card. Set up to 3 DON!! active. Do not play more Characters. Use active DON!! for attacks, Events, and effects.'}</div>
+  <section class="section"><div class="eyebrow">{isThai ? mihawkThaiDeck.plan.eyebrow : 'THE SIMPLE PLAN'}</div><h2>{isThai ? mihawkThaiDeck.plan.title : 'Make the rest count.'}</h2><div class="overview">{(isThai ? mihawkThaiDeck.plan.steps : [
+    { title: '1 · Play effects first', text: 'Play Characters and use their effects before you use the Leader effect.' },
+    { title: '2 · Confirm the field', text: 'Either field must have a Character with a cost of 5 or more.' },
+    { title: '3 · Rest one card', text: 'Rest a card, then set up to 3 DON!! active with the Leader effect.' },
+    { title: '4 · Use the DON!!', text: 'Use active DON!! for attacks, Events, and Character effects. Do not play more Characters this turn.' },
+  ]).map((step) => <article class="tile"><h3>{step.title}</h3><p>{step.text}</p></article>)}</div></section>
+  <section class="section"><div class="flow">{(isThai ? mihawkThaiDeck.plan.flow : ['Play effects', 'Confirm 5+', 'Rest', '+ active DON!!', 'Attack or use Events']).map((step, index) => <><span>{step}</span>{index < (isThai ? mihawkThaiDeck.plan.flow.length : 5) - 1 && <b>→</b>}</>)}</div></section>
+  <section class="section"><div class="eyebrow">{isThai ? mihawkThaiDeck.development.eyebrow : 'DEVELOPMENT'}</div><h2>{isThai ? mihawkThaiDeck.development.title : 'Build at 5 or 6 DON!!'}</h2><div class="overview">{(isThai ? mihawkThaiDeck.development.steps : [
+    { title: '5 DON!!', text: 'Play a 5-cost Character. This gives the Leader a valid 5+ Character for its effect.' },
+    { title: '6 DON!!', text: 'ST32-003 Dracule Mihawk deploys a 5-cost-or-less Perona or Slash Character from your hand. The Leader can then rest that Character.' },
+    { title: '9 or 10 DON!!', text: 'Use the active DON!! for large Characters and a finish. ST24-004 Law & Bepo and OP14-119 Dracule Mihawk are finishers in this list.' },
+    { title: 'Keep a counter', text: 'Plan your Counter Events before you use all active DON!!. ST16-004 Shanks and ST24-004 Law & Bepo are Characters in this list. OP01-055 is a Main Event, not a Counter Event.' },
+  ]).map((step) => <article class="tile"><h3>{step.title}</h3><p>{step.text}</p></article>)}</div></section>
+  <section class="section"><div class="countline"><div><div class="eyebrow">{isThai ? mihawkThaiDeck.list.eyebrow : 'THE EXACT LIST'}</div><h2>{isThai ? mihawkThaiDeck.list.cardCount(mainDeckTotal) : `1 leader + ${mainDeckTotal} cards`}</h2></div><div class="count">{isThai ? mihawkThaiDeck.list.counted(mainDeckTotal) : `✓ Counted: ${mainDeckTotal}`}</div></div><CardGrid deck={deck} metadataById={mihawkCardMetadataById} imageUrl={mihawkCardImageUrl} groups={groups} groupBy={groupBy} lang={locale} /><p class="source">{isThai ? mihawkThaiDeck.list.source : 'This list uses every card and quantity in the Tone source file.'}</p></section>
+  <section class="section export-panel"><div class="countline"><div><div class="eyebrow">{copyText.eyebrow}</div><h2>{copyText.title}</h2></div><button class="button copy-button" type="button" data-copy-export data-copy-label={copyText.copy} data-copied-label={copyText.copied} data-copied-status={copyText.copiedStatus}>{copyText.copy}</button></div><pre class="deck-export" data-deck-export>{egmanExport}</pre><p class="copy-status" data-copy-status role="status" aria-live="polite"></p></section>
+  <div class="notice"><a class="button" href={`${import.meta.env.BASE_URL}${isThai ? '/th/mihawk/pilot/' : '/mihawk/pilot/'}`}>{isThai ? mihawkThaiDeck.pilotLink.label : 'Open the Pilot guide →'}</a><p>{isThai ? mihawkThaiDeck.pilotLink.text : 'Learn the Leader sequence and development points.'}</p></div>
+  <section class="section"><div class="eyebrow">{isThai ? mihawkThaiDeck.sources.eyebrow : 'SOURCES'}</div><p>{isThai ? mihawkThaiDeck.sources.text : 'The exact list comes from the local Tone source file. The official card page confirms rules and overlapping-card interactions.'}</p><p><a href="https://asia-en.onepiece-cardgame.com/feature/deck/deck_102.php">{isThai ? mihawkThaiDeck.sources.officialDeckPage : 'Official One Piece Card Game deck page'}</a></p></section>
+  <CardModal deck={deck} metadataById={mihawkCardMetadataById} artVariants={mihawkCardArtVariants} imageUrl={mihawkCardImageUrl} extraCards={[]} lang={locale} />
+</GuideLayout>
+
+<script>
+  const copyButton = document.querySelector<HTMLButtonElement>('[data-copy-export]');
+  const exportBlock = document.querySelector('[data-deck-export]');
+  const copyStatus = document.querySelector('[data-copy-status]');
+  copyButton?.addEventListener('click', async () => { if (!exportBlock || !copyStatus) return; await navigator.clipboard.writeText(exportBlock.textContent ?? ''); copyButton.textContent = copyButton.dataset.copiedLabel ?? 'Copied'; copyStatus.textContent = copyButton.dataset.copiedStatus ?? 'Copied to your clipboard.'; window.setTimeout(() => { copyButton.textContent = copyButton.dataset.copyLabel ?? 'Copy list'; copyStatus.textContent = ''; }, 2200); });
+</script>
+
+<style>
+  .export-panel{position:relative}.copy-button{font:inherit;cursor:pointer}.copy-button:focus-visible{outline:3px solid var(--red);outline-offset:3px}.deck-export{overflow:auto;margin:0;padding:18px;border:2px solid var(--line);border-radius:14px;background:var(--ink);color:#fffdf7;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}.copy-status{min-height:1.5em;margin:8px 0 0;color:var(--red);font-weight:900}.card strong,.card small{overflow-wrap:anywhere;word-break:break-word}
+</style>

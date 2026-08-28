@@ -1,9 +1,83 @@
 ---
-const { title, active, guideBase = '/elbaph-sabo', brand = 'ONE PIECE · OP17', navigation = ['Deck', 'Pilot', 'Combos'] } = Astro.props;
-const base = `${import.meta.env.BASE_URL}${guideBase}`;
+import { getUiLabels, type Locale, type UiLabelOverrides } from '../i18n/ui';
+
+type NavigationItem = { readonly id: string; readonly label: string; readonly path: string };
+type NavigationInput = NavigationItem | string;
+type LanguageUrls = Partial<Record<Locale, string>>;
+
+const {
+  title,
+  active,
+  lang,
+  guideBase = '/elbaph-sabo',
+  brand = 'ONE PIECE · OP17',
+  navigation = ['Deck', 'Pilot', 'Combos'],
+  labels: labelOverrides,
+  languageUrls,
+  localeUrls,
+} = Astro.props as {
+  title: string;
+  active?: string;
+  lang?: Locale;
+  guideBase?: string;
+  brand?: string;
+  navigation?: readonly NavigationInput[];
+  labels?: UiLabelOverrides;
+  languageUrls?: LanguageUrls;
+  localeUrls?: LanguageUrls;
+};
+
+const basePrefix = import.meta.env.BASE_URL.replace(/\/$/, '');
+const guidePath = guideBase.startsWith('/') ? guideBase : `/${guideBase}`;
+const thaiPathPrefix = `${basePrefix}/th`.replace(/^\/\//, '/');
+const inferredLocale: Locale = Astro.currentLocale === 'th' || Astro.url.pathname === thaiPathPrefix || Astro.url.pathname.startsWith(`${thaiPathPrefix}/`) ? 'th' : 'en';
+const locale: Locale = lang ?? inferredLocale;
+const ui = getUiLabels(locale, labelOverrides);
+const localePrefix = locale === 'en' ? '' : '/th';
+const guideRoot = `${basePrefix}${localePrefix}${guidePath}`.replace(/\/$/, '');
+const deckListLabel = locale === 'th' ? 'รายการเด็ค' : 'Deck list';
+const deckListHref = `${basePrefix}${localePrefix}/`.replace(/\/\//g, '/');
+
+const defaultNavigation: readonly NavigationItem[] = [
+  { id: 'deck', label: 'Deck', path: '/' },
+  { id: 'pilot', label: 'Pilot', path: '/pilot/' },
+  { id: 'combos', label: 'Combos', path: '/combos/' },
+];
+const normalizedNavigation: readonly NavigationItem[] = navigation.map((item) => {
+  if (typeof item !== 'string') {
+    const defaultItem = defaultNavigation.find((entry) => entry.id === item.id);
+    const label = labelOverrides?.navigation?.[item.id] ?? (item.label === defaultItem?.label ? ui.navigation[item.id] ?? item.label : item.label);
+    return { ...item, label };
+  }
+  const id = item.toLowerCase();
+  const fallback = defaultNavigation.find((entry) => entry.id === id);
+  return { id, label: ui.navigation[id] ?? item, path: fallback?.path ?? `/${id}/` };
+});
+
+const routeHref = (path: string): string => {
+  if (/^(?:[a-z]+:)?\/\//i.test(path)) return path;
+  if (path === '/' || path === '') return `${guideRoot}/`;
+  const cleanPath = path.replace(/^\/+|\/+$/g, '');
+  const guidePathWithoutSlash = guidePath.replace(/^\/+|\/+$/g, '');
+  if (cleanPath === guidePathWithoutSlash || cleanPath.startsWith(`${guidePathWithoutSlash}/`)) {
+    return `${basePrefix}${localePrefix}/${cleanPath}/`;
+  }
+  return `${guideRoot}/${cleanPath}/`;
+};
+
+const withBase = (path: string): string => {
+  if (/^(?:[a-z]+:)?\/\//i.test(path)) return path;
+  if (path === basePrefix || path.startsWith(`${basePrefix}/`)) return path;
+  return `${basePrefix}${path.startsWith('/') ? path : `/${path}`}`;
+};
+const derivedLanguageUrls: Record<Locale, string> = {
+  en: withBase(`${Astro.url.pathname.replace(basePrefix, '').replace(/^\/th(?=\/|$)/, '') || '/'}`),
+  th: withBase(`/th${Astro.url.pathname.replace(basePrefix, '').replace(/^\/th(?=\/|$)/, '') || '/'}`),
+};
+const languageLinks = { ...derivedLanguageUrls, ...(localeUrls ?? {}), ...(languageUrls ?? {}) } as Record<Locale, string>;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -12,10 +86,19 @@ const base = `${import.meta.env.BASE_URL}${guideBase}`;
   <body>
     <main class="shell">
       <header class="topbar">
-        <a class="mark" href={`${base}/`}>{brand}</a>
-        <nav aria-label="Guide pages">
-          {navigation.map((label: string) => <a class:list={{ active: active === label.toLowerCase() }} href={`${base}/${label === 'Deck' ? '' : `${label.toLowerCase()}/`}`}>{label}</a>)}
-        </nav>
+        <div class="topbar-brand">
+          <a class="home-link" href={deckListHref}>{deckListLabel}</a>
+          <a class="mark" href={`${guideRoot}/`}>{brand}</a>
+        </div>
+        <div class="topbar-tools">
+          <nav aria-label={ui.guidePages}>
+            {normalizedNavigation.map((item) => <a class:list={{ active: active === item.id }} href={routeHref(item.path)}>{item.label}</a>)}
+          </nav>
+          <nav class="language-switcher" aria-label={ui.languageSwitcher}>
+            <a class:list={{ active: locale === 'en' }} aria-current={locale === 'en' ? 'page' : undefined} href={languageLinks.en}>{ui.english}</a>
+            <a class:list={{ active: locale === 'th' }} aria-current={locale === 'th' ? 'page' : undefined} href={languageLinks.th}>{ui.thai}</a>
+          </nav>
+        </div>
       </header>
       <slot />
     </main>
@@ -38,6 +121,26 @@ const base = `${import.meta.env.BASE_URL}${guideBase}`;
   .power-state .card-image-button img{width:68px;height:98px}
   @media(max-width:700px){.combo-art{min-height:215px;height:215px;padding:12px;gap:10px}.combo-art .card-image-button{width:calc((100% - 10px)/2);flex-basis:calc((100% - 10px)/2)}.combo-detail-cards .card-image-button img{width:160px}}
   @media(max-width:450px){.combo-art{min-height:185px;height:185px;padding:10px;gap:8px}.combo-art .card-image-button{width:calc((100% - 8px)/2);flex-basis:calc((100% - 8px)/2)}.combo-detail-cards .card-image-button img{width:140px}}
+</style>
+<style is:global>
+   .topbar{align-items:center}
+   .topbar-brand{display:flex;align-items:center;gap:14px;min-width:0}
+   .home-link{border:2px solid var(--line);border-radius:99px;background:var(--gold);padding:9px 14px;font-size:12px;font-weight:900;text-decoration:none;white-space:nowrap}
+   .topbar-tools{display:flex;align-items:center;justify-content:flex-end;gap:10px;min-width:0}
+   .language-switcher{display:flex;gap:3px;align-items:center;border:2px solid var(--line);border-radius:99px;padding:3px;background:var(--ink);flex-shrink:0}
+   .language-switcher a{border:1px solid transparent;border-radius:99px;color:var(--paper);padding:5px 9px;font-size:12px;font-weight:900;text-decoration:none;white-space:nowrap}
+   .language-switcher a.active{border-color:var(--line);background:var(--gold);color:var(--ink)}
+   .language-switcher a:focus-visible,.home-link:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+   @media(max-width:700px){.topbar{align-items:flex-start;flex-wrap:wrap}.topbar-brand{width:100%;justify-content:space-between}.topbar-tools{width:100%;justify-content:space-between;flex-wrap:wrap}.topbar-tools>nav:first-child{width:100%;justify-content:flex-start}.language-switcher{margin-left:auto}}
+    @media(max-width:450px){.shell{padding-left:16px;padding-right:16px}.topbar-brand{gap:8px}.mark{font-size:10px}.home-link{padding:8px 11px}.topbar nav a{padding:8px 11px}}
+    /* Thai needs open spacing for stacked vowel marks and taller text lines. */
+    html[lang="th"] body{line-height:1.65}
+    html[lang="th"] .eyebrow,html[lang="th"] .label,html[lang="th"] .language-switcher a{letter-spacing:normal}
+    html[lang="th"] .hero h1,html[lang="th"] .combo-intro h1,html[lang="th"] .combo-detail-intro h1,html[lang="th"] .section h2,html[lang="th"] .combo-detail-section>h2,html[lang="th"] .combo-panel h2{letter-spacing:normal;line-height:1.1}
+    html[lang="th"] .section h3,html[lang="th"] .combo-copy h2,html[lang="th"] .pilot-combo h3{letter-spacing:normal;line-height:1.2}
+    html[lang="th"] .lede{line-height:1.65}
+    @media(max-width:700px){html[lang="th"] .topbar-tools{flex-wrap:nowrap}html[lang="th"] .topbar-tools>nav:first-child{width:auto;gap:4px}html[lang="th"] .topbar-tools>nav:first-child a{padding:8px 9px;font-size:13px}html[lang="th"] .language-switcher{margin-left:auto}}
+    @media(max-width:450px){html[lang="th"] .topbar-tools>nav:first-child a{padding:7px 8px;font-size:12px}html[lang="th"] .language-switcher a{padding:5px 8px}}
 </style>
 <style is:global>
   .card-image-button{display:block;margin:0;padding:0;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer}

@@ -1,54 +1,11 @@
 ---
-const base = `${import.meta.env.BASE_URL}/elbaph-sabo`;
-import GuideLayout from '../../../../layouts/GuideLayout.astro';
-import CardImageButton from '../../../../components/CardImageButton.astro';
-import CardModal from '../../../../components/CardModal.astro';
+import SaboComboDetailPage from '../../../../guides/sabo/ComboDetailPage.astro';
 import { saboCombos } from '../../../../data/combos';
 
 export function getStaticPaths() {
-  return saboCombos.map((combo) => ({ params: { slug: combo.slug }, props: { combo } }));
+  return saboCombos.map((combo) => ({ params: { slug: combo.slug } }));
 }
 
-const { combo } = Astro.props;
-const cardAlt = (id: string) => `${id} card`;
+const { slug } = Astro.params;
 ---
-<GuideLayout title={`Elbaph Sabo · ${combo.title}`} active="combos">
-  <section class="combo-detail-intro">
-    <a class="back-link" href={`${base}/combos/`}>← All combos</a>
-    <div class="eyebrow">{combo.number}</div>
-    <h1>{combo.title}</h1>
-    <p class="lede">{combo.summary}</p>
-  </section>
-
-  <section class="combo-detail-section">
-    <div class="eyebrow">CARDS USED</div>
-    <div class="combo-detail-cards">{combo.cards.map((id) => <CardImageButton id={id} alt={cardAlt(id)} />)}</div>
-  </section>
-
-  <section class="combo-detail-section combo-detail-grid">
-    <article class="combo-panel">
-      <div class="eyebrow">HOW TO PLAY</div>
-      <h2>Follow these steps.</h2>
-      <ol class="combo-steps">{combo.steps.map((step) => <li>{step}</li>)}</ol>
-    </article>
-    <article class="combo-panel">
-      <div class="eyebrow">PREREQUISITES</div>
-      <h2>Check before you start.</h2>
-      <div class="combo-notes">{combo.prerequisites.map((note) => <div class="combo-note">{note.cardId && <CardImageButton id={note.cardId} alt={cardAlt(note.cardId)} />}<p>{note.text}</p></div>)}</div>
-    </article>
-  </section>
-
-  <section class="combo-detail-section">
-    <div class="eyebrow">RESULT</div>
-    <h2>What the line gives you.</h2>
-    <div class="combo-notes combo-result">{combo.result.map((note) => <div class="combo-note">{note.cardId && <CardImageButton id={note.cardId} alt={cardAlt(note.cardId)} />}<p>{note.text}</p></div>)}</div>
-  </section>
-
-  <section class="combo-detail-section">
-    <div class="eyebrow">POWER STATES</div>
-    <h2>See the change.</h2>
-    <div class="power-state-grid">{combo.powerStates.map((state) => <article class="power-state"><CardImageButton id={state.cardId} alt={cardAlt(state.cardId)} /><div><b>{state.label}</b><strong>{state.value}</strong></div></article>)}</div>
-  </section>
-
-  <CardModal />
-</GuideLayout>
+<SaboComboDetailPage slug={slug} lang="en" />

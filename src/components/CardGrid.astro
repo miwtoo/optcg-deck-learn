@@ -1,6 +1,84 @@
 ---
 import { saboDeck, saboCardMetadataById, cardImageUrl as defaultImageUrl } from '../data/sabo';
-const { deck = saboDeck, metadataById = saboCardMetadataById, imageUrl = defaultImageUrl, groups = ['Leader','Search / setup','Elbaph bodies','Replay & counters'], group: groupProp } = Astro.props;
-const group = groupProp ?? ((role: string) => role === 'Leader' ? 'Leader' : ['Search / draw','Hand fixer','Top-three searcher','12+ activator'].some((x) => role.includes(x)) ? 'Search / setup' : ['Blocker','−3K','2K counter','Unblockable finisher','Rush payoff'].some((x) => role.includes(x)) ? 'Elbaph bodies' : 'Replay & counters');
+import { thaiCardMetadataById } from '../data/cards-th';
+import { getUiLabels, type Locale, type UiLabelOverrides } from '../i18n/ui';
+
+type Card = { readonly id: string; readonly name: string; readonly role: string; readonly quantity: number; readonly groupId?: string; readonly group?: string };
+type Group = { readonly id: string; readonly label: string };
+type GroupInput = Group | string;
+type Metadata = { readonly name: string };
+
+const {
+  deck = saboDeck,
+  metadataById = saboCardMetadataById,
+  imageUrl = defaultImageUrl,
+  groups = ['Leader', 'Search / setup', 'Elbaph bodies', 'Replay & counters'],
+  group: legacyGroup,
+  groupBy,
+  lang = 'en',
+  labels: labelOverrides,
+  countLabel,
+} = Astro.props as {
+  deck?: readonly Card[];
+  metadataById?: Readonly<Record<string, Metadata>>;
+  imageUrl?: (id: string) => string;
+  groups?: readonly GroupInput[];
+  group?: ((role: string) => string) | ((card: Card) => string);
+  groupBy?: (card: Card) => string;
+  lang?: Locale;
+  labels?: UiLabelOverrides;
+  countLabel?: string;
+};
+
+const ui = getUiLabels(lang, labelOverrides);
+const localizedMetadataById: Readonly<Record<string, Metadata>> = lang === 'th' ? { ...metadataById, ...thaiCardMetadataById } : metadataById;
+const defaultGroups: readonly Group[] = [
+  { id: 'leader', label: 'Leader' },
+  { id: 'search-setup', label: 'Search / setup' },
+  { id: 'elbaph-bodies', label: 'Elbaph bodies' },
+  { id: 'replay-counters', label: 'Replay & counters' },
+];
+const defaultGroupByCardId: Readonly<Record<string, string>> = {
+  'OP13-004': 'leader',
+  'OP01-016': 'search-setup',
+  'ST01-011': 'search-setup',
+  'OP11-012': 'search-setup',
+  'OP17-084': 'elbaph-bodies',
+  'OP17-086': 'search-setup',
+  'OP17-080': 'search-setup',
+  'OP17-083': 'elbaph-bodies',
+  'OP17-087': 'elbaph-bodies',
+  'OP17-095': 'elbaph-bodies',
+  'OP17-089': 'elbaph-bodies',
+  'OP15-088': 'replay-counters',
+  'OP17-119': 'elbaph-bodies',
+  'OP17-093': 'elbaph-bodies',
+  'OP04-016': 'replay-counters',
+  'OP17-098': 'replay-counters',
+};
+
+const normalizedGroups: readonly Group[] = (groups.length ? groups : defaultGroups).map((item) => {
+  if (typeof item !== 'string') return { ...item, label: ui.groups[item.id] ?? item.label };
+  const defaultGroup = defaultGroups.find((group) => group.label === item);
+  const id = defaultGroup?.id ?? item.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return { id, label: ui.groups[id] ?? ui.groups[item] ?? item };
+});
+const resolveGroup = (card: Card): string => {
+  if (groupBy) return groupBy(card);
+  if (legacyGroup) {
+    try {
+      const stableGroup = (legacyGroup as (value: Card) => string)(card);
+      if (typeof stableGroup === 'string' && stableGroup) return stableGroup;
+    } catch {
+      // Keep support for the original role-based resolver.
+    }
+    return (legacyGroup as (role: string) => string)(card.role);
+  }
+  return card.groupId ?? card.group ?? defaultGroupByCardId[card.id] ?? 'other';
+};
+const groupCards = (group: Group) => deck.filter((card) => {
+  const value = resolveGroup(card);
+  return value === group.id || value === group.label;
+});
 ---
-{groups.map((heading: string) => <section class="deck-group"><h3>{heading} <span>{deck.filter((c: { role: string }) => group(c.role) === heading).reduce((n: number,c: { quantity: number }) => n+c.quantity,0)} cards</span></h3><div class="card-grid">{deck.filter((c: { role: string }) => group(c.role) === heading).map((card: { id: string; name: string; role: string; quantity: number }) => { const meta = metadataById[card.id]; return <button class="card" data-card-id={card.id}><img class="card-image" data-card-image-id={card.id} loading="lazy" src={imageUrl(card.id)} alt={meta?.name ?? card.name} /><small>{card.id} <span class="qty">×{card.quantity}</span></small><strong>{meta?.name ?? card.name}</strong><small>{card.role}</small></button>})}</div></section>)}
+{normalizedGroups.map((group) => { const cards = groupCards(group); return <section class="deck-group"><h3>{group.label} <span>{cards.reduce((total, card) => total + card.quantity, 0)} {countLabel ?? ui.cards}</span></h3><div class="card-grid">{cards.map((card) => { const meta = localizedMetadataById[card.id]; return <button class="card" type="button" data-card-id={card.id}><img class="card-image" data-card-image-id={card.id} loading="lazy" src={imageUrl(card.id)} alt={meta?.name ?? card.name} /><small>{card.id} <span class="qty">×{card.quantity}</span></small><strong>{meta?.name ?? card.name}</strong><small>{card.role}</small></button>})}</div></section>})}

@@ -1,0 +1,11 @@
+---
+import SaboComboDetailPage from '../../../../../guides/sabo/ComboDetailPage.astro';
+import { saboCombos } from '../../../../../data/combos';
+
+export function getStaticPaths() {
+  return saboCombos.map((combo) => ({ params: { slug: combo.slug } }));
+}
+
+const { slug } = Astro.params;
+---
+<SaboComboDetailPage slug={slug} lang="th" />
