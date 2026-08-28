@@ -2,6 +2,10 @@
 
 Use Astro for the website architecture.
 
+# Git commits
+
+Use Conventional Commits for all commit messages.
+
 # Website content
 
 Use ASD-STE100 Simplified Technical English for all text shown on the website.

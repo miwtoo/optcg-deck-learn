@@ -28,7 +28,7 @@ jobs:
       - name: Build
         uses: withastro/action@v6
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Deploy
         id: deployment
