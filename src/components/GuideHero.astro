@@ -1,0 +1,46 @@
+---
+import CardImageButton from './CardImageButton.astro';
+import type { Locale } from '../i18n/ui';
+
+interface HeroCard {
+  id: string;
+  alt: string;
+  imageUrl?: (id: string) => string;
+}
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  byline: string;
+  lede: string;
+  chips?: readonly string[];
+  cards: readonly HeroCard[];
+  imageUrl?: (id: string) => string;
+  lang?: Locale;
+}
+
+const {
+  eyebrow,
+  heading,
+  byline,
+  lede,
+  chips = [],
+  cards,
+  imageUrl,
+  lang = 'en',
+} = Astro.props as Props;
+---
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">{eyebrow}</div>
+    <h1>{heading}<br /><em>{byline}</em></h1>
+    <p class="lede">{lede}</p>
+    {chips.length > 0 && <div class="chips">{chips.map((chip) => <span class="chip">{chip}</span>)}</div>}
+  </div>
+  <div class="hero-art">
+    {cards.slice(0, 2).map((card) => (
+      <CardImageButton id={card.id} alt={card.alt} imageUrl={card.imageUrl ?? imageUrl} lang={lang} />
+    ))}
+  </div>
+</section>

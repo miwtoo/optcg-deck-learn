@@ -1,4 +1,6 @@
 ---
+import DeckListGuideCard from '../components/DeckListGuideCard.astro';
+
 const base = `${import.meta.env.BASE_URL}/`;
 const guides = [
   {
@@ -46,21 +48,7 @@ const guides = [
         </div>
         <div class="guide-grid">
           {guides.map((guide, index) => (
-            <a class="guide-card" href={guide.href}>
-              <div class="card-art">
-                <img src={guide.image} alt={guide.imageAlt} />
-                <span class="card-mark" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-              </div>
-              <div class="card-copy">
-                <div class="card-meta">
-                  <span class="color-label">{guide.colors}</span>
-                  <span class="arrow" aria-hidden="true">↗</span>
-                </div>
-                <h3>{guide.title}</h3>
-                <p>{guide.description}</p>
-                <span class="open-guide">Open guide <span aria-hidden="true">→</span></span>
-              </div>
-            </a>
+            <DeckListGuideCard guide={guide} index={index} openLabel="Open guide" />
           ))}
         </div>
       </section>
@@ -88,23 +76,7 @@ const guides = [
   .section-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:22px}
   h2{margin:0;text-align:right;font-size:clamp(27px,4vw,48px);line-height:.9;letter-spacing:-.06em}
   .guide-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
-  .guide-card{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,1.2fr);border:2px solid var(--line);border-radius:17px;background:var(--card);text-decoration:none;overflow:hidden;box-shadow:8px 9px 0 var(--ink);transition:transform .2s ease,box-shadow .2s ease}
-  .guide-card:hover,.guide-card:focus-visible{transform:translate(-3px,-3px);box-shadow:11px 12px 0 var(--red)}
-  .guide-card:focus-visible{outline:3px solid var(--red);outline-offset:5px}
-  .card-art{display:flex;justify-content:center;align-items:center;position:relative;padding:22px;background:var(--blue);overflow:hidden}
-  .card-art:after{content:"";position:absolute;width:170px;height:170px;border:2px solid var(--red);border-radius:50%;opacity:.28;transform:translate(35px,45px)}
-  .card-art img{position:relative;z-index:1;width:min(100%,170px);border:3px solid var(--line);border-radius:10px;box-shadow:8px 9px 0 var(--red);transform:rotate(-4deg)}
-  .card-mark{position:absolute;top:12px;left:13px;z-index:2;font-size:11px;font-weight:900;letter-spacing:.12em}
-  .card-copy{display:flex;flex-direction:column;align-items:flex-start;padding:22px 22px 20px}
-  .card-meta{display:flex;justify-content:space-between;align-items:center;width:100%;gap:12px}
-  .color-label{color:var(--red);font-size:11px;font-weight:950;letter-spacing:.13em;text-transform:uppercase}
-  .arrow{font-size:25px;line-height:1}
-  h3{margin:22px 0 10px;font-size:clamp(29px,4vw,44px);line-height:.9;letter-spacing:-.06em}
-  .card-copy p{margin:0;color:#34343c;line-height:1.45}
-  .open-guide{margin-top:auto;padding-top:28px;font-weight:900}
-  .open-guide span{color:var(--red);font-size:19px}
   @media(min-width:900px){.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(min-width:1400px){.shell{max-width:1640px}}
-  @media(max-width:600px){.shell{padding:16px 16px 70px}.intro{padding-top:90px}.section-heading{display:block}.section-heading h2{margin-top:12px;text-align:left}.guide-grid{grid-template-columns:1fr}.guide-card{grid-template-columns:42% 58%}.card-art{padding:14px}.card-art img{width:100%;box-shadow:6px 7px 0 var(--red)}.card-copy{padding:17px 15px 16px}h3{margin-top:18px}.open-guide{padding-top:20px}}
-  @media(max-width:390px){.guide-card{grid-template-columns:1fr}.card-art{min-height:260px}.card-art img{width:170px}.card-copy{min-height:245px}}
+  @media(max-width:600px){.shell{padding:16px 16px 70px}.intro{padding-top:90px}.section-heading{display:block}.section-heading h2{margin-top:12px;text-align:left}.guide-grid{grid-template-columns:1fr}}
 </style>

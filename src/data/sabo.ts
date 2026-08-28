@@ -525,10 +525,4 @@ export const saboDeckTotal = saboDeck.reduce(
   0,
 );
 
-export const saboPageNavigation = [
-  { label: 'Deck', href: `${import.meta.env.BASE_URL}/elbaph-sabo/` },
-  { label: 'Pilot', href: `${import.meta.env.BASE_URL}/elbaph-sabo/pilot/` },
-  { label: 'Combos', href: `${import.meta.env.BASE_URL}/elbaph-sabo/combos/` },
-] as const;
-
 export const cardImageUrl = (id: string): string => `${import.meta.env.BASE_URL}/cards/${id}.png`;

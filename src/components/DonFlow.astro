@@ -1,0 +1,13 @@
+---
+interface Props {
+  items: readonly string[];
+  arrowPosition?: 'before' | 'after';
+  class?: string;
+}
+
+const { items, arrowPosition = 'after', class: className = 'flow' } = Astro.props as Props;
+---
+
+<div class={className}>
+  {items.map((item, index) => <>{arrowPosition === 'before' && index > 0 && <b>→</b>}<span>{item}</span>{arrowPosition === 'after' && index < items.length - 1 && <b>→</b>}</>)}
+</div>

@@ -50,7 +50,16 @@ export const mihawkCardMetadata = [
 ] as const satisfies readonly MihawkCardMetadata[];
 export const mihawkCardMetadataById: Readonly<Record<string, MihawkCardMetadata>> = Object.fromEntries(mihawkCardMetadata.map((card) => [card.id, card]));
 export const mihawkDeckTotal = mihawkDeck.reduce((total, card) => total + card.quantity, 0);
-export const mihawkCardArtVariants: Readonly<Record<string, readonly string[]>> = {};
+export const mihawkCardArtVariants: Readonly<Record<string, readonly string[]>> = {
+  'OP14-020': ['OP14-020_p1'],
+  'OP14-033': ['OP14-033_p1'],
+  'OP14-119': ['OP14-119_p1', 'OP14-119_p2'],
+  'OP07-022': ['OP07-022_p1'],
+  'OP07-026': ['OP07-026_p1'],
+  'OP10-030': ['OP10-030_p1'],
+  'OP12-034': ['OP12-034_p1'],
+  'OP12-037': ['OP12-037_p1'],
+};
 export const mihawkCardImageUrl = (id: string): string => `${import.meta.env.BASE_URL}/cards/${id}.png`;
 
 export const mihawkCombos = [

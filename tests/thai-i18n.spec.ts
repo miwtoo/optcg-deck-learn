@@ -53,11 +53,18 @@ test('renders the Thai Mihawk pilot and switches back to the matching English ro
   await expect(page.locator('nav[aria-label="Guide pages"] a.active')).toHaveText('Pilot');
 });
 
-test('loads a Thai Sabo combo detail route', async ({ page }) => {
-  await page.goto('./th/elbaph-sabo/combos/luffy-helper/');
+test('renders the Thai Sabo pilot with its embedded combo guide', async ({ page }) => {
+  await page.goto('./th/elbaph-sabo/pilot/');
 
   await expect(page.locator('html')).toHaveAttribute('lang', 'th');
-  await expect(page).toHaveTitle('Elbaph Sabo · Luffy → ตัวช่วย');
-  await expect(page.getByRole('heading', { name: 'Luffy → ตัวช่วย' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'ทำตามขั้นตอนนี้' })).toBeVisible();
+
+  const comboSection = page.locator('section[aria-labelledby="combo-lines-title"]');
+  await expect(comboSection.getByRole('heading', { name: 'ทำคอมโบ' })).toBeVisible();
+  await expect(comboSection).toContainText('ใช้คอมโบสั้นเหล่านี้หลังสร้างบอร์ด ตรวจ DON!! ก่อนเริ่ม');
+  await expect(comboSection.locator('button.card-image-button')).toHaveCount(6);
+
+  const guideNavigation = page.locator('nav[aria-label="หน้าไกด์"]');
+  await expect(guideNavigation.getByRole('link', { name: 'เด็ค', exact: true })).toBeVisible();
+  await expect(guideNavigation.getByRole('link', { name: 'วิธีเล่น', exact: true })).toHaveClass(/active/);
+  await expect(guideNavigation.getByRole('link', { name: 'คอมโบ', exact: true })).toHaveCount(0);
 });

@@ -1,0 +1,63 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  deckText: string;
+  copyLabel: string;
+  copiedLabel: string;
+  copiedStatus: string;
+  source?: string;
+  sourceText?: string;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  deckText,
+  copyLabel,
+  copiedLabel,
+  copiedStatus,
+  source,
+  sourceText,
+  class: className = 'section export-panel',
+} = Astro.props as Props;
+const sourceCopy = source ?? sourceText;
+const hasSource = sourceCopy !== undefined || Astro.slots.has('source');
+---
+
+<section class={className} data-deck-export-panel>
+  <div class="countline">
+    <div>
+      <div class="eyebrow">{eyebrow}</div>
+      <h2>{title}</h2>
+    </div>
+    <button class="button copy-button" type="button" data-copy-export data-copy-label={copyLabel} data-copied-label={copiedLabel} data-copied-status={copiedStatus}>{copyLabel}</button>
+  </div>
+  {hasSource && <p class="source"><slot name="source">{sourceCopy}</slot></p>}
+  <pre class="deck-export" data-deck-export>{deckText}</pre>
+  <p class="copy-status" data-copy-status data-copied-status={copiedStatus} role="status" aria-live="polite"></p>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-deck-export-panel]').forEach((panel) => {
+    const copyButton = panel.querySelector<HTMLButtonElement>('[data-copy-export]');
+    const exportBlock = panel.querySelector<HTMLElement>('[data-deck-export]');
+    const copyStatus = panel.querySelector<HTMLElement>('[data-copy-status]');
+
+    copyButton?.addEventListener('click', async () => {
+      if (!exportBlock || !copyStatus) return;
+      await navigator.clipboard.writeText(exportBlock.textContent ?? '');
+      copyButton.textContent = copyButton.dataset.copiedLabel ?? 'Copied';
+      copyStatus.textContent = copyButton.dataset.copiedStatus ?? 'Copied to your clipboard.';
+      window.setTimeout(() => {
+        copyButton.textContent = copyButton.dataset.copyLabel ?? 'Copy list';
+        copyStatus.textContent = '';
+      }, 2200);
+    });
+  });
+</script>
+
+<style>
+  .export-panel{position:relative}.copy-button{font:inherit;cursor:pointer}.copy-button:focus-visible{outline:3px solid var(--red);outline-offset:3px}.deck-export{overflow:auto;margin:0;padding:18px;border:2px solid var(--line);border-radius:14px;background:var(--ink);color:#fffdf7;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}.copy-status{min-height:1.5em;margin:8px 0 0;color:var(--red);font-weight:900}
+</style>

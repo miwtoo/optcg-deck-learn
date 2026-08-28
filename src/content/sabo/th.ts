@@ -1,7 +1,6 @@
 export const saboThaiNavigation = [
   { key: 'deck', label: 'เด็ค' },
   { key: 'pilot', label: 'วิธีเล่น' },
-  { key: 'combos', label: 'คอมโบ' },
 ] as const;
 
 export const saboThaiDeckRoleLabels = {

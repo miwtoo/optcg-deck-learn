@@ -1,0 +1,33 @@
+---
+interface JumpLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  links: JumpLink[];
+  ariaLabel?: string;
+}
+
+const { links, ariaLabel = 'Guide sections' } = Astro.props as Props;
+---
+
+<nav class="guide-jump-links" aria-label={ariaLabel}>
+  <span class="jump-label">{ariaLabel}</span>
+  <div class="jump-list">
+    {links.map((link) => <a href={link.href}>{link.label}<span aria-hidden="true">↘</span></a>)}
+  </div>
+</nav>
+
+<style>
+  .guide-jump-links{display:flex;align-items:center;gap:14px;margin:22px auto 0;padding:9px 12px;border:2px solid var(--line);border-radius:999px;background:var(--card);box-shadow:4px 4px 0 var(--ink);max-width:920px}
+  .jump-label{flex:0 0 auto;color:var(--red);font-size:10px;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+  .jump-list{display:flex;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none}
+  .jump-list::-webkit-scrollbar{display:none}
+  .jump-list a{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--ink);font-size:12px;font-weight:900;text-decoration:none;white-space:nowrap;transition:background-color .18s ease,transform .18s ease}
+  .jump-list a:nth-child(2n){background:var(--gold)}
+  .jump-list a:hover{background:var(--green);transform:translateY(-2px)}
+  .jump-list a:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+  .jump-list span{color:var(--red);font-size:15px;line-height:1}
+  @media(max-width:600px){.guide-jump-links{align-items:flex-start;flex-direction:column;gap:7px;border-radius:15px;margin-top:18px}.jump-list{width:100%}}
+</style>

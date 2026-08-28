@@ -1,0 +1,28 @@
+---
+import CardImageButton from './CardImageButton.astro';
+import type { Locale } from '../i18n/ui';
+
+type AltResolver = (id: string, lang: Locale) => string;
+
+interface Props {
+  ids: readonly string[];
+  alt: AltResolver;
+  class?: string;
+  wrapperClass?: string;
+  imageUrl?: (id: string) => string;
+  lang?: Locale;
+}
+
+const {
+  ids,
+  alt,
+  class: className,
+  wrapperClass = className ?? 'card-cluster',
+  imageUrl,
+  lang = 'en',
+} = Astro.props as Props;
+---
+
+<div class={wrapperClass}>
+  {ids.map((id) => <CardImageButton id={id} alt={alt(id, lang)} imageUrl={imageUrl} lang={lang} />)}
+</div>

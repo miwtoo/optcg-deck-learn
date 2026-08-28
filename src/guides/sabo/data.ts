@@ -29,7 +29,6 @@ export const saboNavigation = (lang: Locale) => lang === 'th'
   : [
       { id: 'deck', label: 'Deck', path: '/' },
       { id: 'pilot', label: 'Pilot', path: '/pilot/' },
-      { id: 'combos', label: 'Combos', path: '/combos/' },
     ];
 
 export const saboGroups = (lang: Locale) => lang === 'th'
