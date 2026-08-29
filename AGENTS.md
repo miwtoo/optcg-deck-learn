@@ -50,6 +50,17 @@ Ground deck guide text in this video:
 Use official card text to check card effects.
 Do not add a card claim that the video or official card text does not support.
 
+# New deck guides
+
+For a new deck guide, follow the Sabo and Mihawk component patterns.
+Create one data module with the exact deck list, official card text, roles, totals, and image helper.
+Copy required card images from local reference data into `public/cards/`.
+Add each deck card to `card-use.ts` with a practical Use note.
+Add the guide to the home deck list.
+Show the 50-card count and the cost curve.
+Map available Parallel Art images in the data module.
+Run `pnpm run check` and `pnpm run build`.
+
 # Reference card data
 
 `reference/card-data/` is local source material. Git does not track it.
