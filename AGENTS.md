@@ -24,6 +24,13 @@ When website text asks the user to choose:
 - Give only the facts needed to choose fast.
 - Mark one option as recommended.
 
+# Card modal Use notes
+
+Write each Use note as a practical action.
+Use one or two short sentences.
+State when to use the card and its main result.
+Ground every note in official card text and deck-guide evidence.
+
 # Deploy
 
 Deploy the site to GitHub Pages after a user asks to deploy.
