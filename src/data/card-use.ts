@@ -1,10 +1,12 @@
 import { mihawkDeck } from './mihawk';
 import { saboDeck, saboFlexCards } from './sabo';
+import { enelDeck } from './enel';
 
 type CardUseId =
   | (typeof saboDeck)[number]['id']
   | (typeof saboFlexCards)[number]['id']
-  | (typeof mihawkDeck)[number]['id'];
+  | (typeof mihawkDeck)[number]['id']
+  | (typeof enelDeck)[number]['id'];
 
 export const cardUse: Readonly<Record<CardUseId, string>> = {
   'OP13-004': 'Use [DON!! x1] with an 8-cost Character in play. Your Leader and Characters gain +1000 power.',
@@ -52,6 +54,23 @@ export const cardUse: Readonly<Record<CardUseId, string>> = {
   'OP13-040': 'Use this as a [Counter] for +3000 Leader power. In Main, rest 2 DON!! to keep up to 2 rested Characters with a cost of 7 or less down through the next Refresh Phase.',
   'OP14-036': 'Use this as a [Counter] for +4000 power. Its [Trigger] can rest an opponent Character with 7000 base power or less.',
   'OP14-039': 'Use this with Dracule Mihawk as your Leader. Draw 1 card on play and set 1 DON!! as active at turn end.',
+  'OP15-058': 'Use this from your second turn when you need DON!! for a large turn. Add 1 active and up to 4 rested DON!!, then give up to 4 rested DON!! to 1 Character.',
+  'OP12-071': 'Use this early to find an Event. Look at 4 cards and add up to 1 Event to your hand.',
+  'OP15-061': 'Use this when you need a card early. Return 1 DON!! to your DON!! deck to draw 1 card, then give an opposing Character −1000 power when it attacks.',
+  'OP15-066': 'Use this before a later draw effect when you want to set your next draw. Return 1 DON!! to draw 1 card, then arrange the top 2 cards when Satori attacks.',
+  'OP15-067': 'Use this while you have 6 or less DON!! cards and want a Rush attack. Return 1 DON!! to draw 1 card, then give it rested DON!! with Enel’s Leader effect.',
+  'OP09-072': 'Use this when you need a Blocker and more cards. Return 2 DON!! and trash 1 card from your hand to draw 2 cards.',
+  'OP12-063': 'Use this after you have 4 or more Events in your trash. It becomes 7000 power and gains +5 cost and [Blocker].',
+  'OP10-067': 'Use this when a key purple Event is in your trash. Return 1 DON!! to add a purple Event with a cost of 5 or less to your hand, then set 1 DON!! as active.',
+  'OP15-118': 'Use this late while you have 6 or less DON!! cards and need a protected body. It becomes 10000 power; return 1 DON!! to look at 5 cards, add up to 1 card to your hand, then trash 1 card.',
+  'OP13-076': 'Use this when your Leader has given DON!! to a Character and a large opposing Character needs −8000 power. Rest 5 DON!! for the Main effect, or trash 1 card to use its +3000 [Counter].',
+  'OP15-075': 'Use this while your Leader is Enel and an opposing Character has 3000 power or less. Return 1 DON!! to give your Leader or Character +1000 power, then K.O. that Character.',
+  'OP15-076': 'Use this after Satori arranges your deck when you need a card. While your Leader is Enel, return 1 DON!! to draw 1 card, then give an opposing Character −1000 power.',
+  'OP15-077': 'Use this after you rest an opposing Character with 6000 power or less. Return 1 DON!! to draw 1 card, then keep that rested Character from becoming active in the next Refresh Phase.',
+  'OP15-078': 'Use this when an opposing Character with 5000 power or less needs to be rested. Return 2 DON!! to draw 1 card and rest it; its [Counter] gives +1000 power and can draw 1 card when you have 6 or less DON!! cards.',
+  'OP15-074': 'Use this while your Leader is Enel when you need a card and a higher-cost Character. Return 1 DON!! to draw 1 card, then give 1 of your Characters +2 cost until the end of your opponent’s next End Phase.',
+  'OP05-077': 'Use this before El Thor when an opposing Character needs a power reduction. Return 1 DON!! to give it −5000 power this turn; its [Trigger] sets 1 DON!! as active.',
+  'OP09-077': 'Use this when you need to K.O. an opposing Character with 6000 power or less. Return 2 DON!! for the Main effect; its [Trigger] sets 1 DON!! as active.',
 };
 
 export const cardUseById: Readonly<Record<string, string>> = cardUse;

@@ -1,0 +1,79 @@
+---
+import GuideLayout from '../../layouts/GuideLayout.astro';
+import CardGrid from '../../components/CardGrid.astro';
+import CardModal from '../../components/CardModal.astro';
+import GuideHero from '../../components/GuideHero.astro';
+import GuideSection from '../../components/GuideSection.astro';
+import DonFlow from '../../components/DonFlow.astro';
+import DeckExportPanel from '../../components/DeckExportPanel.astro';
+import { enelDeck, enelDeckTotal, enelCardMetadataById, enelCardArtVariants, enelCardImageUrl } from '../../data/enel';
+import type { Locale } from '../../i18n/ui';
+
+const { lang = 'en' } = Astro.props as { lang?: Locale };
+const mainDeckTotal = enelDeckTotal - 1;
+const groups = [
+  { id: 'leader', label: 'Leader' },
+  { id: 'engine', label: 'Search and draw' },
+  { id: 'characters', label: 'Characters' },
+  { id: 'events', label: 'Events and control' },
+];
+const groupById: Readonly<Record<string, string>> = {
+  'OP15-058': 'leader',
+  'OP12-071': 'engine',
+  'OP15-061': 'engine',
+  'OP15-066': 'engine',
+  'OP15-067': 'engine',
+  'OP09-072': 'characters',
+  'OP12-063': 'characters',
+  'OP10-067': 'characters',
+  'OP15-118': 'characters',
+  'OP13-076': 'events',
+  'OP05-077': 'events',
+  'OP09-077': 'events',
+};
+const groupBy = (card: { readonly id: string }) => groupById[card.id] ?? (enelCardMetadataById[card.id]?.category === 'Event' ? 'events' : 'characters');
+const navigation = [
+  { id: 'deck', label: 'Deck', path: '/enel/' },
+  { id: 'pilot', label: 'Pilot', path: '/enel/pilot/' },
+];
+const deckText = enelDeck.map((card) => `${card.quantity} ${card.id} ${card.name}`).join('\n');
+const costCurve = [
+  { cost: 0, count: '21 Events' },
+  { cost: 1, count: '14 Characters' },
+  { cost: 2, count: '4 Events' },
+  { cost: 3, count: '0' },
+  { cost: 4, count: '5 Characters' },
+  { cost: 5, count: '2 Characters' },
+  { cost: 6, count: '4 Characters' },
+];
+---
+
+<GuideLayout title="Purple Enel · OP15-058" active="deck" lang={lang} guideBase="/enel" brand="ONE PIECE · OP15" navigation={navigation}>
+  <GuideHero eyebrow="PURPLE · SKY ISLAND" heading="Purple Enel" byline="OP15-058" lede="Use DON!! with care. Draw before you remove. Build a late Enel turn." chips={["OP15-058 Leader", `1 leader + ${mainDeckTotal} cards`]} cards={[{ id: 'OP15-058', alt: 'OP15-058 Enel leader' }, { id: 'OP15-118', alt: 'OP15-118 Enel' }]} imageUrl={enelCardImageUrl} lang={lang} />
+  <div class="notice enel-notice"><b>Sequence matters.</b> Use DON!! − effects before the Leader effect. Use the Leader first only when you need its active DON!!. Use Satori before draw effects. Use Ohm before threshold removal.</div>
+
+  <GuideSection><div class="eyebrow">THE SIMPLE PLAN</div><h2>Spend DON!! with a reason.</h2><div class="overview enel-overview">
+    <article class="tile"><h3>1 · Set up</h3><p>Use OP12-071 Pudding and your search cards to shape your hand.</p></article>
+    <article class="tile"><h3>2 · Draw first</h3><p>Use Satori before your draw effects. Keep the cards you need.</p></article>
+    <article class="tile"><h3>3 · Control</h3><p>Use your Events to answer the board. Keep DON!! for the next action.</p></article>
+    <article class="tile"><h3>4 · Close</h3><p>Play OP15-118 Enel late and use the Leader effect in the right order.</p></article>
+  </div></GuideSection>
+  <GuideSection><DonFlow items={['Use DON!! −', 'Satori', 'Ohm', 'Control', 'OP15-118 Enel']} /></GuideSection>
+  <GuideSection><div class="eyebrow">COST CURVE</div><h2>Main deck by cost.</h2><div class="curve enel-cost-curve">{costCurve.map((item) => <article class="lane"><h3>Cost {item.cost}</h3><p>{item.count}</p></article>)}</div><div class="notice enel-notice"><p>Enel has only six DON!! cards, so its curve differs from a normal Purple deck.</p></div></GuideSection>
+  <GuideSection><div class="eyebrow">DON!! CHECKPOINTS</div><h2>Keep one turn ahead.</h2><div class="overview enel-checkpoints">
+    <article class="tile"><h3>Early game</h3><p>Use DON!! − effects before the Leader effect. Use the Leader first only when you need active DON!!. Use Satori before draw effects.</p></article>
+    <article class="tile"><h3>Middle game</h3><p>Use Ohm before an effect that removes a threshold target. Use Events to control the board.</p></article>
+    <article class="tile"><h3>Late game</h3><p>Keep OP15-118 Enel for the late turn. Check your active DON!! before you start.</p></article>
+  </div></GuideSection>
+  <GuideSection><div class="countline"><div><div class="eyebrow">THE EXACT LIST</div><h2>1 leader + {mainDeckTotal} cards</h2></div><div class="count">✓ Counted: {mainDeckTotal}</div></div><CardGrid deck={enelDeck} metadataById={enelCardMetadataById} imageUrl={enelCardImageUrl} groups={groups} groupBy={groupBy} lang={lang} /><p class="source">This list uses every card and quantity from the Enel source list. Tap a card to read its local text.</p></GuideSection>
+  <DeckExportPanel eyebrow="EGMAN EVENTS DECK BUILDER" title="Copy the deck list." deckText={deckText} copyLabel="Copy list" copiedLabel="Copied" copiedStatus="Copied to your clipboard." source="Paste this list into Egman Events Deck Builder." />
+  <div class="notice enel-notice"><a class="button" href={`${import.meta.env.BASE_URL}/enel/pilot/`}>Open the Pilot guide →</a><p>Learn the keep rules, turn plan, and DON!! choices.</p></div>
+  <GuideSection><div class="eyebrow">SOURCES</div><p>Fan-made learning guide for the Purple Enel OP15-058 deck. Card effects come from the local card data.</p><p><a href="https://asia-en.onepiece-cardgame.com/">Official One Piece Card Game</a></p></GuideSection>
+  <CardModal deck={enelDeck} metadataById={enelCardMetadataById} artVariants={enelCardArtVariants} imageUrl={enelCardImageUrl} extraCards={[]} lang={lang} />
+</GuideLayout>
+
+<style>
+  .enel-notice{border-left-color:#7544c9;background:#f0e7ff}.enel-notice .button{background:#d9c3ff}.enel-checkpoints{grid-template-columns:repeat(3,minmax(0,1fr))}.enel-overview .tile:nth-child(even),.enel-checkpoints .tile:nth-child(odd){background:#f0e7ff;box-shadow:5px 5px 0 #7544c9}.enel-checkpoints .tile:nth-child(2){background:var(--card);box-shadow:5px 5px 0 var(--gold)}
+  @media(max-width:900px){.enel-checkpoints{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:600px){.enel-checkpoints{grid-template-columns:1fr}}
+</style>

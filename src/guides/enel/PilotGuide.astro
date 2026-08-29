@@ -1,0 +1,41 @@
+---
+import GuideLayout from '../../layouts/GuideLayout.astro';
+import CardModal from '../../components/CardModal.astro';
+import GuideHero from '../../components/GuideHero.astro';
+import GuideSection from '../../components/GuideSection.astro';
+import GuideJumpLinks from '../../components/GuideJumpLinks.astro';
+import CardCluster from '../../components/CardCluster.astro';
+import { enelDeck, enelCombos, enelCardMetadataById, enelCardArtVariants, enelCardImageUrl } from '../../data/enel';
+import type { Locale } from '../../i18n/ui';
+
+const { lang = 'en' } = Astro.props as { lang?: Locale };
+const alt = (id: string) => `${id} card`;
+const navigation = [{ id: 'deck', label: 'Deck', path: '/enel/' }, { id: 'pilot', label: 'Pilot', path: '/enel/pilot/' }];
+---
+
+<GuideLayout title="Purple Enel Pilot" active="pilot" lang={lang} guideBase="/enel" brand="ONE PIECE · OP15" navigation={navigation}>
+  <GuideHero eyebrow="PILOT GUIDE · PURPLE ENEL" heading="Play Enel" byline="one clear sequence at a time." lede="Use DON!! with care. Draw first. Control the board. Finish with OP15-118 Enel." chips={["OP15-058", 'Flexible guide']} cards={[{ id: 'OP15-058', alt: 'OP15-058 Enel leader' }, { id: 'OP15-118', alt: 'OP15-118 Enel' }]} imageUrl={enelCardImageUrl} lang={lang} />
+  <div class="notice disclosure enel-notice"><b>Use this as a menu.</b><p>Change the line when your hand, active DON!!, or the opponent’s board changes.</p></div>
+  <GuideJumpLinks ariaLabel="Guide sections" links={[{ href: '#mulligan', label: 'Mulligan' }, { href: '#turn-plan', label: 'Turn plan' }, { href: '#don-rules', label: 'DON!! rules' }, { href: '#combos', label: 'Combos' }]} />
+
+  <GuideSection id="mulligan"><div class="eyebrow">MULLIGAN</div><h2>Keep a line, not one card.</h2><div class="overview">
+    {[['Setup', ['OP12-071', 'OP15-061'], 'Keep Pudding and Ohm when they give you a clear next turn.'], ['Draw', ['OP15-066'], 'Keep Satori when you need to draw and improve your hand.'], ['Rush', ['OP15-067', 'OP15-058'], 'Keep Shura when the Leader can support its rush target.'], ['Control', ['OP15-075', 'OP15-078'], 'Keep an Event when the opponent’s board needs an answer.']].map(([title, ids, text]) => <article class="keep"><CardCluster ids={ids as string[]} alt={alt} wrapperClass="guidance-art" imageUrl={enelCardImageUrl} lang={lang} /><h3>{title}</h3><p>{text}</p></article>)}
+  </div></GuideSection>
+  <GuideSection id="turn-plan"><div class="eyebrow">BEGINNER PILOT</div><h2>Follow the turn order.</h2><div class="pilot-flow">
+    {[['1', 'Use DON!! − effects first', ['OP15-058'], 'Resolve DON!! − effects before the Leader effect when they need DON!!.'], ['2', 'Use Satori first', ['OP15-066'], 'Use Satori before other draw effects. Then choose the card you need.'], ['3', 'Use Ohm first', ['OP15-061', 'OP15-075'], 'Use Ohm before El Thor removes a threshold target.'], ['4', 'Rush with Shura', ['OP15-067', 'OP15-058'], 'Use Shura with the Leader when its boosted target can attack now.'], ['5', 'Close with Enel', ['OP15-118', 'OP15-058'], 'Use OP15-118 Enel late. Resolve DON!! − effects before the Leader effect.']].map(([number, title, ids, text]) => <article class="pilot-step"><div class="step-no">{number}</div><div><CardCluster ids={ids as string[]} alt={alt} wrapperClass="guidance-art" imageUrl={enelCardImageUrl} lang={lang} /><h3>{title}</h3><p>{text}</p></div></article>)}
+  </div></GuideSection>
+  <GuideSection id="don-rules"><div class="eyebrow">DON!! RULES</div><h2>Spend DON!! in order.</h2><div class="overview enel-rules"><article class="tile"><h3>Resolve DON!! − first</h3><p>Use DON!! − effects before the Leader effect when they need DON!!.</p></article><article class="tile"><h3>Draw first</h3><p>Use Satori before other draw effects. This keeps your hand choice clear.</p></article><article class="tile"><h3>Control first</h3><p>Use Events before you commit to a late OP15-118 Enel turn.</p></article></div></GuideSection>
+  <GuideSection id="combos"><div class="eyebrow">COMBOS</div><h2>Use the short lines first.</h2><div class="combo-grid enel-combo-grid">{enelCombos.map((combo) => <article class="combo-card"><div class="combo-art"><CardCluster ids={combo.cards} alt={alt} wrapperClass="guidance-art" imageUrl={enelCardImageUrl} lang={lang} /></div><div class="combo-copy"><div class="eyebrow">{combo.number}</div><h3>{combo.title}</h3><p>{combo.summary}</p><div class="combo-step"><b>STEPS</b><ol>{combo.steps.map((step) => <li>{step}</li>)}</ol></div></div></article>)}</div></GuideSection>
+  <GuideSection><div class="eyebrow">DEFENSE</div><h2>Keep one answer.</h2><div class="notice enel-defense"><CardCluster ids={['OP15-078']} alt={alt} wrapperClass="guidance-art" imageUrl={enelCardImageUrl} lang={lang} /><p>Keep Mamaragan when the opponent’s board needs an answer. Resolve any DON!! − effect before the Leader effect.</p></div></GuideSection>
+  <CardModal deck={enelDeck} metadataById={enelCardMetadataById} artVariants={enelCardArtVariants} imageUrl={enelCardImageUrl} extraCards={[]} lang={lang} />
+</GuideLayout>
+
+<style>
+  .enel-notice{border-left-color:#7544c9;background:#f0e7ff}
+  .enel-notice.disclosure{max-width:760px}
+  .enel-rules{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .enel-combo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .enel-rules .tile:nth-child(even),.enel-defense{background:#f0e7ff;box-shadow:5px 5px 0 #7544c9}
+  @media(max-width:900px){.enel-rules{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:600px){.enel-rules,.enel-combo-grid{grid-template-columns:1fr}}
+</style>
