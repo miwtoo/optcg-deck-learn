@@ -1,10 +1,21 @@
 ---
 import { saboDeck, saboFlexCards, saboCardArtVariants, saboCardMetadataById, cardImageUrl as defaultImageUrl } from '../data/sabo';
 import { thaiCardMetadataById } from '../data/cards-th';
+import { cardUseById } from '../data/card-use';
 import { getUiLabels, type Locale, type UiLabelOverrides } from '../i18n/ui';
 
-type DeckCard = { readonly id: string; readonly name: string; readonly role: string; readonly quantity: number };
-type Metadata = { readonly name?: string; readonly role?: string; readonly effect?: string };
+type DeckCard = { readonly id: string; readonly name: string; readonly role: string; readonly quantity: number; readonly effect?: string };
+type Metadata = {
+  readonly name?: string;
+  readonly role?: string;
+  readonly category?: string;
+  readonly colors?: readonly string[];
+  readonly attributes?: readonly string[];
+  readonly cost?: number | null;
+  readonly power?: number | null;
+  readonly types?: readonly string[];
+  readonly effect?: string;
+};
 
 const {
   deck = saboDeck,
@@ -50,7 +61,8 @@ const cards = Object.fromEntries([...deck, ...extraCards].map((card) => {
     ...metadata,
     name: metadata.name ?? card.name,
     role: metadata.role ?? card.role,
-    effect: metadata.effect ?? '',
+    useNote: cardUseById[card.id],
+    effect: metadata.effect ?? ('effect' in card ? card.effect : '') ?? '',
     image: imageUrl(card.id),
     variants: (artVariants[card.id] ?? []).map((variant, index) => ({ id: variant, label: `PA ${index + 1}`, image: imageUrl(variant) })),
   }];
@@ -64,9 +76,26 @@ const modalLabels = {
 };
 ---
 <dialog class="modal" id="card-modal" data-cards={JSON.stringify(cards)} data-labels={JSON.stringify(modalLabels)}><button class="close" type="button" data-close aria-label={ui.closeCard}>×</button><div id="card-modal-content"></div></dialog>
+<style is:global>
+  .modal{width:min(760px,calc(100vw - 28px));max-height:calc(100vh - 28px);border:2px solid var(--line);border-radius:18px;background:var(--card);color:var(--ink);padding:24px;box-shadow:12px 14px 0 var(--ink)}
+  .modal::backdrop{background:rgba(17,19,29,.68)}
+  .modal .close{position:absolute;top:12px;right:14px;width:34px;height:34px;border:2px solid var(--line);border-radius:50%;background:var(--gold);color:var(--ink);font:900 22px/1 inherit;cursor:pointer}
+  .modal .close:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+  .modal-top{display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center;padding-right:38px}
+  .modal-top>img{width:150px;border:2px solid var(--line);border-radius:10px;box-shadow:7px 7px 0 var(--red)}
+  .modal-top h2{margin:5px 0 0;font-size:clamp(27px,5vw,46px);line-height:.95;letter-spacing:-.06em}
+  .modal .chips{margin-top:16px}
+  .card-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:24px 0 20px;padding-top:16px;border-top:1px solid #d8d3c8}
+  .card-fact{min-width:0}.card-fact dt{color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.card-fact dd{margin:2px 0 0;font-weight:900;overflow-wrap:anywhere}
+  .card-use{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline;margin:20px 0 16px;padding:12px 14px;border:2px solid var(--line);border-left:7px solid var(--gold);border-radius:10px;background:#fff8df;box-shadow:4px 4px 0 var(--ink)}.card-use b{color:var(--red);font-size:11px;letter-spacing:.08em;text-transform:uppercase}.card-use p{margin:0;font-weight:900;line-height:1.35}
+  .modal .effect-copy{margin:0;padding-top:16px;border-top:1px solid #d8d3c8;white-space:pre-line}.modal .effect-copy b{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+  .effect-label{display:inline-block;margin:0 2px;color:var(--red);font-weight:950;letter-spacing:.01em}.effect-label--on-play{color:#1769aa}.effect-label--rush-blocker{color:#d36b1f}
+  .modal .source{margin:18px 0 0;color:var(--muted);font-size:11px}
+  @media(max-width:520px){.modal{padding:18px}.modal-top{grid-template-columns:92px 1fr;gap:15px}.modal-top>img{width:92px}.modal-top h2{font-size:29px}.card-facts{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:18px}.card-use{grid-template-columns:1fr;gap:4px;margin-top:16px}}
+</style>
 <script>
   type Variant = { id: string; label: string; image: string };
-  type Card = { image: string; name: string; role: string; id: string; quantity: number; effect: string; variants: Variant[] };
+  type Card = { image: string; name: string; role: string; useNote?: string; id: string; quantity: number; effect: string; variants: Variant[]; category?: string; colors?: string[]; attributes?: string[]; cost?: number | null; power?: number | null; types?: string[] };
   type ModalLabels = { closeCard: string; parallelArt: string; baseArt: string; cardText: string; cardDetailsSource: string };
   const dialog = document.querySelector<HTMLDialogElement>('#card-modal');
   const content = document.querySelector<HTMLDivElement>('#card-modal-content');
@@ -78,7 +107,8 @@ const modalLabels = {
   const selectedImage = (card: Card) => { const saved = savedArt(card.id); return card.variants.find((variant) => variant.id === saved)?.image ?? card.image; };
   const updateImages = (id: string, image: string) => document.querySelectorAll<HTMLImageElement>('[data-card-image-id]').forEach((imageElement) => { if (imageElement.dataset.cardImageId === id) imageElement.src = image; });
   const saveArt = (card: Card, variantId: string) => { if (variantId === card.id) { try { localStorage.removeItem(storageKey(card.id)); } catch { /* Storage may be unavailable. */ } updateImages(card.id, card.image); render(card); return; } const variant = card.variants.find((item) => item.id === variantId); if (!variant) return; try { localStorage.setItem(storageKey(card.id), variant.id); } catch { /* Storage may be unavailable. */ } updateImages(card.id, variant.image); render(card); };
-  const render = (card: Card) => { const image = selectedImage(card); const cardId = escapeHtml(card.id); const cardName = escapeHtml(card.name); const cardRole = escapeHtml(card.role); const cardImage = escapeHtml(image); const options = card.variants.length ? `<fieldset class="art-selector" data-card-id="${cardId}"><legend>${escapeHtml(labels.parallelArt)}</legend><div>${[{ id: card.id, label: labels.baseArt, image: card.image }, ...card.variants].map((variant) => `<button type="button" class="art-option" data-art-id="${escapeHtml(variant.id)}" aria-pressed="${variant.image === image}"><img src="${escapeHtml(variant.image)}" alt="${cardName}, ${escapeHtml(variant.label)}"><span>${escapeHtml(variant.label)}</span></button>`).join('')}</div></fieldset>` : ''; content!.innerHTML = `<div class="modal-top" data-card-id="${cardId}"><img data-card-image-id="${cardId}" src="${cardImage}" alt="${cardName}"><div><div class="eyebrow">${cardRole}</div><h2>${cardName}</h2><div class="chips"><span class="chip">${cardId}</span><span class="chip">×${escapeHtml(card.quantity)}</span></div></div></div>${options}<p><b>${escapeHtml(labels.cardText)}</b><br>${escapeHtml(card.effect)}</p><p class="source">${escapeHtml(labels.cardDetailsSource)}</p>`; };
+  const highlightEffectLabels = (value: unknown) => escapeHtml(value).replace(/\[([^\]\n]+)\]/g, (label, text: string) => { const normalized = text.trim(); const labelClass = /on play/i.test(normalized) ? 'effect-label effect-label--on-play' : /^(rush|blocker)$/i.test(normalized) ? 'effect-label effect-label--rush-blocker' : 'effect-label'; return `<span class="${labelClass}">${label}</span>`; });
+  const render = (card: Card) => { const image = selectedImage(card); const cardId = escapeHtml(card.id); const cardName = escapeHtml(card.name); const cardUse = escapeHtml(card.useNote?.trim() ? card.useNote : card.role); const cardImage = escapeHtml(image); const options = card.variants.length ? `<fieldset class="art-selector" data-card-id="${cardId}"><legend>${escapeHtml(labels.parallelArt)}</legend><div>${[{ id: card.id, label: labels.baseArt, image: card.image }, ...card.variants].map((variant) => `<button type="button" class="art-option" data-art-id="${escapeHtml(variant.id)}" aria-pressed="${variant.image === image}"><img src="${escapeHtml(variant.image)}" alt="${cardName}, ${escapeHtml(variant.label)}"><span>${escapeHtml(variant.label)}</span></button>`).join('')}</div></fieldset>` : ''; const facts = ([['Category', card.category], ['Color', card.colors?.join(', ')], ['Attribute', card.attributes?.join(', ')], ['Cost', card.cost], ['Power', card.power], ['Traits', card.types?.join(', ')]] as const).filter(([, value]) => value !== null && value !== undefined && value !== '' && (!Array.isArray(value) || value.length)).map(([label, value]) => `<div class="card-fact"><dt>${label}</dt><dd>${escapeHtml(value)}</dd></div>`).join(''); const effect = highlightEffectLabels(card.effect); content!.innerHTML = `<div class="modal-top" data-card-id="${cardId}"><img data-card-image-id="${cardId}" src="${cardImage}" alt="${cardName}"><div><h2>${cardName}</h2><div class="chips"><span class="chip">${cardId}</span><span class="chip">×${escapeHtml(card.quantity)}</span></div></div></div>${facts ? `<dl class="card-facts">${facts}</dl>` : ''}${options}<section class="card-use" aria-label="Use"><b>Use</b><p>${cardUse}</p></section><p class="effect-copy"><b>${escapeHtml(labels.cardText)}</b><br>${effect}</p><p class="source">${escapeHtml(labels.cardDetailsSource)}</p>`; };
 
   if (dialog && content) {
     document.querySelectorAll<HTMLImageElement>('[data-card-image-id]').forEach((image) => { const card = cards[image.dataset.cardImageId ?? '']; if (card) image.src = selectedImage(card); });

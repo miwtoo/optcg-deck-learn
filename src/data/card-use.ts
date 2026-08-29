@@ -1,0 +1,57 @@
+import { mihawkDeck } from './mihawk';
+import { saboDeck, saboFlexCards } from './sabo';
+
+type CardUseId =
+  | (typeof saboDeck)[number]['id']
+  | (typeof saboFlexCards)[number]['id']
+  | (typeof mihawkDeck)[number]['id'];
+
+export const cardUse: Readonly<Record<CardUseId, string>> = {
+  'OP13-004': 'Use [DON!! x1] with an 8-cost Character in play. Your Leader and Characters gain +1000 power.',
+  'OP01-016': 'Use this on play to find a {Straw Hat Crew} card. Look at 5 cards and add 1 other card to your hand.',
+  'ST01-011': 'Use this on play to move rested DON!!. Give up to 2 DON!! cards to your Leader or 1 Character.',
+  'OP11-012': 'Use this when your opponent uses an Event on your turn. All your Characters gain +2000 power that turn.',
+  'OP17-084': 'Use this when a 12-cost Character is in play. Give 1 of your Characters [Unblockable] for the turn.',
+  'OP17-086': 'Use this to draw cards. Trash 1 {Elbaph} card to draw 2 cards.',
+  'OP17-080': 'Use this on play to look at 3 cards for an {Elbaph} card. A 12-cost Character gives this card +3000 power.',
+  'OP17-083': 'Use this to block with a 12-cost Character in play. It gains [Blocker] and +3000 power.',
+  'OP17-087': 'Use this with a 12-cost Character in play. Its On Play effect gives an opponent Character -3000 power for the turn.',
+  'OP17-095': 'Use this with a 12-cost Character in play for +3000 power. Put 3 trash cards at the bottom of your deck to stop an effect that removes your Character.',
+  'OP17-089': 'Use this to find an {Elbaph} card. It gains +12 cost and looks at 3 cards on play.',
+  'OP15-088': 'Use this to play a {Straw Hat Crew} Character with a cost of 2 or less from your trash. It gains +6 cost and trashes 3 cards from your deck.',
+  'OP17-119': 'Use this on play to K.O. opponent Characters with a total cost of 4 or less. It gains +12 cost and +3000 power on your opponent\'s turn.',
+  'OP17-093': 'Use this to draw 1 card and play a Character with a cost of 2 or less from your trash. A 12-cost Character gives it [Rush].',
+  'OP04-016': 'Use this as a [Counter] for +3000 power. Its [Trigger] gives an opponent Leader or Character -3000 power.',
+  'OP17-098': 'Use this as a [Counter] for +3000 Leader power. With a 12-cost Character, rest 6 DON!! to K.O. up to 2 Characters with a cost of 6 or less.',
+  'OP17-081': 'Trash 1 card on play to return another Character with a cost of 8 or less from your trash to your hand. An {Elbaph} Leader gives it +12 cost.',
+  'OP17-082': 'Use this on play to change cards in your hand. Draw 2 and trash 2; a 12-cost Character gives it +3000 power.',
+  'EB04-007': 'Use this to give your Leader +2000 power until your opponent\'s next End Phase. It gains [Rush: Character] against an 8000-power Character.',
+  'OP17-096': 'Use this as a [Counter] with a 12-cost Character in play. Give your Leader or Character +4000 power.',
+  'OP15-092': 'Use this when your trash has 10 or more cards. It becomes 9000 power and gains +10 cost.',
+  'OP17-091': 'Use this with a 12-cost Character in play. It gains +3000 power and its On Play effect makes your opponent trash 1 card.',
+  'OP15-094': 'Use this [Blocker] to protect another {Straw Hat Crew} Character. Trash this card instead of that Character.',
+  'ST21-003': 'Use this to stop [Blocker] on an attack this turn. Select a {Straw Hat Crew} Character with 6000 power or more that attacks this turn.',
+  'OP14-020': 'Use this to set up to 3 DON!! as active. Rest 1 card while a 5-cost Character is in play, then do not play Character cards that turn.',
+  'OP07-022': 'Use this on play to find a green {Land of Wano} card. Look at 5 cards and add 1 other card to your hand.',
+  'OP12-034': 'Use this with a <Slash> Leader to find a card. Look at 5 cards for a <Slash> card or green Event.',
+  'OP14-023': 'Use this as a rest target. It becomes active at the end of your turn.',
+  'ST32-001': 'Use this on play to change cards in your hand. Rest your attribute Leader or 1 DON!! to draw 2 and trash 1.',
+  'ST32-005': 'Use this to attack a Character when you play it. Its On Play effect can rest an opponent Character with a cost of 2 or less when its Leader condition is met.',
+  'OP07-026': 'Use this to keep a rested card down. It stops 1 rested Character or DON!! from becoming active in the next Refresh Phase.',
+  'OP10-030': 'Use this [Banish] card to set 1 DON!! as active. You cannot set DON!! as active with Character effects that turn.',
+  'OP12-023': 'Use this as a 6000-power {Land of Wano} Character. It has 2000 Counter.',
+  'OP14-033': 'Use this to stop up to 2 Characters with a cost of 5 or less from being rested until their next End Phase. When it is K.O.\'d, rest 1 card to play a green 5-cost-or-less Character.',
+  'ST32-002': 'Use this on play to draw 1 card. It stops an opponent Character with a base cost of 6 or less from becoming rested until their next End Phase.',
+  'OP13-031': 'Use this to play a 5-cost-or-less Character rested from your hand. Return 1 of your Characters to its owner\'s hand; with 1 or less Life cards, it gains [Blocker].',
+  'ST32-003': 'Use this on play to deploy a 5-cost-or-less [Perona] or stated-attribute Character when its Leader condition is met. When it becomes rested, draw 1 card and trash 1 card.',
+  'OP14-119': 'When this Character becomes rested, stop a Character with a cost of 9 or less from being rested until its next End Phase. On an opponent attack, trash 1 card for +2000 power.',
+  'ST16-004': 'Use this on play to K.O. a rested opponent Character.',
+  'ST24-004': 'Use this to rest an opponent Character and keep it down through the next Refresh Phase. Two rested opponent Characters give your Leader +2000 power until their next End Phase.',
+  'OP01-055': 'Use this to draw cards. Rest 2 of your Characters to draw 2 cards.',
+  'OP12-037': 'Use this as a [Counter] for +3000 Leader power. In Main, rest 3 DON!! to rest up to 2 opponent Characters or DON!! cards.',
+  'OP13-040': 'Use this as a [Counter] for +3000 Leader power. In Main, rest 2 DON!! to keep up to 2 rested Characters with a cost of 7 or less down through the next Refresh Phase.',
+  'OP14-036': 'Use this as a [Counter] for +4000 power. Its [Trigger] can rest an opponent Character with 7000 base power or less.',
+  'OP14-039': 'Use this with Dracule Mihawk as your Leader. Draw 1 card on play and set 1 DON!! as active at turn end.',
+};
+
+export const cardUseById: Readonly<Record<string, string>> = cardUse;

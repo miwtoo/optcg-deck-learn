@@ -3,9 +3,11 @@ import CardImageButton from './CardImageButton.astro';
 import type { Locale } from '../i18n/ui';
 
 type AltResolver = (id: string, lang: Locale) => string;
+type CardSeparator = 'OR' | '+';
 
 interface Props {
   ids: readonly string[];
+  separators?: readonly CardSeparator[];
   alt: AltResolver;
   class?: string;
   wrapperClass?: string;
@@ -15,6 +17,7 @@ interface Props {
 
 const {
   ids,
+  separators,
   alt,
   class: className,
   wrapperClass = className ?? 'card-cluster',
@@ -24,5 +27,8 @@ const {
 ---
 
 <div class={wrapperClass}>
-  {ids.map((id) => <CardImageButton id={id} alt={alt(id, lang)} imageUrl={imageUrl} lang={lang} />)}
+  {ids.map((id, index) => <>
+    {index > 0 && separators?.[index - 1] && <span class="card-cluster-separator">{separators[index - 1]}</span>}
+    <CardImageButton id={id} alt={alt(id, lang)} imageUrl={imageUrl} lang={lang} />
+  </>)}
 </div>
