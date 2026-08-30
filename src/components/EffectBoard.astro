@@ -1,0 +1,111 @@
+---
+/**
+ * A two-sided playmat for effect steps. New snapshots can provide `player`
+ * and `opponent` zone groups. The old flat snapshot shape is still accepted:
+ * its `opponent` zone is used for the opponent side and all other zones for
+ * the player side.
+ */
+export type EffectBoardZone = 'leader' | 'characters' | 'stage' | 'deck' | 'trash' | 'life' | 'don' | 'cost' | 'hand';
+export interface EffectBoardSide {
+  readonly leader?: readonly string[];
+  readonly characters?: readonly string[];
+  readonly stage?: readonly string[];
+  readonly deck?: readonly string[];
+  readonly trash?: readonly string[];
+  readonly life?: readonly string[];
+  readonly don?: readonly string[];
+  readonly cost?: readonly string[];
+  readonly hand?: readonly string[];
+  readonly handCount?: number;
+  readonly donActive?: number;
+  readonly donRested?: number;
+}
+export interface EffectBoardSnapshot {
+  readonly cards?: Partial<Record<EffectBoardZone | 'opponent', readonly string[]>>;
+  readonly opponent?: EffectBoardSide;
+  readonly player?: EffectBoardSide;
+  readonly don?: { readonly active?: number; readonly rested?: number };
+  readonly highlight?: readonly string[];
+}
+export interface EffectBoardStep { readonly action: string; readonly moveLabel?: string; readonly snapshot: EffectBoardSnapshot; }
+export interface EffectBoardLabels {
+  readonly previous?: string; readonly next?: string; readonly reset?: string; readonly step?: string; readonly empty?: string;
+  readonly opponent?: string; readonly player?: string; readonly hiddenHand?: string;
+  readonly zones?: Partial<Record<EffectBoardZone | 'opponent', string>>;
+  readonly activeDon?: string; readonly restedDon?: string;
+}
+export interface EffectBoardProps {
+  readonly title: string; readonly steps: readonly EffectBoardStep[]; readonly labels?: EffectBoardLabels;
+  readonly startingIndex?: number; readonly imageForCard: (id: string) => string; readonly altForCard?: (id: string) => string; readonly class?: string;
+}
+
+const { title, steps, labels = {}, startingIndex = 0, imageForCard, altForCard = (id: string) => id, class: className = '' } = Astro.props as EffectBoardProps;
+const zoneLabels: Record<EffectBoardZone, string> = {
+  leader: labels.zones?.leader ?? 'Leader', characters: labels.zones?.characters ?? 'Character Area', stage: labels.zones?.stage ?? 'Stage',
+  deck: labels.zones?.deck ?? 'Deck', trash: labels.zones?.trash ?? 'Trash', life: labels.zones?.life ?? 'Life',
+  don: labels.zones?.don ?? 'DON!! deck', cost: labels.zones?.cost ?? 'Cost Area', hand: labels.zones?.hand ?? 'Hand',
+};
+const safeStart = steps.length ? Math.min(Math.max(Math.trunc(startingIndex), 0), steps.length - 1) : 0;
+const sideFor = (snapshot: EffectBoardSnapshot, side: 'opponent' | 'player'): EffectBoardSide => {
+  if (snapshot[side]) return snapshot[side] as EffectBoardSide;
+  const cards = snapshot.cards ?? {};
+  if (side === 'opponent') return { leader: cards.opponent ?? [] };
+  return { leader: cards.leader, characters: cards.characters, hand: cards.hand, life: cards.life, trash: cards.trash, donActive: snapshot.don?.active, donRested: snapshot.don?.rested };
+};
+const cards = (side: EffectBoardSide, zone: EffectBoardZone) => side[zone] ?? [];
+const has = (id: string, snapshot: EffectBoardSnapshot) => snapshot.highlight?.includes(id) ? ' is-highlighted' : '';
+---
+
+<section class={`effect-board ${className}`} data-effect-board data-start-index={safeStart} aria-label={title}>
+  <div class="effect-board__header">
+    <div><p class="effect-board__eyebrow">{title}</p><p class="effect-board__live" data-effect-live aria-live="polite">{steps[safeStart]?.action ?? labels.empty ?? 'No steps'}</p></div>
+    <div class="effect-board__controls" aria-label={title}>
+      <button type="button" data-effect-previous disabled={safeStart === 0 || steps.length === 0}>{labels.previous ?? 'Previous'}</button>
+      <span data-effect-step aria-live="polite">{steps.length ? `${safeStart + 1} / ${steps.length}` : '0 / 0'}</span>
+      <button type="button" data-effect-next disabled={safeStart >= steps.length - 1 || steps.length === 0}>{labels.next ?? 'Next'}</button>
+      <button type="button" data-effect-reset>{labels.reset ?? 'Reset'}</button>
+    </div>
+  </div>
+  <div class="effect-board__snapshots">
+    {steps.map((step, index) => <div class="effect-board__snapshot" data-effect-snapshot={index} hidden={index !== safeStart}>
+      <div class="effect-board__move"><span>{step.moveLabel ?? `${labels.step ?? 'Step'} ${index + 1}`}</span><strong data-effect-action>{step.action}</strong></div>
+      <div class="effect-board__mat">
+        {(['opponent', 'player'] as const).map((sideName) => { const side = sideFor(step.snapshot, sideName); const isOpponent = sideName === 'opponent'; return <div class={`effect-board__side effect-board__side--${sideName}`}>
+          <div class="effect-board__side-title"><span>{isOpponent ? (labels.opponent ?? 'Opponent') : (labels.player ?? 'Player')}</span><small>{isOpponent ? 'Their side' : 'Your side'}</small></div>
+          <div class="effect-board__layout">
+            <div class="effect-board__rail">
+              {(['deck', 'trash'] as const).map((zone) => <div class="effect-board__zone effect-board__zone--stack" data-zone={zone}><h3>{zoneLabels[zone]}</h3><div class="effect-board__cards">{cards(side, zone).map((id) => <button class={`effect-board__card${has(id, step.snapshot)}`} type="button" data-card-id={id}><img data-card-image-id={id} src={imageForCard(id)} alt={altForCard(id)} loading="lazy" /></button>)}</div></div>)}
+            </div>
+            <div class="effect-board__center">
+              <div class="effect-board__top-row">
+                <div class="effect-board__zone" data-zone="leader"><h3>{zoneLabels.leader}</h3><div class="effect-board__cards">{cards(side, 'leader').map((id) => <button class={`effect-board__card${has(id, step.snapshot)}`} type="button" data-card-id={id}><img data-card-image-id={id} src={imageForCard(id)} alt={altForCard(id)} loading="lazy" /></button>)}</div></div>
+                <div class="effect-board__zone" data-zone="stage"><h3>{zoneLabels.stage}</h3><div class="effect-board__cards">{cards(side, 'stage').map((id) => <button class={`effect-board__card${has(id, step.snapshot)}`} type="button" data-card-id={id}><img data-card-image-id={id} src={imageForCard(id)} alt={altForCard(id)} loading="lazy" /></button>)}</div></div>
+              </div>
+              <div class="effect-board__zone effect-board__zone--characters" data-zone="characters"><h3>{zoneLabels.characters}<small> · up to 5</small></h3><div class="effect-board__cards">{cards(side, 'characters').map((id) => <button class={`effect-board__card${has(id, step.snapshot)}`} type="button" data-card-id={id}><img data-card-image-id={id} src={imageForCard(id)} alt={altForCard(id)} loading="lazy" /></button>)}</div></div>
+              <div class="effect-board__zone effect-board__zone--hand" data-zone="hand"><h3>{zoneLabels.hand}</h3>{isOpponent && !cards(side, 'hand').length && side.handCount !== undefined ? <div class="effect-board__hidden-hand"><span aria-hidden="true">▰ ▰ ▰</span> {side.handCount} {labels.hiddenHand ?? 'cards hidden'}</div> : <div class="effect-board__cards">{cards(side, 'hand').map((id) => <button class={`effect-board__card${has(id, step.snapshot)}`} type="button" data-card-id={id}><img data-card-image-id={id} src={imageForCard(id)} alt={altForCard(id)} loading="lazy" /></button>)}</div>}</div>
+            </div>
+            <div class="effect-board__rail">
+              {(['life', 'don', 'cost'] as const).map((zone) => <div class={`effect-board__zone effect-board__zone--${zone}`} data-zone={zone}><h3>{zoneLabels[zone]}</h3>{zone === 'don' ? <div class="effect-board__don"><span>{labels.activeDon ?? 'Active'} <b>{side.donActive ?? 0}</b></span><span>{labels.restedDon ?? 'Rested'} <b>{side.donRested ?? 0}</b></span></div> : <div class="effect-board__cards">{cards(side, zone).map((id) => <button class={`effect-board__card${has(id, step.snapshot)}`} type="button" data-card-id={id}><img data-card-image-id={id} src={imageForCard(id)} alt={altForCard(id)} loading="lazy" /></button>)}</div>}</div>)}
+            </div>
+          </div>
+        </div>})}
+      </div>
+    </div>) }
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-effect-board]').forEach((board) => {
+    const snapshots = [...board.querySelectorAll<HTMLElement>('[data-effect-snapshot]')]; const previous = board.querySelector<HTMLButtonElement>('[data-effect-previous]'); const next = board.querySelector<HTMLButtonElement>('[data-effect-next]'); const reset = board.querySelector<HTMLButtonElement>('[data-effect-reset]'); const live = board.querySelector<HTMLElement>('[data-effect-live]'); const step = board.querySelector<HTMLElement>('[data-effect-step]'); const start = Number(board.dataset.startIndex ?? 0); let current = start;
+    const show = (index: number) => { if (!snapshots.length) return; current = Math.min(Math.max(index, 0), snapshots.length - 1); snapshots.forEach((snapshot, i) => { snapshot.hidden = i !== current; }); const action = snapshots[current]?.querySelector<HTMLElement>('[data-effect-action]')?.textContent ?? ''; if (live) live.textContent = action; if (step) step.textContent = `${current + 1} / ${snapshots.length}`; if (previous) previous.disabled = current === 0; if (next) next.disabled = current === snapshots.length - 1; };
+    previous?.addEventListener('click', () => show(current - 1)); next?.addEventListener('click', () => show(current + 1)); reset?.addEventListener('click', () => show(start));
+  });
+</script>
+
+<style>
+  .effect-board{margin:30px 0;border:2px solid var(--line);border-radius:20px;background:var(--card);box-shadow:9px 10px 0 var(--ink);overflow:hidden}
+  .effect-board__header{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:18px 22px;border-bottom:2px solid var(--line);background:#fff0bf}.effect-board__eyebrow{margin:0;color:var(--red);font-size:11px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}.effect-board__live{margin:4px 0 0;font-weight:900}.effect-board__controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:flex-end}.effect-board__controls button{border:2px solid var(--line);border-radius:99px;background:var(--card);padding:7px 11px;font:inherit;font-size:12px;font-weight:900;cursor:pointer}.effect-board__controls button:disabled{opacity:.4;cursor:not-allowed}.effect-board__controls button:focus-visible{outline:3px solid var(--red);outline-offset:2px}.effect-board__controls span{font-size:12px;font-weight:900;white-space:nowrap}.effect-board__snapshot{padding:18px 22px}.effect-board__move{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}.effect-board__move span{color:var(--red);font-size:11px;font-weight:950;letter-spacing:.1em;text-transform:uppercase}.effect-board__move strong{font-size:16px}
+  .effect-board__mat{display:grid;gap:8px;padding:10px;border:2px solid var(--line);border-radius:15px;background:#d9d4f2}.effect-board__side{padding:10px;border:1px solid color-mix(in srgb,var(--line) 48%,transparent);border-radius:11px;background:color-mix(in srgb,var(--card) 70%,transparent)}.effect-board__side--opponent{background:#d8ebdf}.effect-board__side--player{background:#eee1c9}.effect-board__side-title{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 8px;color:var(--red);font-size:11px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.effect-board__side-title small{color:var(--ink);font-size:9px;letter-spacing:.06em;opacity:.6}.effect-board__layout{display:grid;grid-template-columns:84px minmax(0,1fr) 84px;gap:8px}.effect-board__rail{display:grid;gap:8px;align-content:stretch}.effect-board__center{display:grid;gap:8px;min-width:0}.effect-board__top-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.effect-board__zone{min-width:0;padding:7px;border:1px dashed color-mix(in srgb,var(--line) 55%,transparent);border-radius:8px;background:color-mix(in srgb,var(--card) 56%,transparent)}.effect-board__zone h3{margin:0 0 6px;font-size:9px;letter-spacing:.1em;text-transform:uppercase}.effect-board__zone h3 small{font-size:8px;opacity:.55}.effect-board__zone--characters{min-height:76px}.effect-board__zone--hand{min-height:58px}.effect-board__cards{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-start}.effect-board__card{width:43px;padding:0;border:0;background:transparent;cursor:pointer;transition:transform .16s ease}.effect-board__card img{display:block;width:100%;aspect-ratio:5/7;object-fit:cover;border:1px solid var(--line);border-radius:4px;box-shadow:2px 2px 0 var(--ink)}.effect-board__card:hover{transform:translateY(-4px)}.effect-board__card:focus-visible{outline:3px solid var(--red);outline-offset:3px}.effect-board__card.is-highlighted img{outline:3px solid var(--red);outline-offset:2px;box-shadow:3px 3px 0 var(--red)}.effect-board__hidden-hand{padding:8px 2px;font-size:10px;font-weight:900;opacity:.72}.effect-board__hidden-hand span{letter-spacing:-5px;margin-right:8px}.effect-board__don{display:grid;gap:5px;font-size:9px;font-weight:900}.effect-board__don span{display:flex;justify-content:space-between;padding:6px 5px;border-radius:5px;background:var(--gold)}.effect-board__don span+span{background:#c5c0d8}.effect-board__zone--life,.effect-board__zone--don,.effect-board__zone--cost{min-height:52px}
+  @media(max-width:650px){.effect-board__header{align-items:flex-start;flex-direction:column}.effect-board__controls{justify-content:flex-start}.effect-board__snapshot{padding:16px 12px}.effect-board__layout{grid-template-columns:1fr}.effect-board__rail{grid-template-columns:repeat(3,1fr);grid-row:3}.effect-board__rail:first-child{grid-row:2}.effect-board__top-row{grid-template-columns:1fr 1fr}.effect-board__card{width:42px}.effect-board__side-title small{display:none}}
+  @media(max-width:420px){.effect-board__mat{padding:7px}.effect-board__side{padding:7px}.effect-board__top-row{grid-template-columns:1fr}.effect-board__rail{grid-template-columns:1fr 1fr 1fr}.effect-board__card{width:38px}}
+</style>

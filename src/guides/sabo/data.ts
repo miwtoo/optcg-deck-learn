@@ -53,6 +53,69 @@ export const localizedSaboFlexCards = (lang: Locale) => lang === 'th'
   ? saboFlexCards.map((card) => ({ ...card, role: saboThaiFlexRoleLabels[card.id as keyof typeof saboThaiFlexRoleLabels] ?? card.role }))
   : saboFlexCards;
 
+export const saboEffectBoard = {
+  title: '4 DON!! · Saul → sixes',
+  labels: {
+    previous: 'Previous',
+    next: 'Next',
+    reset: 'Reset',
+    step: 'Step',
+    opponent: 'Opponent',
+    player: 'Player',
+    zones: { leader: 'Leader', characters: 'Characters', hand: 'Hand', life: 'Life', trash: 'Trash', don: 'DON!!' },
+    activeDon: 'Active',
+    restedDon: 'Rested',
+    empty: 'No steps',
+  },
+  steps: [
+    {
+      moveLabel: '4 DON!!',
+      action: 'Play Jaguar.D.Saul for 4 DON!!.',
+      snapshot: {
+        player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], donActive: 1, donRested: 4 },
+        opponent: {},
+        highlight: ['OP17-089'],
+      },
+    },
+    {
+      moveLabel: 'Saul effect',
+      action: 'Use Saul’s effect to look at the top 3 cards.',
+      snapshot: {
+        player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], donActive: 1, donRested: 4 },
+        opponent: {},
+        highlight: ['OP17-089'],
+      },
+    },
+    {
+      moveLabel: 'Add to hand',
+      action: 'Add an Elbaph card to your hand.',
+      snapshot: {
+        player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], hand: ['OP17-086'], donActive: 1, donRested: 4 },
+        opponent: {},
+        highlight: ['OP17-089', 'OP17-086'],
+      },
+    },
+    {
+      moveLabel: 'Keep the board',
+      action: 'Keep Usopp, Jinbe, Robin, and Zoro on the board.',
+      snapshot: {
+        player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], hand: ['OP17-086'], donActive: 1, donRested: 4 },
+        opponent: {},
+        highlight: ['OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'],
+      },
+    },
+    {
+      moveLabel: 'Sabo boost',
+      action: 'Use 1 DON!! on Sabo when your cost-8-or-more Character is live. Saul qualifies. The four small bodies become 6K.',
+      snapshot: {
+        player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], hand: ['OP17-086'], donActive: 0, donRested: 4 },
+        opponent: {},
+        highlight: ['OP13-004', 'OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'],
+      },
+    },
+  ],
+} as const;
+
 export const saboCardName = (id: string, lang: Locale, fallback = id) => lang === 'th'
   ? thaiCardNames[id]?.name ?? fallback
   : fallback;

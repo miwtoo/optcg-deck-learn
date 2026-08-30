@@ -174,6 +174,68 @@ export const saboThaiPilot = {
       { title: 'ปิดเทิร์น', ids: ['OP17-093', 'ST01-011', 'OP17-098'], text: 'เล่น Luffy แล้วเล่นหรือเล่น Robin ซ้ำ เมื่อมี Character 12+ บนบอร์ด Luffy ได้ [Rush] Brook ใส่ DON!! ที่พัก 2 ใบให้ Sabo ได้ เก็บเคาน์เตอร์เมื่อบอร์ดต้องการการป้องกัน' },
     ],
   },
+  effectBoard: {
+    title: '4 DON!! · Saul → ตัวพลัง 6K',
+    labels: {
+      previous: 'ก่อนหน้า',
+      next: 'ถัดไป',
+      reset: 'เริ่มใหม่',
+      step: 'ขั้นที่',
+      opponent: 'ฝ่ายตรงข้าม',
+      player: 'ผู้เล่น',
+      zones: { leader: 'ลีดเดอร์', characters: 'Character', hand: 'มือ', life: 'Life', trash: 'แทรช', don: 'DON!!' },
+      activeDon: 'พร้อมใช้',
+      restedDon: 'พักแล้ว',
+      empty: 'ไม่มีขั้นตอน',
+    },
+    steps: [
+      {
+        moveLabel: '4 DON!!',
+        action: 'เล่น Jaguar.D.Saul ด้วย DON!! 4 ใบ',
+        snapshot: {
+          player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], donActive: 1, donRested: 4 },
+          opponent: {},
+          highlight: ['OP17-089'],
+        },
+      },
+      {
+        moveLabel: 'เอฟเฟกต์ Saul',
+        action: 'ใช้เอฟเฟกต์ของ Saul ดู 3 ใบบนสุด',
+        snapshot: {
+          player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], donActive: 1, donRested: 4 },
+          opponent: {},
+          highlight: ['OP17-089'],
+        },
+      },
+      {
+        moveLabel: 'เพิ่มเข้ามือ',
+        action: 'เพิ่มการ์ด {Elbaph} เข้ามือ',
+        snapshot: {
+          player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], hand: ['OP17-086'], donActive: 1, donRested: 4 },
+          opponent: {},
+          highlight: ['OP17-089', 'OP17-086'],
+        },
+      },
+      {
+        moveLabel: 'รักษาบอร์ด',
+        action: 'ให้ Usopp, Jinbe, Robin และ Zoro อยู่บนบอร์ด',
+        snapshot: {
+          player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], hand: ['OP17-086'], donActive: 1, donRested: 4 },
+          opponent: {},
+          highlight: ['OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'],
+        },
+      },
+      {
+        moveLabel: 'บูสต์ Sabo',
+        action: 'ใส่ DON!! 1 ใบให้ Sabo เมื่อ Character ค่าคอสต์ 8+ ของคุณอยู่บนบอร์ด Saul เข้าเงื่อนไขนี้ ตัวเล็กทั้งสี่มีพลัง 6K',
+        snapshot: {
+          player: { leader: ['OP13-004'], characters: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'], hand: ['OP17-086'], donActive: 0, donRested: 4 },
+          opponent: {},
+          highlight: ['OP13-004', 'OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'],
+        },
+      },
+    ],
+  },
   replayTargets: {
     eyebrow: 'LUFFY · OP17-093',
     heading: 'เป้าหมายเล่นซ้ำของ OP17-093 Luffy',
