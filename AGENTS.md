@@ -31,6 +31,17 @@ Use one or two short sentences.
 State when to use the card and its main result.
 Ground every note in official card text and deck-guide evidence.
 
+# Effect board modal
+
+Use `src/components/EffectBoardModal.astro` to show a combo on the two-player playmat.
+Add its trigger to the related combo card.
+Give each snapshot explicit `player` and `opponent` zones.
+Use only cards and game state supported by official card text and guide evidence.
+Keep unknown opponent cards and counts empty.
+Add localized modal labels with the guide content.
+Keep card inspection working through the existing `CardModal`.
+Test the trigger, board steps, modal close, and card modal on desktop and mobile.
+
 # Deploy
 
 Deploy the site to GitHub Pages after a user asks to deploy.
