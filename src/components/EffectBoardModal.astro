@@ -1,0 +1,114 @@
+---
+import EffectBoard from './EffectBoard.astro';
+import type { EffectBoardProps } from './EffectBoard.astro';
+
+export interface EffectBoardModalProps extends EffectBoardProps {
+  readonly modalId: string;
+  readonly triggerLabel: string;
+  readonly closeLabel: string;
+  readonly triggerAttribute?: string;
+  readonly triggerValue?: string;
+}
+
+const {
+  modalId,
+  triggerLabel,
+  closeLabel,
+  triggerAttribute = 'data-effect-board-trigger',
+  triggerValue = modalId,
+  title,
+  steps,
+  labels,
+  startingIndex,
+  imageForCard,
+  altForCard,
+  class: boardClass,
+} = Astro.props as EffectBoardModalProps;
+
+const triggerAttributes = { [triggerAttribute]: triggerValue };
+---
+
+<button class="effect-board-modal__trigger" type="button" {...triggerAttributes} aria-controls={modalId} aria-haspopup="dialog">
+  {triggerLabel}
+</button>
+<dialog
+  class="effect-board-modal"
+  id={modalId}
+  data-effect-board-modal
+  data-trigger-attribute={triggerAttribute}
+  data-trigger-value={triggerValue}
+  aria-label={title}
+>
+  <button class="effect-board-modal__close" type="button" data-effect-board-modal-close aria-label={closeLabel}>×</button>
+  <EffectBoard
+    title={title}
+    steps={steps}
+    labels={labels}
+    startingIndex={startingIndex}
+    imageForCard={imageForCard}
+    altForCard={altForCard}
+    class={boardClass}
+  />
+</dialog>
+
+<style is="global">
+  .effect-board-modal{width:min(1180px,calc(100vw - 24px));max-width:none;max-height:calc(100vh - 24px);margin:auto;padding:24px;border:2px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);box-shadow:12px 14px 0 var(--ink);overflow:auto}
+  .effect-board-modal::backdrop{background:rgba(17,19,29,.72)}
+  .effect-board-modal__trigger{display:inline-flex;align-items:center;justify-content:center;max-width:100%;margin-top:12px;padding:8px 13px;border:2px solid var(--line);border-radius:99px;background:var(--gold);color:var(--ink);font:inherit;font-size:12px;font-weight:900;line-height:1.2;text-align:center;cursor:pointer;box-shadow:4px 5px 0 var(--ink);transition:transform .18s ease,box-shadow .18s ease}
+  .effect-board-modal__trigger:hover{transform:translate(1px,2px);box-shadow:2px 3px 0 var(--ink)}
+  .effect-board-modal__trigger:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+  .effect-board-modal__close{position:absolute;top:12px;right:14px;z-index:1;width:36px;height:36px;border:2px solid var(--line);border-radius:50%;background:var(--gold);color:var(--ink);font:900 22px/1 inherit;cursor:pointer}
+  .effect-board-modal>.effect-board{margin:0}
+  @media(max-width:650px){.effect-board-modal{width:calc(100vw - 16px);max-height:calc(100vh - 16px);padding:10px;border-radius:16px;box-shadow:7px 8px 0 var(--ink)}.effect-board-modal__close{top:7px;right:8px;width:32px;height:32px}}
+  @media(max-width:450px){.effect-board-modal__trigger{width:100%;padding:8px 10px}}
+</style>
+
+<script>
+  const modals = [...document.querySelectorAll<HTMLDialogElement>('[data-effect-board-modal]')];
+  const openers = new WeakMap<HTMLDialogElement, HTMLElement>();
+
+  const selectorFor = (modal: HTMLDialogElement) => {
+    const attribute = modal.dataset.triggerAttribute ?? 'data-effect-board-trigger';
+    if (!/^data-[\w-]+$/.test(attribute)) return null;
+    return `[${attribute}]`;
+  };
+
+  const openerFor = (modal: HTMLDialogElement, target: Element) => {
+    const selector = selectorFor(modal);
+    const trigger = selector ? target.closest<HTMLElement>(selector) : null;
+    return trigger?.getAttribute(modal.dataset.triggerAttribute ?? '') === modal.dataset.triggerValue ? trigger : null;
+  };
+
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+
+    modals.forEach((modal) => {
+      const opener = openerFor(modal, target);
+      if (opener) {
+        if (!modal.open) {
+          openers.set(modal, opener);
+          modal.showModal();
+        }
+        return;
+      }
+      if (target.closest('[data-effect-board-modal-close]') && target.closest('dialog') === modal) {
+        modal.close();
+        return;
+      }
+      if (target === modal) modal.close();
+    });
+  });
+
+  modals.forEach((modal) => {
+    modal.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      modal.close();
+    });
+    modal.addEventListener('close', () => {
+      const opener = openers.get(modal);
+      openers.delete(modal);
+      opener?.focus();
+    });
+  });
+</script>

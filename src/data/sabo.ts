@@ -37,24 +37,6 @@ export const saboDeck = [
     "id": "OP01-016",
     "name": "Nami",
     "role": "Search / draw",
-    "quantity": 4
-  },
-  {
-    "id": "ST01-011",
-    "name": "Brook",
-    "role": "DON!! utility",
-    "quantity": 4
-  },
-  {
-    "id": "OP11-012",
-    "name": "Franky",
-    "role": "Event payoff",
-    "quantity": 2
-  },
-  {
-    "id": "OP17-084",
-    "name": "Tony Tony.Chopper",
-    "role": "Unblockable finisher",
     "quantity": 2
   },
   {
@@ -64,10 +46,10 @@ export const saboDeck = [
     "quantity": 4
   },
   {
-    "id": "OP17-080",
-    "name": "Usopp",
-    "role": "Top-three searcher",
-    "quantity": 4
+    "id": "OP17-084",
+    "name": "Tony Tony.Chopper",
+    "role": "Unblockable finisher",
+    "quantity": 2
   },
   {
     "id": "OP17-083",
@@ -85,6 +67,24 @@ export const saboDeck = [
     "id": "OP17-095",
     "name": "Roronoa Zoro",
     "role": "2K counter",
+    "quantity": 4
+  },
+  {
+    "id": "OP17-082",
+    "name": "Sanji",
+    "role": "Hand filter / trash setup",
+    "quantity": 4
+  },
+  {
+    "id": "OP17-080",
+    "name": "Usopp",
+    "role": "Top-three searcher",
+    "quantity": 4
+  },
+  {
+    "id": "ST01-011",
+    "name": "Brook",
+    "role": "DON!! utility",
     "quantity": 4
   },
   {
@@ -118,9 +118,9 @@ export const saboDeck = [
     "quantity": 2
   },
   {
-    "id": "OP17-098",
-    "name": "Gum-Gum Kong Gun",
-    "role": "3K counter · KO two",
+    "id": "OP14-096",
+    "name": "Ground Death",
+    "role": "Negation · 4K counter",
     "quantity": 2
   }
 ] as const satisfies readonly SaboDeckEntry[];
@@ -192,28 +192,6 @@ export const saboCardMetadata = [
       "Straw Hat Crew"
     ],
     "effect": "[On Play] Give up to 2 rested DON!! cards to your Leader or 1 of your Characters.",
-    "trigger": null
-  },
-  {
-    "id": "OP11-012",
-    "packId": "569111",
-    "name": "Franky",
-    "rarity": "Uncommon",
-    "category": "Character",
-    "cost": 4,
-    "attributes": [
-      "Strike"
-    ],
-    "power": 4000,
-    "counter": 2000,
-    "colors": [
-      "Red"
-    ],
-    "blockNumber": 3,
-    "types": [
-      "Straw Hat Crew"
-    ],
-    "effect": "[Your Turn] [Once Per Turn] When your opponent activates an Event, all of your Characters gain +2000 power during this turn.",
     "trigger": null
   },
   {
@@ -308,6 +286,29 @@ export const saboCardMetadata = [
       "Straw Hat Crew"
     ],
     "effect": "If there is a Character with a cost of 12 or more, this Character gains [Blocker] and +3000 power. (After your opponent declares an attack, you may rest this card to make it the new target of the attack.)",
+    "trigger": null
+  },
+  {
+    "id": "OP17-082",
+    "packId": "569117",
+    "name": "Sanji",
+    "rarity": "Common",
+    "category": "Character",
+    "cost": 2,
+    "attributes": [
+      "Strike"
+    ],
+    "power": 2000,
+    "counter": 1000,
+    "colors": [
+      "Black"
+    ],
+    "blockNumber": 5,
+    "types": [
+      "Elbaph",
+      "Straw Hat Crew"
+    ],
+    "effect": "If there is a Character with a cost of 12 or more, this Character gains +3000 power. [On Play] Draw 2 cards and trash 2 cards from your hand.",
     "trigger": null
   },
   {
@@ -471,10 +472,10 @@ export const saboCardMetadata = [
     "trigger": "[Trigger] Give up to 1 of your opponent's Leader or Character cards −3000 power during this turn."
   },
   {
-    "id": "OP17-098",
-    "packId": "569117",
-    "name": "Gum-Gum Kong Gun",
-    "rarity": "Common",
+    "id": "OP14-096",
+    "packId": "569114",
+    "name": "Ground Death",
+    "rarity": "Rare",
     "category": "Event",
     "cost": 1,
     "attributes": [],
@@ -483,21 +484,18 @@ export const saboCardMetadata = [
     "colors": [
       "Black"
     ],
-    "blockNumber": 5,
+    "blockNumber": 4,
     "types": [
-      "Elbaph",
-      "The Four Emperors",
-      "Straw Hat Crew"
+      "The Seven Warlords of the Sea",
+      "Baroque Works"
     ],
-    "effect": "[Main] You may rest 6 of your DON!! cards: If there is a Character with a cost of 12 or more, K.O. up to 2 of your opponent's Characters with a cost of 6 or less. [Counter] Your Leader gains +3000 power during this battle.",
+    "effect": "[Main] You may rest 2 of your DON!! cards: Negate the effect of up to 1 of your opponent's Characters with a cost of 5 or less during this turn. [Counter] If you have 10 or more cards in your trash, up to 1 of your Leader or Character cards gains +4000 power during this battle.",
     "trigger": null
   }
 ] as const satisfies readonly SaboCardMetadata[];
 
 export const saboFlexCards = [
   { id: 'OP17-081', name: 'Gerd', role: 'Flex · Tier 1', quantity: 0, effect: 'If your Leader has the {Elbaph} type, this Character gains +12 cost. [On Play] You may trash 1 card from your hand: Add up to 1 Character card with a cost of 8 or less other than [Gerd] from your trash to your hand.' },
-  { id: 'OP17-082', name: 'Sanji', role: 'Flex · Tier 1', quantity: 0, effect: 'If there is a Character with a cost of 12 or more, this Character gains +3000 power. [On Play] Draw 2 cards and trash 2 cards from your hand.' },
-  { id: 'EB04-007', name: 'Roronoa Zoro', role: 'Flex · Tier 2', quantity: 0, effect: '[On Play] Your Leader gains +2000 power until the end of your opponent’s next End Phase. [Activate: Main] [Once Per Turn] If your opponent has a Character with 8000 power or more, this Character gains [Rush: Character] during this turn.' },
   { id: 'OP17-096', name: 'I’m Luffy!! The Man Who Will Be King of the Pirates!!', role: 'Flex · Tier 2', quantity: 0, effect: '[Counter] If there is a Character with a cost of 12 or more, up to 1 of your Leader or Characters gains +4000 power during this battle.' },
   { id: 'OP15-092', name: 'Monkey.D.Luffy', role: 'Flex · Tier 3', quantity: 0, effect: 'Apply each of the following effects based on the number of cards in your trash: • If there are 10 or more cards, this Character’s base power becomes 9000 and it gains +10 cost. • If you have 20 or more cards, during your opponent’s turn, your Leader’s base power becomes 7000. • If you have 30 or more cards, this Character gains +1000 power.' },
   { id: 'OP17-091', name: 'Brook', role: 'Flex · Tier 3', quantity: 0, effect: 'If there is a Character with a cost of 12 or more, this Character gains +3000 power. [On Play] If there is a Character with a cost of 12 or more, your opponent trashes 1 card from their hand.' },
@@ -509,7 +507,6 @@ export const saboCardArtVariants: Readonly<Record<string, readonly string[]>> = 
   'OP13-004': ['OP13-004_p1', 'OP13-004_p2'],
   'OP01-016': ['OP01-016_p1', 'OP01-016_p2', 'OP01-016_p3', 'OP01-016_p4', 'OP01-016_p5', 'OP01-016_p7', 'OP01-016_p8', 'OP01-016_p9'],
   'ST01-011': ['ST01-011_p1', 'ST01-011_p2', 'ST01-011_p3', 'ST01-011_p4', 'ST01-011_p5'],
-  'OP11-012': ['OP11-012_r1'],
   'OP04-016': ['OP04-016_p1', 'OP04-016_p3'],
   'OP17-080': ['OP17-080_p1'],
   'OP17-087': ['OP17-087_p1'],

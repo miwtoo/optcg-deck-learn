@@ -7,12 +7,9 @@ import GuideSection from '../../components/GuideSection.astro';
 import GuideJumpLinks from '../../components/GuideJumpLinks.astro';
 import CardCluster from '../../components/CardCluster.astro';
 import { mihawkDeck, mihawkCombos, mihawkCardMetadataById, mihawkCardArtVariants, mihawkCardImageUrl } from '../../data/mihawk';
-import { mihawkThaiNavigation, mihawkThaiPilot } from '../../content/mihawk/th';
 import type { Locale } from '../../i18n/ui';
 
 const { lang = 'en' } = Astro.props as { lang?: Locale };
-const locale: Locale = lang === 'th' ? 'th' : 'en';
-const isThai = locale === 'th';
 const englishPilot = {
   cardAlt: (id: string) => `${id} card`,
   hero: {
@@ -89,40 +86,35 @@ const englishPilot = {
   },
   leaderFact: { eyebrow: 'LEADER FACT', text: 'Against an opposing Leader with the Slash attribute, OP14-020 gains +1000 power.', leaderAlt: 'OP14-020 Dracule Mihawk leader' },
 };
-const pilot = isThai ? mihawkThaiPilot : englishPilot;
+const pilot = englishPilot;
 const curves = pilot.curve.lanes;
-const navigation = isThai
-  ? [
-      { id: 'deck', label: mihawkThaiNavigation.deck, path: '/mihawk/' },
-      { id: 'pilot', label: mihawkThaiNavigation.pilot, path: '/mihawk/pilot/' },
-    ]
-  : [
-      { id: 'deck', label: 'Deck', path: '/mihawk/' },
-      { id: 'pilot', label: 'Pilot', path: '/mihawk/pilot/' },
-    ];
+const navigation = [
+  { id: 'deck', label: 'Deck', path: '/mihawk/' },
+  { id: 'pilot', label: 'Pilot', path: '/mihawk/pilot/' },
+];
 ---
-<GuideLayout title={isThai ? mihawkThaiPilot.title : 'Green Dracule Mihawk Pilot'} active="pilot" lang={locale} guideBase="/mihawk" brand="ONE PIECE · OP14" navigation={navigation}>
-  <GuideHero eyebrow={pilot.hero.eyebrow} heading={isThai ? mihawkThaiPilot.hero.title : englishPilot.hero.title} byline={isThai ? '' : englishPilot.hero.titleEmphasis} lede={pilot.hero.lede} chips={pilot.hero.chips} cards={[{ id: 'OP14-020', alt: pilot.hero.leaderAlt }, { id: 'ST32-003', alt: isThai ? 'ST32-003 Dracule Mihawk' : englishPilot.hero.characterAlt }]} imageUrl={mihawkCardImageUrl} lang={locale} />
+<GuideLayout title="Green Dracule Mihawk Pilot" active="pilot" lang={lang} guideBase="/mihawk" brand="ONE PIECE · OP14" navigation={navigation}>
+  <GuideHero eyebrow={pilot.hero.eyebrow} heading={englishPilot.hero.title} byline={englishPilot.hero.titleEmphasis} lede={pilot.hero.lede} chips={pilot.hero.chips} cards={[{ id: 'OP14-020', alt: pilot.hero.leaderAlt }, { id: 'ST32-003', alt: englishPilot.hero.characterAlt }]} imageUrl={mihawkCardImageUrl} lang={lang} />
   <div class="notice disclosure"><b>{pilot.disclosure.title}</b><p>{pilot.disclosure.text}</p></div>
-  <GuideJumpLinks ariaLabel={isThai ? 'หัวข้อในคู่มือ' : 'Guide sections'} links={isThai ? [{ href: '#mulligan', label: 'มุลลิแกน' }, { href: '#curve', label: 'ลำดับ DON!!' }, { href: '#leader-sequence', label: 'ลำดับลีดเดอร์' }, { href: '#finish', label: 'ปิดเกม' }, { href: '#mihawk-combos', label: 'คอมโบ' }] : [{ href: '#mulligan', label: 'Mulligan' }, { href: '#curve', label: 'Curve' }, { href: '#leader-sequence', label: 'Leader order' }, { href: '#finish', label: 'Finish' }, { href: '#mihawk-combos', label: 'Combos' }]} />
+   <GuideJumpLinks ariaLabel="Guide sections" links={[{ href: '#mulligan', label: 'Mulligan' }, { href: '#curve', label: 'Curve' }, { href: '#leader-sequence', label: 'Leader order' }, { href: '#finish', label: 'Finish' }, { href: '#mihawk-combos', label: 'Combos' }]} />
 
-  <GuideSection id="mulligan" class="section visual-guide" aria-labelledby="mulligan-title"><div class="eyebrow">{pilot.mulligan.eyebrow}</div><h2 id="mulligan-title">{pilot.mulligan.title}</h2><p class="guide-note">{pilot.mulligan.note}</p><div class="mulligan-grid">{pilot.mulligan.items.map((item) => <article class="visual-card"><CardCluster ids={item.ids} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={locale} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></GuideSection>
+  <GuideSection id="mulligan" class="section visual-guide" aria-labelledby="mulligan-title"><div class="eyebrow">{pilot.mulligan.eyebrow}</div><h2 id="mulligan-title">{pilot.mulligan.title}</h2><p class="guide-note">{pilot.mulligan.note}</p><div class="mulligan-grid">{pilot.mulligan.items.map((item) => <article class="visual-card"><CardCluster ids={item.ids} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={lang} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></GuideSection>
 
-  <GuideSection id="curve" class="section visual-guide" aria-labelledby="curve-title"><div class="eyebrow">{pilot.curve.eyebrow}</div><h2 id="curve-title">{pilot.curve.title}</h2><p class="source">{pilot.curve.note}</p><div class="ideal-curve">{curves.map((lane)=><article class="ideal-lane"><h3>{lane.heading}</h3>{lane.turns.map((turn)=><div class="ideal-step"><CardCluster ids={turn.ids} separators={turn.separators as ('OR' | '+')[]} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} wrapperClass="ideal-pair" lang={locale} /><div><h4>{turn.don} · {turn.title}</h4><p>{turn.text}</p><span class="tag">{pilot.curve.tag}</span></div></div>)}</article>)}</div></GuideSection>
+  <GuideSection id="curve" class="section visual-guide" aria-labelledby="curve-title"><div class="eyebrow">{pilot.curve.eyebrow}</div><h2 id="curve-title">{pilot.curve.title}</h2><p class="source">{pilot.curve.note}</p><div class="ideal-curve">{curves.map((lane)=><article class="ideal-lane"><h3>{lane.heading}</h3>{lane.turns.map((turn)=><div class="ideal-step"><CardCluster ids={turn.ids} separators={turn.separators as ('OR' | '+')[]} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} wrapperClass="ideal-pair" lang={lang} /><div><h4>{turn.don} · {turn.title}</h4><p>{turn.text}</p><span class="tag">{pilot.curve.tag}</span></div></div>)}</article>)}</div></GuideSection>
 
-  <GuideSection id="leader-sequence" class="section visual-guide" aria-labelledby="sequence-title"><div class="eyebrow">{pilot.sequence.eyebrow}</div><h2 id="sequence-title">{pilot.sequence.title}</h2><div class="pilot-flow sequence-flow">{pilot.sequence.items.map((step, index) => <article class="pilot-step"><div class="step-no">{index + 1}</div><div>{step.ids.length > 0 && <CardCluster ids={step.ids} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={locale} />}<h3>{step.title}</h3><p>{step.text}</p></div></article>)}</div></GuideSection>
+  <GuideSection id="leader-sequence" class="section visual-guide" aria-labelledby="sequence-title"><div class="eyebrow">{pilot.sequence.eyebrow}</div><h2 id="sequence-title">{pilot.sequence.title}</h2><div class="pilot-flow sequence-flow">{pilot.sequence.items.map((step, index) => <article class="pilot-step"><div class="step-no">{index + 1}</div><div>{step.ids.length > 0 && <CardCluster ids={step.ids} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={lang} />}<h3>{step.title}</h3><p>{step.text}</p></div></article>)}</div></GuideSection>
 
-  <GuideSection id="finish" class="section visual-guide" aria-labelledby="finish-title"><div class="eyebrow">{pilot.finish.eyebrow}</div><h2 id="finish-title">{pilot.finish.title}</h2><p class="guide-note">{pilot.finish.note}</p><div class="pilot-flow sequence-flow">{pilot.finish.items.map((step) => <article class="pilot-step"><div class="step-no">{step.title.split(' · ')[0]}</div><div>{step.ids.length > 0 && <CardCluster ids={step.ids} separators={step.separators as ('OR' | '+')[]} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={locale} />}<h3>{step.title.split(' · ').slice(1).join(' · ')}</h3><p>{step.text}</p></div></article>)}</div></GuideSection>
+  <GuideSection id="finish" class="section visual-guide" aria-labelledby="finish-title"><div class="eyebrow">{pilot.finish.eyebrow}</div><h2 id="finish-title">{pilot.finish.title}</h2><p class="guide-note">{pilot.finish.note}</p><div class="pilot-flow sequence-flow">{pilot.finish.items.map((step) => <article class="pilot-step"><div class="step-no">{step.title.split(' · ')[0]}</div><div>{step.ids.length > 0 && <CardCluster ids={step.ids} separators={step.separators as ('OR' | '+')[]} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={lang} />}<h3>{step.title.split(' · ').slice(1).join(' · ')}</h3><p>{step.text}</p></div></article>)}</div></GuideSection>
 
-  <GuideSection class="section visual-guide" aria-labelledby="tips-title"><div class="eyebrow">{pilot.tips.eyebrow}</div><h2 id="tips-title">{pilot.tips.title}</h2><div class="tips-grid">{pilot.tips.items.map((item) => <article class="tips-card"><div class="tips-card-art"><CardImageButton id={item.id} imageUrl={mihawkCardImageUrl} lang={locale} alt={`${item.id} ${item.title}`} /></div><div><strong>{pilot.tips.targetLabel}</strong><h3>{item.title}</h3><p>{item.text}</p></div></article>)}</div></GuideSection>
-  <GuideSection id="mihawk-combos" class="section visual-guide" aria-labelledby="combo-title"><div class="eyebrow">{pilot.combos.eyebrow}</div><h2 id="combo-title">{pilot.combos.title}</h2><p class="guide-note">{pilot.combos.note}</p><div class="pilot-combo-grid">{pilot.combos.items.map((combo) => <article class="pilot-combo"><div class="pilot-combo-head"><CardCluster ids={combo.cards} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={locale} /><div><div class="eyebrow">{combo.number}</div><h3>{combo.title}</h3><p>{combo.summary}</p></div></div><ol class="combo-steps">{combo.steps.map((step) => <li>{step}</li>)}</ol></article>)}</div></GuideSection>
+  <GuideSection class="section visual-guide" aria-labelledby="tips-title"><div class="eyebrow">{pilot.tips.eyebrow}</div><h2 id="tips-title">{pilot.tips.title}</h2><div class="tips-grid">{pilot.tips.items.map((item) => <article class="tips-card"><div class="tips-card-art"><CardImageButton id={item.id} imageUrl={mihawkCardImageUrl} lang={lang} alt={`${item.id} ${item.title}`} /></div><div><strong>{pilot.tips.targetLabel}</strong><h3>{item.title}</h3><p>{item.text}</p></div></article>)}</div></GuideSection>
+  <GuideSection id="mihawk-combos" class="section visual-guide" aria-labelledby="combo-title"><div class="eyebrow">{pilot.combos.eyebrow}</div><h2 id="combo-title">{pilot.combos.title}</h2><p class="guide-note">{pilot.combos.note}</p><div class="pilot-combo-grid">{pilot.combos.items.map((combo) => <article class="pilot-combo"><div class="pilot-combo-head"><CardCluster ids={combo.cards} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={lang} /><div><div class="eyebrow">{combo.number}</div><h3>{combo.title}</h3><p>{combo.summary}</p></div></div><ol class="combo-steps">{combo.steps.map((step) => <li>{step}</li>)}</ol></article>)}</div></GuideSection>
 
-  <GuideSection class="section visual-guide"><div class="eyebrow">{pilot.defense.eyebrow}</div><h2>{pilot.defense.title}</h2><div class="defense-card"><CardCluster ids={pilot.defense.cardIds} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={locale} /><div class="defense-copy">{pilot.defense.facts.map((fact) => <p>{fact}</p>)}</div></div></GuideSection>
+  <GuideSection class="section visual-guide"><div class="eyebrow">{pilot.defense.eyebrow}</div><h2>{pilot.defense.title}</h2><div class="defense-card"><CardCluster ids={pilot.defense.cardIds} alt={(id) => pilot.cardAlt(id)} imageUrl={mihawkCardImageUrl} lang={lang} /><div class="defense-copy">{pilot.defense.facts.map((fact) => <p>{fact}</p>)}</div></div></GuideSection>
 
-  <GuideSection class="section visual-guide"><div class="eyebrow">{pilot.effectComparison.eyebrow}</div><h2>{pilot.effectComparison.title}</h2><div class="effect-compare">{pilot.effectComparison.items.map((item) => <article><CardImageButton id={item.id} imageUrl={mihawkCardImageUrl} lang={locale} alt={`${item.id} ${item.title}`} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></GuideSection>
+  <GuideSection class="section visual-guide"><div class="eyebrow">{pilot.effectComparison.eyebrow}</div><h2>{pilot.effectComparison.title}</h2><div class="effect-compare">{pilot.effectComparison.items.map((item) => <article><CardImageButton id={item.id} imageUrl={mihawkCardImageUrl} lang={lang} alt={`${item.id} ${item.title}`} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></GuideSection>
 
-  <GuideSection class="section slash-note"><div class="eyebrow">{pilot.leaderFact.eyebrow}</div><div class="slash-card"><CardImageButton id="OP14-020" imageUrl={mihawkCardImageUrl} lang={locale} alt={pilot.leaderFact.leaderAlt} /><p>{pilot.leaderFact.text}</p></div></GuideSection>
-  <CardModal deck={mihawkDeck} metadataById={mihawkCardMetadataById} artVariants={mihawkCardArtVariants} imageUrl={mihawkCardImageUrl} extraCards={[]} lang={locale} />
+  <GuideSection class="section slash-note"><div class="eyebrow">{pilot.leaderFact.eyebrow}</div><div class="slash-card"><CardImageButton id="OP14-020" imageUrl={mihawkCardImageUrl} lang={lang} alt={pilot.leaderFact.leaderAlt} /><p>{pilot.leaderFact.text}</p></div></GuideSection>
+  <CardModal deck={mihawkDeck} metadataById={mihawkCardMetadataById} artVariants={mihawkCardArtVariants} imageUrl={mihawkCardImageUrl} extraCards={[]} lang={lang} />
 </GuideLayout>
 
 <style>

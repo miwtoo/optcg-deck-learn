@@ -1,6 +1,5 @@
 ---
 import { saboDeck, saboCardMetadataById, cardImageUrl as defaultImageUrl } from '../data/sabo';
-import { thaiCardMetadataById } from '../data/cards-th';
 import { getUiLabels, type Locale, type UiLabelOverrides } from '../i18n/ui';
 
 type Card = { readonly id: string; readonly name: string; readonly role: string; readonly quantity: number; readonly groupId?: string; readonly group?: string };
@@ -31,7 +30,6 @@ const {
 };
 
 const ui = getUiLabels(lang, labelOverrides);
-const localizedMetadataById: Readonly<Record<string, Metadata>> = lang === 'th' ? { ...metadataById, ...thaiCardMetadataById } : metadataById;
 const defaultGroups: readonly Group[] = [
   { id: 'leader', label: 'Leader' },
   { id: 'search-setup', label: 'Search / setup' },
@@ -81,4 +79,4 @@ const groupCards = (group: Group) => deck.filter((card) => {
   return value === group.id || value === group.label;
 });
 ---
-{normalizedGroups.map((group) => { const cards = groupCards(group); return <section class="deck-group"><h3>{group.label} <span>{cards.reduce((total, card) => total + card.quantity, 0)} {countLabel ?? ui.cards}</span></h3><div class="card-grid">{cards.map((card) => { const meta = localizedMetadataById[card.id]; return <button class="card" type="button" data-card-id={card.id}><img class="card-image" data-card-image-id={card.id} loading="lazy" src={imageUrl(card.id)} alt={meta?.name ?? card.name} /><small>{card.id} <span class="qty">×{card.quantity}</span></small><strong>{meta?.name ?? card.name}</strong><small>{card.role}</small></button>})}</div></section>})}
+{normalizedGroups.map((group) => { const cards = groupCards(group); return <section class="deck-group"><h3>{group.label} <span>{cards.reduce((total, card) => total + card.quantity, 0)} {countLabel ?? ui.cards}</span></h3><div class="card-grid">{cards.map((card) => { const meta = metadataById[card.id]; return <button class="card" type="button" data-card-id={card.id}><img class="card-image" data-card-image-id={card.id} loading="lazy" src={imageUrl(card.id)} alt={meta?.name ?? card.name} /><small>{card.id} <span class="qty">×{card.quantity}</span></small><strong>{meta?.name ?? card.name}</strong><small>{card.role}</small></button>})}</div></section>})}

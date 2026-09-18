@@ -25,15 +25,15 @@ export const saboCombos: readonly SaboCombo[] = [
   {
     slug: 'luffy-helper',
     number: 'LINE 01',
-    title: 'Luffy → helper',
-    summary: 'Use Luffy to attack now and replay a small body.',
-    cards: ['OP17-093', 'OP17-087'],
+    title: 'Luffy → finish',
+    summary: 'Use Luffy to attack now and recover the 2-cost card the turn needs.',
+    cards: ['OP17-093', 'ST01-011'],
     steps: [
       'Keep a 12+ Character on your board.',
       'Play Monkey.D.Luffy for 8 DON!!.',
       'Draw 1 card.',
       'Play a 2-cost-or-less Character from your trash.',
-      'Use Robin to give an opposing Character −3K before you attack.',
+      'Prefer Brook for leader DON!!. Choose Robin for a key reduction, Jinbe for defense, or Chopper for the finish.',
     ],
     prerequisites: [
       { cardId: 'OP17-093', text: 'You need 8 DON!! for Luffy.' },
@@ -42,24 +42,25 @@ export const saboCombos: readonly SaboCombo[] = [
     ],
     result: [
       { cardId: 'OP17-093', text: 'Luffy draws 1 and gets Rush.' },
-      { cardId: 'OP17-087', text: 'Robin lowers one opposing Character by 3K.' },
+      { cardId: 'ST01-011', text: 'Brook can put up to 2 rested DON!! on your Leader or a Character.' },
     ],
     powerStates: [
       { cardId: 'OP17-093', label: 'Luffy', value: '8K + Rush' },
-      { cardId: 'OP17-087', label: 'Robin', value: '2K → 5K with 12+ → 6K with Sabo +1K' },
+      { cardId: 'ST01-011', label: 'Brook', value: '3K · up to 2 rested DON!!' },
     ],
   },
   {
     slug: 'docking-six-helper',
     number: 'LINE 02',
-    title: 'Docking Six → helper',
-    summary: 'Use Docking Six to replay the small body you need.',
+    title: 'Docking Six → recovery',
+    summary: 'Use Docking Six to replay the small body that fixes the board.',
     cards: ['OP15-088', 'OP17-080'],
     steps: [
       'Play Pirates Docking Six for 5 DON!!.',
       'Trash the top 3 cards of your deck.',
       'Play a 2-cost-or-less Straw Hat Crew Character from your trash.',
-      'Choose Usopp when you need another search.',
+      'Choose Usopp or Sanji for value and trash setup.',
+      'Choose Zoro for protection, Robin for a key reduction, Brook for leader DON!!, Jinbe for defense, or Chopper for the finish.',
     ],
     prerequisites: [
       { cardId: 'OP15-088', text: 'Docking Six needs 5 DON!!.' },
@@ -68,7 +69,7 @@ export const saboCombos: readonly SaboCombo[] = [
     ],
     result: [
       { cardId: 'OP15-088', text: 'Docking Six becomes an 11-cost, 7K Character. It does not turn on the 12+ effects.' },
-      { cardId: 'OP17-080', text: 'Usopp looks at the top 3 cards and adds an Elbaph card.' },
+      { cardId: 'OP17-080', text: 'Usopp looks at the top 3 cards, adds an Elbaph card, and trashes the rest.' },
     ],
     powerStates: [
       { cardId: 'OP15-088', label: 'Docking Six', value: '7K · cost 11' },
@@ -78,8 +79,8 @@ export const saboCombos: readonly SaboCombo[] = [
   {
     slug: 'saul-sixes',
     number: 'LINE 03',
-    title: 'Saul → sixes',
-    summary: 'Play Saul to turn on the small Elbaph bodies.',
+    title: 'Saul → 6K board',
+    summary: 'Play Saul to turn on the 12+ threshold and the wide board.',
     cards: ['OP17-089', 'OP17-080', 'OP17-083', 'OP17-087', 'OP17-095'],
     steps: [
       'Play Jaguar.D.Saul for 4 DON!!.',

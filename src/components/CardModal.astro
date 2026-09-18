@@ -1,6 +1,5 @@
 ---
 import { saboDeck, saboFlexCards, saboCardArtVariants, saboCardMetadataById, cardImageUrl as defaultImageUrl } from '../data/sabo';
-import { thaiCardMetadataById } from '../data/cards-th';
 import { cardUseById } from '../data/card-use';
 import { getUiLabels, type Locale, type UiLabelOverrides } from '../i18n/ui';
 
@@ -53,14 +52,13 @@ const ui = getUiLabels(lang, {
   cardText: cardTextLabel ?? labelOverrides?.cardText,
   cardDetailsSource: detailsSourceLabel ?? labelOverrides?.cardDetailsSource,
 });
-const localizedMetadataById: Readonly<Record<string, Metadata>> = lang === 'th' ? { ...metadataById, ...thaiCardMetadataById } : metadataById;
 const cards = Object.fromEntries([...deck, ...extraCards].map((card) => {
-  const metadata = localizedMetadataById[card.id] ?? {};
+  const metadata = metadataById[card.id] ?? {};
   return [card.id, {
     ...card,
     ...metadata,
     name: metadata.name ?? card.name,
-    role: metadata.role ?? card.role,
+    role: ('role' in metadata ? metadata.role : undefined) ?? card.role,
     useNote: cardUseById[card.id],
     effect: metadata.effect ?? ('effect' in card ? card.effect : '') ?? '',
     image: imageUrl(card.id),

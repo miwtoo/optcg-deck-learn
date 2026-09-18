@@ -1,0 +1,188 @@
+---
+import GuideLayout from '../../layouts/GuideLayout.astro';
+import GuideSection from '../../components/GuideSection.astro';
+import GuideHero from '../../components/GuideHero.astro';
+import GuideJumpLinks from '../../components/GuideJumpLinks.astro';
+import CardCluster from '../../components/CardCluster.astro';
+import CardImageButton from '../../components/CardImageButton.astro';
+import CardModal from '../../components/CardModal.astro';
+import { saboCardMetadataById } from '../../data/sabo';
+import { saboMatchupCards, saboMatchupCardMetadataById } from '../../data/sabo-matchup-cards';
+import { localizedSaboDeck, localizedSaboFlexCards, saboNavigation, saboCardAlt } from './data';
+import type { Locale } from '../../i18n/ui';
+
+const { lang = 'en', slug } = Astro.props as { lang?: Locale; slug?: string };
+const deck = localizedSaboDeck(lang);
+const flexCards = localizedSaboFlexCards(lang);
+type Chapter = { slug: string; title: string; kicker: string; order: string; sections: readonly { title: string; text: string; cards?: readonly string[] }[] };
+const chapters: readonly Chapter[] = [
+  { slug: 'mirror', title: 'VS MIRROR', kicker: 'MATCHUP CHAPTER', order: 'Prefer second.', sections: [
+    { title: 'Premise', text: 'The player who builds the board first can make the safer 12-cost turn. Zoro in play or in the trash limits Loki.' },
+    { title: 'Game plan', text: 'Build your board before a 12-cost Character. At 3 Life, trade board when the opponent has few resources. At 1–2 Life, pressure the Leader with big bodies.', cards: ['OP17-119', 'OP17-095', 'OP15-088'] },
+    { title: 'Turn by turn (going first)', text: 'Do not force a 12-cost early. Put Zoro on the board or in the trash early. Keep useful 2-cost Characters instead of spending their Counters.' },
+    { title: 'Going second', text: 'Prefer second. Build your board before the opponent plays a 12-cost Character. Make the first safe attacks and keep your Elbaph effects ready.' },
+    { title: 'Late Game', text: 'At 3 Life, trade when the opponent has few resources. At 1–2 Life, attack the Leader with big bodies.' },
+    { title: 'Conclusion', text: 'Do not overspend Counters on useful 2-cost Characters. A rushed 12-cost turn enables the opponent’s Elbaph effects.' },
+  ] },
+  { slug: 'mihawk', title: 'VS MIHAWK', kicker: 'MATCHUP CHAPTER', order: 'Favorable. Go wide.', sections: [
+    { title: 'Premise', text: 'The plan is to go wide and limit Perona before Mihawk can build a small board.' },
+    { title: 'Game plan', text: 'Attack with 2-cost Characters to limit Perona. Use Robin to reduce the 6-cost Mihawk. Use Hody to rest Jinbe and keep DON!! open for Ground Death.', cards: ['OP17-087', 'OP17-095', 'OP17-119'] },
+    { title: 'Turn by turn (going first)', text: 'Make the small attacks first. Protect 2-cost Zoro before 10 DON!! so it can protect Loki.' },
+    { title: 'Going second', text: 'Go wide and make the opponent answer several bodies. Keep the small board safe before the 10 DON!! turn.' },
+    { title: 'Late Game', text: 'From 10 DON!!, prioritize pressure. Shanks or Vander Decken can remove Zoro.' },
+    { title: 'Conclusion', text: 'Protect the small board before the 10 DON!! turn. Keep pressure after that turn.' },
+  ] },
+  { slug: 'xebec', title: 'VS XEBEC', kicker: 'MATCHUP CHAPTER', order: 'Difficult. Prefer second.', sections: [
+    { title: 'Premise', text: 'Xebec can gain late-game resources. Many attacks are needed before those resources matter.' },
+    { title: 'Game plan', text: 'Make many attacks to deny late-game resources. Use Robin on a rested Shiki or Newgate. Keep Saul active before Shiki.', cards: ['OP17-087', 'OP17-089', 'OP14-096'] },
+    { title: 'Turn by turn (going first)', text: 'Keep Saul active before Shiki. Loki may attack. At 5–6 DON!!, usually give Linlin its draw.' },
+    { title: 'Going second', text: 'Prefer second. Near 10 DON!!, discard two if your hand has bricks. Keep making attacks.' },
+    { title: 'Late Game', text: 'Save Ground Death to negate Captain John. Do not assume lethal through defense or Events.' },
+    { title: 'Conclusion', text: 'Deny resources with many swings. Keep your answer for Captain John and do not force a lethal attack.' },
+  ] },
+  { slug: 'kaido', title: 'VS KAIDO', kicker: 'MATCHUP CHAPTER', order: 'Prefer first.', sections: [
+    { title: 'Premise', text: 'Large-body trades are not the goal. Wide attacks on the Leader make the opponent answer now.' },
+    { title: 'Game plan', text: 'Go wide and attack the Leader. Preserve Loki, Saul, and Luffy. Let spent 2-cost Characters go.', cards: ['OP17-084', 'OP17-119', 'OP17-089'] },
+    { title: 'Turn by turn (going first)', text: 'Make key attacks first with 2 DON!! open for Slow-Slow Beam Sword. Use the first safe attack on the Leader.' },
+    { title: 'Going second', text: 'Prefer first when possible. If you go second, keep the same wide plan and avoid poor large-body trades.' },
+    { title: 'Late Game', text: 'Keep a second 12+ plan for 10-cost Linlin. Use Chopper, not Ground Death, to bypass 10-cost blockers.' },
+    { title: 'Conclusion', text: 'Do not trade large bodies when an attack on the Leader is better.' },
+  ] },
+  { slug: 'strategies', title: 'STRATEGIES VS ACE RED, ENEL P, ROBIN YP', kicker: 'MATCHUP CHAPTER', order: 'Three closing plans.', sections: [
+    { title: 'Premise', text: 'These three matchups reward early attacks. Choose the plan for the opposing Leader and keep the attack count high.' },
+    { title: 'VS ACE RED', text: 'Prefer second. Take the first two Life cards and go wide. Use Robin on 5-cost Ace and especially 4-cost Luffy. Keep Saul active. Target Saul, then Docking Six, then Luffy. Do not KO 4-cost Luffy with Loki. This enables discounted 10-cost Newgate.', cards: ['OP17-087', 'OP17-089', 'OP17-095'] },
+    { title: 'VS ENEL P', text: 'Go first. Attack with all bodies, including Saul. Use Loki to remove cost-1 pieces and cost Enel resources. Use Robin on targets such as Reiju, not usually on Enel. Do not reduce your attack count only to take Life.', cards: ['OP17-119', 'OP17-089', 'OP17-087'] },
+    { title: 'VS ROBIN YP', text: 'Go first. Attack the Leader early. Avoid board trades that give Robin time to rebuild. Push the 10 DON!! Linlin turn because Robin cannot keep DON!! for Giant. Keep Brook in the trash. Use Luffy to recover Jinbe. Use Ground Death defense to live, then finish.', cards: ['OP17-093', 'OP17-083', 'OP14-096'] },
+  ] },
+];
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const index = chapters.findIndex((chapter) => chapter.slug === slug);
+const selected = index >= 0 ? chapters[index] : undefined;
+const href = (chapter: Chapter) => `${baseUrl}/elbaph-sabo/matchups/${chapter.slug}/`;
+const chapterCards = (chapter: Chapter) => chapter.sections.flatMap((section) => section.cards ?? []).slice(0, 3);
+type KeyCardGroup = { label: string; ids: readonly string[]; roles: Readonly<Record<string, string>> };
+const keyCards: Readonly<Record<string, readonly KeyCardGroup[]>> = {
+  mirror: [
+    { label: 'Your key cards', ids: ['OP17-095', 'OP17-119', 'OP15-088', 'OP17-093'], roles: { 'OP17-095': 'Protect Loki.', 'OP17-119': 'Make the 12-cost turn.', 'OP15-088': 'Recover a 2-cost card.', 'OP17-093': 'Rush and recover.' } },
+    { label: 'Opponent key cards', ids: ['OP17-095', 'OP17-119', 'OP15-088', 'OP17-093'], roles: { 'OP17-095': 'Limit Loki.', 'OP17-119': 'Track the 12-cost turn.', 'OP15-088': 'Deny the recovery turn.', 'OP17-093': 'Respect the Rush attack.' } },
+  ],
+  mihawk: [
+    { label: 'Your key cards', ids: ['OP17-087', 'OP17-095', 'OP17-119', 'OP17-084'], roles: { 'OP17-087': 'Reduce Mihawk.', 'OP17-095': 'Protect Loki.', 'OP17-119': 'Apply pressure.', 'OP17-084': 'Bypass a Blocker.' } },
+    { label: 'Opponent key cards', ids: ['OP14-020', 'OP14-033', 'ST32-004', 'OP06-033'], roles: { 'OP14-020': 'Build the Mihawk turn.', 'OP14-033': 'Protect key Characters.', 'ST32-004': 'Rest small Characters.', 'OP06-033': 'Remove a rested Character.' } },
+  ],
+  xebec: [
+    { label: 'Your key cards', ids: ['OP17-087', 'OP17-119', 'OP17-089', 'OP14-096'], roles: { 'OP17-087': 'Reduce a rested target.', 'OP17-119': 'Keep attacks high.', 'OP17-089': 'Keep Saul active.', 'OP14-096': 'Answer Captain John.' } },
+    { label: 'Opponent key cards', ids: ['OP17-039', 'OP17-049', 'OP17-044', 'EB02-030'], roles: { 'OP17-039': 'Gain cards on attack.', 'OP17-049': 'Create a late choice.', 'OP17-044': 'Lock attacks when rested.', 'EB02-030': 'Protect a K.O.' } },
+  ],
+  kaido: [
+    { label: 'Your key cards', ids: ['OP17-119', 'OP17-089', 'OP17-093', 'OP17-084'], roles: { 'OP17-119': 'Keep a 12+ plan.', 'OP17-089': 'Enable Docking Six.', 'OP17-093': 'Rush and recover.', 'OP17-084': 'Bypass a Blocker.' } },
+    { label: 'Opponent key cards', ids: ['ST34-004'], roles: { 'ST34-004': 'Plan for 10-cost Linlin.' } },
+  ],
+  strategies: [
+    { label: 'Your key cards · Ace Red', ids: ['OP17-087', 'OP17-089', 'OP15-088', 'OP17-093'], roles: { 'OP17-087': 'Reduce Ace or Luffy.', 'OP17-089': 'Keep Saul active.', 'OP15-088': 'Recover the next card.', 'OP17-093': 'Keep pressure.' } },
+    { label: 'Opponent key cards · Ace Red', ids: ['OP16-001', 'OP16-018', 'OP16-015'], roles: { 'OP16-001': 'Give a Character Rush.', 'OP16-018': 'Protect a K.O.', 'OP16-015': 'Threaten the attack.' } },
+    { label: 'Your key cards · Enel P', ids: ['OP17-119', 'OP15-088', 'OP17-087', 'OP17-095'], roles: { 'OP17-119': 'Remove small pieces.', 'OP15-088': 'Recover a 2-cost card.', 'OP17-087': 'Reduce a target.', 'OP17-095': 'Keep a 2K Counter.' } },
+    { label: 'Opponent key cards · Enel P', ids: ['OP15-058'], roles: { 'OP15-058': 'Make each missed attack matter.' } },
+    { label: 'Your key cards · Robin YP', ids: ['ST01-011', 'OP17-083', 'OP17-093'], roles: { 'ST01-011': 'Give leader DON!!.', 'OP17-083': 'Hold defense.', 'OP17-093': 'Recover Jinbe.' } },
+    { label: 'Opponent key cards · Robin YP', ids: ['OP09-062', 'ST34-004'], roles: { 'OP09-062': 'Build DON!! over turns.', 'ST34-004': 'Set the 10 DON!! turn.' } },
+  ],
+};
+const combinedMetadata = { ...saboCardMetadataById, ...saboMatchupCardMetadataById };
+const combinedExtraCards = [...flexCards, ...saboMatchupCards];
+const cardName = (id: string) => combinedMetadata[id]?.name ?? id;
+type CurveRow = { don: string; ids?: readonly string[]; separators?: readonly ('OR' | '+')[]; text: string; historical?: boolean };
+type CurveSet = { first: readonly CurveRow[]; second: readonly CurveRow[] };
+const originalCurves: Readonly<Record<string, CurveSet>> = {
+  mirror: { first: [
+    { don: '1 DON!!', ids: ['OP01-016', 'OP17-086'], separators: ['OR'], text: 'Red Nami if you lack Docking Six and a 2-cost card. Black Nami if Docking Six and Usopp are ready.' },
+    { don: '3 DON!!', ids: ['OP17-080', 'OP17-095'], text: 'Play Usopp. Put 2-cost Zoro in the trash. Sanji can discard it.' },
+    { don: '5 DON!!', ids: ['OP15-088', 'OP17-095'], text: 'Use Docking Six for Zoro. Else play two 2-cost Characters, including Zoro. Saul is also possible.' },
+    { don: '7 DON!!', ids: ['OP17-119', 'OP15-088', 'OP17-087'], separators: ['OR', 'OR'], text: 'Play Loki. If the opponent has Loki and Zoro, use Docking Six for Zoro, then play Loki. Docking Six for Robin can remove two Characters.' },
+    { don: '9 DON!!', ids: ['OP17-093', 'OP17-087'], separators: ['+'], text: 'Play Luffy and recover Robin. Sanji is another recovery choice.' },
+    { don: '10 DON!!', ids: ['OP17-093', 'OP17-083', 'ST01-011'], separators: ['+', 'OR'], text: 'Play Luffy. Recover Jinbe for defense or Brook for lethal pressure. Hold 1 DON!!.' },
+    { don: '7 DON!!', ids: ['OP15-094'], text: 'Historical line for few or no 2-cost Characters.', historical: true },
+  ], second: [
+    { don: '2 DON!!', ids: ['OP17-080', 'OP17-082'], separators: ['OR'], text: 'Play Usopp or Sanji.' },
+    { don: '4 DON!!', ids: ['OP17-080', 'OP17-082', 'OP17-095'], text: 'Play two value 2-cost Characters, including Zoro.' },
+    { don: '6 DON!!', ids: ['OP15-088', 'OP17-119'], separators: ['OR'], text: 'Play Docking Six or Loki. Use Docking Six when Saul is live and you need a 12+ body.' },
+    { don: '8 DON!!', ids: ['OP17-093', 'ST01-011'], separators: ['+'], text: 'Play Luffy and recover Brook. Delay this line for Docking Six when Brook is not in the trash. Docking Six can recover Robin to remove Docking Six.' },
+    { don: '10 DON!!', ids: ['OP17-093', 'OP17-087'], separators: ['+'], text: 'Play Luffy and recover Robin. Keep later DON!! for defense.' },
+  ] },
+  mihawk: { first: [
+    { don: '1 DON!!', ids: ['OP01-016', 'OP17-086'], separators: ['OR'], text: 'Red Nami if you lack Docking Six and a 2-cost card. Black Nami if Docking Six and Usopp are ready.' },
+    { don: '3 DON!!', ids: ['OP17-080'], text: 'Play Usopp. Leave Usopp in the trash with Docking Six. Otherwise use Nami or make a 5K swing.' },
+    { don: '5 DON!!', ids: ['OP15-088', 'OP17-080', 'ST01-011'], separators: ['+', 'OR'], text: 'Use Docking Six for Usopp or Brook. Else play Saul.' },
+    { don: '7 DON!!', ids: ['OP17-119', 'OP17-089', 'OP17-087'], separators: ['OR', 'OR'], text: 'Play Loki. Or play Saul and Robin into a rested 6-cost Mihawk. After Saul, Docking Six can recover Robin, Usopp, or Sanji.' },
+    { don: '9 DON!!', ids: ['OP17-093', 'OP17-087', 'OP17-082'], separators: ['+', 'OR'], text: 'Play Luffy and recover Robin or Sanji. Use Zoro when Mihawk has little board.' },
+    { don: '10 DON!!', ids: ['OP17-093', 'OP17-083', 'ST01-011'], separators: ['+', 'OR'], text: 'Play Luffy and recover Jinbe for defense or Brook for lethal pressure.', },
+    { don: '10 DON!!', ids: ['OP15-094'], text: 'Historical 7-cost Zoro line.', historical: true },
+  ], second: [
+    { don: '2 DON!!', ids: ['OP17-080', 'OP17-082'], separators: ['OR'], text: 'Play Usopp or Sanji.' },
+    { don: '4 DON!!', ids: ['OP17-089', 'OP17-080', 'OP17-082'], separators: ['OR', 'OR'], text: 'Play Saul. Else play two value 2-cost Characters.' },
+    { don: '6 DON!!', ids: ['OP15-088', 'OP17-119'], separators: ['OR'], text: 'After Saul, use Docking Six for Usopp. Else play Loki to clear a 1-cost Character.' },
+    { don: '8 DON!!', ids: ['OP17-093', 'ST01-011', 'OP15-088', 'OP17-087'], separators: ['+', 'OR', 'OR'], text: 'Play Luffy and recover Brook. Else use Docking Six, or recover Robin for a 6-cost Mihawk.' },
+    { don: '10 DON!!', ids: ['OP17-093', 'OP17-087'], separators: ['+'], text: 'Play Luffy and recover Robin. Attack with all bodies, including Zoro.' },
+  ] },
+  xebec: { first: [
+    { don: '1 DON!!', ids: ['OP01-016', 'OP17-086'], separators: ['OR'], text: 'Red Nami if you lack Docking Six and Saul. Black Nami if those cards are ready.' },
+    { don: '3 DON!!', ids: ['OP17-080', 'OP15-088'], separators: ['+'], text: 'Play Usopp. Leave it in the trash with Docking Six. Use Nami only with no Docking Six or Saul.' },
+    { don: '5 DON!!', ids: ['OP15-088', 'OP17-080', 'OP17-089'], separators: ['+', 'OR'], text: 'Use Docking Six for Usopp or Brook. Else play two 2-cost Characters when Loki is in hand.' },
+    { don: '7 DON!!', ids: ['OP17-119', 'OP15-088', 'OP17-080'], separators: ['OR', 'OR'], text: 'Play Loki after Docking Six. After Saul, use Docking Six for Usopp. Keep Saul active.' },
+    { don: '9 DON!!', ids: ['OP17-093', 'OP17-087', 'OP17-082'], separators: ['+', 'OR'], text: 'Play Luffy and recover Robin or Sanji. Use Jinbe or Usopp for defense when there is no rested target.' },
+    { don: '10 DON!!', ids: ['OP17-093', 'OP17-083', 'ST01-011'], separators: ['+', 'OR'], text: 'Play Luffy and recover Jinbe for defense or Brook for lethal pressure.' },
+    { don: '10 DON!!', ids: ['OP15-094'], text: 'Historical 7-cost Zoro line.', historical: true },
+  ], second: [
+    { don: '2 DON!!', ids: ['OP17-080', 'OP17-082'], separators: ['OR'], text: 'Play Usopp or Sanji.' },
+    { don: '4 DON!!', ids: ['OP17-080', 'OP17-082', 'OP17-089'], separators: ['OR', 'OR'], text: 'Play two value 2-cost Characters for Loki, or play Saul for Docking Six. Keep Saul active.' },
+    { don: '6 DON!!', ids: ['OP15-088', 'OP17-119'], separators: ['OR'], text: 'After Saul, use Docking Six for Usopp. Else play Loki. Loki can KO a 4-cost Character if Xebec missed Linlin.' },
+    { don: '8 DON!!', ids: ['OP17-093', 'ST01-011', 'OP15-088', 'OP17-087'], separators: ['+', 'OR', 'OR'], text: 'Play Luffy and recover Brook. Delay for Docking Six when Brook is absent. Recover Robin when Shiki is rested.' },
+    { don: '10 DON!!', ids: ['OP17-093', 'OP17-087'], separators: ['+'], text: 'Play Luffy and recover Robin. Keep later DON!! for defense.' },
+  ] },
+  kaido: { first: [
+    { don: '1 DON!!', ids: ['OP01-016', 'OP17-086'], separators: ['OR'], text: 'Red Nami if you lack Docking Six and Saul. Black Nami if those cards are ready.' },
+    { don: '3 DON!!', ids: ['OP17-080', 'OP15-088'], separators: ['+'], text: 'Play Usopp. Leave it in the trash with Docking Six. Use Nami only with no Docking Six or Saul.' },
+    { don: '5 DON!!', ids: ['OP15-088', 'OP17-080', 'OP17-089'], separators: ['OR', 'OR'], text: 'Use Docking Six for Usopp or Brook. Else play Saul.' },
+    { don: '7 DON!!', ids: ['OP17-119'], text: 'Play Loki and KO 3-cost Yamato when possible. Keep another 12+ plan. After Saul, use Docking Six for Usopp.' },
+    { don: '9 DON!!', ids: ['OP17-093', 'OP17-082', 'ST01-011', 'OP17-087'], separators: ['+', 'OR', 'OR'], text: 'Play Luffy. Sanji filters. Brook is preferred. Robin has little value.' },
+    { don: '10 DON!!', ids: ['OP17-093', 'OP17-083', 'ST01-011'], separators: ['+', 'OR'], text: 'Play Luffy and recover Jinbe or Brook.' },
+    { don: '10 DON!!', ids: ['OP15-094'], text: 'Historical 7-cost Zoro line. It has little value here.', historical: true },
+  ], second: [
+    { don: '2 DON!!', ids: ['OP17-080', 'OP17-082'], separators: ['OR'], text: 'Play Usopp or Sanji.' },
+    { don: '4 DON!!', ids: ['OP17-080', 'OP17-082', 'OP17-089'], separators: ['OR', 'OR'], text: 'Play two value 2-cost Characters for Loki, or play Saul for Docking Six.' },
+    { don: '6 DON!!', ids: ['OP15-088', 'OP17-119'], separators: ['OR'], text: 'After Saul, use Docking Six for Usopp. Else play Loki to KO 3-cost Yamato.' },
+    { don: '8 DON!!', ids: ['OP17-093', 'ST01-011', 'OP15-088'], separators: ['+', 'OR'], text: 'Play Luffy and recover Brook. Delay for Docking Six when Brook is absent. Preserve Character power.' },
+    { don: '10 DON!!', ids: ['OP17-093', 'OP17-083'], separators: ['+'], text: 'Play Luffy and recover Jinbe.' },
+  ] },
+};
+const curveSet = selected ? originalCurves[selected.slug] : undefined;
+---
+<GuideLayout title={selected ? `Elbaph Sabo · ${selected.title}` : 'Elbaph Sabo · Matchups'} active="matchups" lang={lang} navigation={saboNavigation(lang)}>
+  {selected ? <>
+    <GuideHero eyebrow={selected.kicker} heading={selected.title} byline="Read the plan in order." lede={`${selected.order} Use each section for one part of the game.`} cards={chapterCards(selected).slice(0, 2).map((id) => ({ id, alt: saboCardAlt(id, lang, `${id} ${saboCardMetadataById[id]?.name ?? 'card'}`) }))} lang={lang} />
+    <a class="chapter-return" href={`${baseUrl}/elbaph-sabo/`}>← Deck introduction</a>
+    <GuideJumpLinks ariaLabel="Matchup sections" links={selected.sections.map((section, sectionIndex) => ({ href: `#section-${sectionIndex}`, label: section.title }))} />
+    <div class="pilot-map" aria-label="Matchup chapter order"><span>{`Chapter ${index + 1} of 5`}</span><i aria-hidden="true">→</i><span>{selected.order}</span><i aria-hidden="true">→</i><span>Read in order</span></div>
+    <GuideSection id="matchup-chapter" aria-labelledby="matchup-title" class="visual-guide">
+      <div class="eyebrow">{selected.kicker}</div><h2 id="matchup-title">{selected.title} plan</h2>
+      <div class="chapter-sections">{selected.sections.map((section, sectionIndex) => <section class="chapter-section" id={`section-${sectionIndex}`} aria-labelledby={`section-heading-${sectionIndex}`}>
+        <h3 id={`section-heading-${sectionIndex}`}>{section.title}</h3><p>{section.text}</p>
+        {section.cards && <div class="chapter-card-callout"><CardCluster ids={section.cards} alt={(id) => saboCardAlt(id, lang, `${id} ${saboCardMetadataById[id]?.name ?? 'card'}`)} wrapperClass="guidance-art" lang={lang} /><span class="tag">Tap a card for its text.</span></div>}
+        {curveSet && (section.title === 'Turn by turn (going first)' || section.title === 'Going second') && <div class="curve-block" data-curve={section.title}><div class="eyebrow">Original book curve</div><div class="curve-list">{(section.title === 'Turn by turn (going first)' ? curveSet.first : curveSet.second).map((row) => <article class:list={{ 'curve-row': true, 'curve-row-historical': row.historical }}><strong>{row.don}</strong>{row.ids && <CardCluster ids={row.ids} separators={row.separators} alt={(id) => saboCardAlt(id, lang, `${id} ${saboCardMetadataById[id]?.name ?? 'card'}`)} wrapperClass="curve-cards" lang={lang} />}<p>{row.text}</p>{row.historical && <span class="historical-note">Original curve · not in the 09/09 deck list</span>}</article>)}</div></div>}
+      </section>)}</div>
+      <div class="key-card-lanes" aria-label="Key cards">{(keyCards[selected.slug] ?? []).map((group) => <section class="key-card-lane" aria-labelledby={`key-${group.label.replaceAll(' ', '-').toLowerCase()}`}><div class="eyebrow" id={`key-${group.label.replaceAll(' ', '-').toLowerCase()}`}>{group.label}</div><div class="key-card-grid">{group.ids.map((id) => <article class="key-card"><CardImageButton id={id} alt={saboCardAlt(id, lang, `${id} ${cardName(id)}`)} lang={lang} /><div><strong>{cardName(id)}</strong><span>{group.roles[id]}</span></div></article>)}</div></section>)}</div>
+      <div class="notice"><b>Use this chapter at the table.</b> Read the turn order first. Keep the stated hazard in mind.</div>
+      <nav class="chapter-nav" aria-label="Matchup chapters"><a class="button" href={index > 0 ? href(chapters[index - 1]) : `${baseUrl}/elbaph-sabo/`}>← {index > 0 ? 'Previous chapter' : 'Deck introduction'}</a><a class="button button-next" href={index < chapters.length - 1 ? href(chapters[index + 1]) : `${baseUrl}/elbaph-sabo/`}>{index < chapters.length - 1 ? 'Next chapter →' : 'Deck introduction →'}</a></nav>
+    </GuideSection>
+  </> : <>
+    <GuideHero eyebrow="SABO RB · MATCHUP BOOK" heading="Matchup chapters" byline="Read the plan in order." lede="Choose one chapter. Use the turn order, card lanes, and conclusion." cards={[{ id: 'OP13-004', alt: 'Sabo leader' }, { id: 'OP17-119', alt: 'Loki' }]} lang={lang} />
+    <GuideJumpLinks ariaLabel="Matchup chapters" links={chapters.map((chapter) => ({ href: href(chapter), label: chapter.title }))} />
+    <div class="pilot-map" aria-label="Matchup chapter order"><span>1 · Mirror</span><i aria-hidden="true">→</i><span>2 · Mihawk</span><i aria-hidden="true">→</i><span>3 · Xebec</span><i aria-hidden="true">→</i><span>4 · Kaido</span><i aria-hidden="true">→</i><span>5 · Strategies</span></div>
+    <GuideSection id="matchups" aria-labelledby="matchups-heading" class="visual-guide"><div class="eyebrow">CHAPTER CONTENTS</div><h2 id="matchups-heading">Choose the matchup.</h2><p class="lede">Open a chapter for its ordered plan. Return to the deck introduction at any time.</p><div class="matchup-grid">{chapters.map((chapter, chapterIndex) => <article class:list={{ 'matchup-card': true, 'matchup-card-accent': chapterIndex % 3 === 1 }}><div class="chapter-card-art"><CardCluster ids={chapterCards(chapter)} alt={(id) => saboCardAlt(id, lang)} wrapperClass="guidance-art" lang={lang} /></div><div class="matchup-number">0{chapterIndex + 1}</div><h3>{chapter.title}</h3><p>{chapter.order}</p><a class="open-plan" href={href(chapter)}>Open chapter <span aria-hidden="true">↗</span></a></article>)}</div><div class="notice"><b>Start with the deck introduction.</b> Use the matchup chapters after you know the core plan. <a href={`${baseUrl}/elbaph-sabo/`}>Open deck introduction →</a></div></GuideSection>
+  </>}
+  <CardModal deck={deck} extraCards={combinedExtraCards} metadataById={combinedMetadata} lang={lang} />
+</GuideLayout>
+
+<style>
+  .chapter-return{display:inline-block;margin:0 0 16px;color:var(--ink);font-weight:900;text-decoration:none}.chapter-return:hover,.chapter-return:focus-visible{text-decoration:underline}.pilot-map{display:flex;align-items:center;gap:9px;margin:4px 0;padding:12px 14px;border:2px solid var(--line);border-radius:15px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:950;overflow-x:auto;white-space:nowrap;box-shadow:7px 7px 0 var(--red)}.pilot-map span{padding:5px 8px;border-radius:99px;background:var(--gold);color:var(--ink)}.pilot-map i{color:var(--gold);font-style:normal;font-size:17px}.pilot-map+section{margin-top:34px}.visual-guide{position:relative;scroll-margin-top:20px}.visual-guide h2{max-width:760px}.chapter-sections{max-width:820px;border-top:2px solid var(--line)}.chapter-section{padding:22px 0;border-bottom:1px solid #d8d3c8;scroll-margin-top:20px}.chapter-section h3{margin:0 0 8px;font-size:clamp(24px,4vw,36px);line-height:1}.chapter-section p{margin:0;max-width:700px;font-size:16px;line-height:1.5}.chapter-card-callout{display:flex;align-items:center;gap:14px;margin-top:15px}.chapter-card-callout :global(.guidance-art){min-height:94px}.chapter-card-callout :global(.card-cluster){align-items:flex-end}.chapter-card-callout :global(.card-image-button){width:64px;height:92px;overflow:hidden}.chapter-card-callout :global(.card-image-button img){display:block;width:64px;height:92px;object-fit:cover;border:2px solid var(--line);border-radius:6px}.curve-block{margin-top:16px;padding:10px;border:2px solid var(--line);border-radius:15px;background:var(--paper);box-shadow:5px 5px 0 var(--blue)}.curve-list{display:grid;gap:7px;margin-top:8px}.curve-row{display:grid;grid-template-columns:62px minmax(92px,auto) 1fr;gap:8px;align-items:center;padding:7px 8px;border:1px solid #d8d3c8;border-radius:11px;background:var(--card)}.curve-row>strong{color:var(--red);font-size:12px;letter-spacing:.04em}:global(.curve-cards){display:flex;align-items:flex-end;gap:4px;min-width:0}:global(.curve-cards .card-image-button){width:38px;height:55px;overflow:hidden}:global(.curve-cards .card-image-button img){display:block;width:38px;height:55px;object-fit:cover;border:1px solid var(--line);border-radius:4px}.curve-row p{margin:0;font-size:12px;line-height:1.3}.curve-row-historical{background:var(--gold)}.historical-note{grid-column:2 / -1;color:var(--red);font-size:11px;font-weight:950;letter-spacing:.04em}.key-card-lanes{display:grid;gap:16px;max-width:820px;margin-top:28px}.key-card-lane{padding-top:16px;border-top:2px solid var(--line)}.key-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}.key-card{display:flex;align-items:center;gap:8px;min-width:0;padding:8px;border:2px solid var(--line);border-radius:12px;background:var(--card);transition:transform .18s ease,box-shadow .18s ease}.key-card:hover,.key-card:focus-within{transform:translateY(-2px);box-shadow:4px 4px 0 var(--blue)}.key-card :global(.card-image-button){flex:0 0 42px;width:42px;height:60px;overflow:hidden}.key-card :global(.card-image-button img){display:block;width:42px;height:60px;object-fit:cover;border:1px solid var(--line);border-radius:4px}.key-card div{min-width:0}.key-card strong,.key-card span{display:block}.key-card strong{font-size:11px;line-height:1.1}.key-card span{margin-top:3px;color:var(--muted);font-size:10px;line-height:1.2}..tag{display:inline-block;padding:5px 9px;border-radius:99px;background:var(--blue);font-size:11px;font-weight:900}.notice{margin:25px 0 4px;padding:14px 15px;border:2px solid var(--line);border-radius:13px;background:var(--gold);box-shadow:5px 5px 0 var(--line);font-size:14px}.notice b{font-weight:950;margin-right:5px}.notice a{font-weight:950}.chapter-nav{display:flex;justify-content:space-between;gap:12px;max-width:820px;margin-top:28px}.button{border:2px solid var(--line);border-radius:99px;background:var(--card);padding:9px 15px;font-weight:900;text-decoration:none}.button-next{background:var(--gold)}.matchup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.matchup-card{display:flex;flex-direction:column;min-width:0;padding:16px;border:2px solid var(--line);border-radius:15px;background:var(--card);box-shadow:6px 7px 0 var(--blue);transition:transform .18s ease,box-shadow .18s ease}.matchup-card:hover,.matchup-card:focus-within{transform:translateY(-3px);box-shadow:8px 10px 0 var(--red)}.matchup-card-accent{box-shadow:6px 7px 0 var(--gold)}.chapter-card-art{min-height:108px;margin:-4px -2px 12px;padding:8px 4px}.chapter-card-art :global(.card-cluster){align-items:flex-end}.chapter-card-art :global(.card-image-button){width:54px;height:78px;overflow:hidden}.chapter-card-art :global(.card-image-button img){display:block;width:54px;height:78px;object-fit:cover;border:1px solid var(--line);border-radius:5px}.matchup-number{color:var(--red);font-size:11px;font-weight:950;letter-spacing:.12em}.matchup-card h3{margin:6px 0 0;font-size:21px;line-height:1.05}.matchup-card p{margin:5px 0 0;color:var(--red);font-size:12px;font-weight:900}.open-plan{display:flex;justify-content:space-between;align-items:center;margin-top:14px;border:2px solid var(--line);border-radius:99px;padding:9px 12px;background:var(--gold);font-weight:950;text-decoration:none}.open-plan:hover,.open-plan:focus-visible{transform:translateY(-2px)}
+  @media(max-width:700px){.pilot-map+section{margin-top:25px}.chapter-section h3{font-size:27px}.chapter-section p{font-size:14px}.chapter-card-callout{align-items:flex-start;flex-direction:column;gap:8px}.curve-row{grid-template-columns:56px 1fr;gap:6px;padding:6px 7px}:global(.curve-cards){grid-column:2}.curve-row p{grid-column:1 / -1;font-size:12px}.historical-note{grid-column:1 / -1}.key-card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.key-card{padding:7px}.key-card :global(.card-image-button){flex-basis:40px;width:40px;height:57px}.key-card :global(.card-image-button img){width:40px;height:57px}.key-card span{font-size:10px}.matchup-grid{grid-template-columns:1fr;gap:14px}.matchup-card{padding:15px}.chapter-card-art{min-height:94px}.chapter-nav .button{font-size:13px}}
+</style>
